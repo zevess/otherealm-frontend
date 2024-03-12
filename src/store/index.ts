@@ -4,13 +4,17 @@ import filmDataReducer from "./reducers/filmDataReducer";
 import bookDataReducer from "./reducers/bookDataReducer";
 import stateReducer from "./reducers/stateReducer";
 import gameDataReducer from "./reducers/gameDataReducer";
+import authReducer from './auth'
+import commentsReducer from './comment'
 
 export const store = configureStore({
     reducer:{
         state: stateReducer,
         filmData: filmDataReducer,
         bookData: bookDataReducer,
-        gameData: gameDataReducer
+        gameData: gameDataReducer,
+        authData: authReducer,
+        commentsData: commentsReducer
     }
 })
 

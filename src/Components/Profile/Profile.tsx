@@ -7,6 +7,8 @@ import React from "react"
 import { divideItems, itemTypes, searchToggleItems, sections } from "../../utils/itemTypes"
 import { handleChange } from "../../utils/handleChange"
 import { SearchToggleGroup } from "../Toggles/SearchToggleGroup"
+import { useAppSelector } from "../../store"
+import DisabledPortalPopup, { PopupWithTrigger } from "../Popup"
 
 export const Profile = () => {
 
@@ -15,9 +17,11 @@ export const Profile = () => {
   const [divide, setDivide] = React.useState(Object.keys(divideItems)[0]);
   console.log(section, type, divide)
 
+  const nameSelector = String(useAppSelector((state) => state.authData.data?.name));
+
   return (
     <>
-      <ProfileName name="ник" />
+      <ProfileName name={nameSelector} />
       <Box display={"flex"} justifyContent={'center'}>
         <Box display={'flex'} flexDirection={'column'} marginRight={'20px'}>
           <SectionToggleGroup items={sections} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSection)} alignment={section}></SectionToggleGroup>

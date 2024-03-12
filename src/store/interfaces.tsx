@@ -1,5 +1,5 @@
 
-export interface filmResultProps{
+export interface filmResultProps {
     total: number,
     limit: number,
     pages: number,
@@ -9,22 +9,22 @@ export interface filmResultProps{
             name: string,
             alternativeName?: string,
             enName?: string,
-            type? : string,
-            year?: number ,
-            poster?: 
-                {
-                    url?: string
-                }
+            type?: string,
+            year?: number,
+            poster?:
+            {
+                url?: string
+            }
             ,
             rating?: {
                 kp?: number,
                 imdb?: number
-            } 
+            }
         }
     ]
 }
 
-export interface currentFilmItemProps{
+export interface currentFilmItemProps {
     id: number,
     alternativeName?: string,
     name?: string,
@@ -49,7 +49,7 @@ export interface currentFilmItemProps{
             name?: string
         }
     ],
-    persons:[
+    persons: [
         {
             id: number,
             name: string,
@@ -60,14 +60,14 @@ export interface currentFilmItemProps{
     ]
 }
 
-export interface bookResultProps{
+export interface bookResultProps {
     totalBooksItems: number,
     totalItems: number,
     items: [
         {
             id?: string,
             selfLink?: string,
-            volumeInfo?:{
+            volumeInfo?: {
                 title?: string,
                 description?: string,
                 authors?: [
@@ -79,12 +79,12 @@ export interface bookResultProps{
             }
         }
     ]
-} 
+}
 
 
-export interface currentBookProps{
+export interface currentBookProps {
     id?: string,
-    volumeInfo?:{
+    volumeInfo?: {
         title?: string,
         authors?: string[],
         publishedDate?: string,
@@ -97,7 +97,7 @@ export interface currentBookProps{
 }
 
 
-export interface gameResultProps{
+export interface gameResultProps {
     count: number
     results: [
         {
@@ -106,9 +106,9 @@ export interface gameResultProps{
             background_image?: string,
             id?: number,
         }
-    ] 
+    ]
 }
-export interface currentGameItemProps{
+export interface currentGameItemProps {
     id?: number,
     name?: string,
     name_original?: string,
@@ -130,4 +130,34 @@ export interface currentGameItemProps{
             name: string
         }
     ]
+}
+
+export interface authDataProps {
+    name: string,
+    email: string
+}
+
+export interface CommentProps {
+
+    comments: [
+        {
+            _id: string,
+            user: {
+                _id: string,
+                name: string,
+                email: string,
+                passwordHash: string,
+                createdAt: string,
+                updatedAt: string,
+                __v: 0
+            },
+            postId: string,
+            text: string,
+            createdAt: string,
+            updatedAt: string,
+            __v: 0
+        },
+    ]
+
+
 }
