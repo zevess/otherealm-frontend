@@ -1,6 +1,5 @@
 import axios from '../axios.ts'
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import { authDataProps } from './interfaces.tsx';
 
 export const fetchComment = createAsyncThunk('/comments', async(params) => {
     const {data} = await axios.post('/comments', params);
@@ -11,12 +10,6 @@ export const fetchGetComments = createAsyncThunk('/comments/:postId', async(post
     const {data} = await axios.get(`/comments/${postId}`);
     return data
 })
-
-
-// export interface authProps {
-//     data: authDataProps | null
-//     status: string
-// }
 
 const initialState = {
     comments: {

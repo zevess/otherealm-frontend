@@ -16,6 +16,8 @@ import { Authorize, Registration } from './Components/RegistrationPage/Registrat
 import { useAppDispatch } from './store/hooks'
 import React from 'react'
 import { fetchAuthMe } from './store/auth'
+import axios from './axios'
+import { addFavourites } from './store/favourite'
 
 
 // const router = createBrowserRouter(
@@ -48,6 +50,21 @@ function App() {
   React.useEffect(() => {
     dispatch(fetchAuthMe())
   }, [])
+  const userId = (useAppSelector((state) => state.authData.data?._id));
+  console.log(userId);
+
+  const [sections, setSections] = React.useState()
+  React.useEffect(() => {
+      if (userId !== undefined) {
+          axios.get(`/favourite/${userId}`).then(res => {
+              setSections(res.data);
+              dispatch(addFavourites(res.data));
+          }).catch(err => {
+              console.warn(err);
+              alert('ошибка при получении разделов')
+          })
+      }
+  }, [userId])
 
   // if(selectIsAuth == null){
   //   return <Navigate to={"/auth"}/>

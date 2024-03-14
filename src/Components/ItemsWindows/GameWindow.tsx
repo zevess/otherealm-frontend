@@ -16,6 +16,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { filmItemFetch } from "../../store/fetches/filmFetch";
 import { ItemDescription } from "./ItemComponents/ItemDescription";
 import { gameItemFetch } from "../../store/fetches/gameFetch";
+import { AddToSection } from "../CreateSection";
 
 
 export const GameWindow = () => {
@@ -63,9 +64,10 @@ export const GameWindow = () => {
                                 <Box width={'100%'} border={'solid 1px black'} borderTop={'none'} borderLeft={'none'} height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
                                     <Typography variant="h5">инфо</Typography>
                                 </Box>
-                                <ButtonUsage onClick={() => alert("W")} style={{ width: '30%', backgroundColor: 'rgba(239, 239, 239, 1)' }}>
+                                <AddToSection/>
+                                {/* <ButtonUsage onClick={() => alert("W")} style={{ width: '30%', backgroundColor: 'rgba(239, 239, 239, 1)' }}>
                                     добавить в раздел
-                                </ButtonUsage>
+                                </ButtonUsage> */}
                             </Box>
                             <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'}> 
                                 <Box display={'flex'}>

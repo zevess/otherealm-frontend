@@ -72,7 +72,7 @@ const grey = {
 const PopupBody = styled('div')(
   ({ theme }: { theme: Theme }) => `
   width: max-content;
-  height: 150px;
+  height: max-content;
   display: flex;
   align-items: center;
   padding: 16px;

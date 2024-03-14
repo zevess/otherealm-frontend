@@ -134,7 +134,8 @@ export interface currentGameItemProps {
 
 export interface authDataProps {
     name: string,
-    email: string
+    email: string,
+    _id: string
 }
 
 export interface CommentProps {

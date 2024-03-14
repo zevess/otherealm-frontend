@@ -22,7 +22,7 @@ export const HeaderLogin = () => {
         }
     };
 
-    console.log(isAuth)
+    // console.log(isAuth)
 
     return (
         <Header>

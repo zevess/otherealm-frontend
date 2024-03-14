@@ -15,7 +15,7 @@ export const Profile = () => {
   const [section, setSection] = React.useState(Object.keys(sections)[0]);
   const [type, setType] = React.useState(Object.keys(itemTypes)[0]);
   const [divide, setDivide] = React.useState(Object.keys(divideItems)[0]);
-  console.log(section, type, divide)
+  // console.log(section, type, divide)
 
   const nameSelector = String(useAppSelector((state) => state.authData.data?.name));
 

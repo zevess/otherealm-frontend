@@ -7,6 +7,10 @@ import { DivideToggleGroup } from "../Toggles/DivideToggleGroup"
 import { handleChange } from "../../utils/handleChange"
 import { PopupWithTrigger } from "../Popup"
 import { CreateSection } from "../CreateSection"
+import axios from '../../axios.ts'
+import { useAppSelector } from "../../store"
+import { useAppDispatch } from "../../store/hooks.tsx"
+import { addFavourites } from "../../store/favourite.ts"
 
 interface ListWindowProps {
     type: string,
@@ -15,7 +19,28 @@ interface ListWindowProps {
     setDivide: React.Dispatch<React.SetStateAction<string>>,
 }
 
+
+
 export const ListWindow: FC<ListWindowProps> = ({ type, divide, setType, setDivide }) => {
+
+    const dispatch = useAppDispatch();
+    const userId = (useAppSelector((state) => state.authData.data?._id));
+    console.log(userId);
+
+    const [sections, setSections] = React.useState()
+    React.useEffect(() => {
+        if (userId !== undefined) {
+            axios.get(`/favourite/${userId}`).then(res => {
+                setSections(res.data);
+                dispatch(addFavourites(res.data));
+            }).catch(err => {
+                console.warn(err);
+                alert('ошибка при получении разделов')
+            })
+        }
+    }, [userId])
+
+    console.log(sections);
 
     return (
         <Box sx={{ width: '1300px', maxWidth: '1300px', minHeight: '500px', backgroundColor: 'white', borderRadius: '24px', border: 'solid 1px black' }}>
@@ -37,16 +62,16 @@ export const ListWindow: FC<ListWindowProps> = ({ type, divide, setType, setDivi
 
                 </div>
                 <Box display={'flex'} flexDirection={'column'}>
-                    <DivideToggleGroup items={divideItems} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setDivide)} alignment={divide} />
+                    {sections !== undefined && <DivideToggleGroup items={sections} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setDivide)} alignment={divide} />}
+                    
                     {/* <PopupWithTrigger
                         id="popup-without-portal-fixed"
                         buttonLabel="создать раздел"
                         disablePortal
                         strategy="fixed"
                     /> */}
-                    <CreateSection/>
+                    <CreateSection />
                 </Box>
-
             </div>
         </Box>
     )

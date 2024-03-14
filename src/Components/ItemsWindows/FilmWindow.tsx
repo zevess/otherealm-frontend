@@ -10,7 +10,7 @@ import { DiscussSection, } from "./DiscussWindow/DiscussSection";
 import { ItemTitle } from "./ItemComponents/ItemTitle";
 import { handleChange } from "../../utils/handleChange";
 import { ItemType } from "./ItemComponents/ItemType";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../store";
 import { useAppDispatch } from "../../store/hooks";
 import { filmItemFetch } from "../../store/fetches/filmFetch";

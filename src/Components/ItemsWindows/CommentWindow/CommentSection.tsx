@@ -3,7 +3,7 @@ import { InputText } from "../../InputText"
 import { Comment } from "./Comment"
 import React from "react"
 import { useParams } from "react-router-dom"
-import axios from '../../../axios.ts'
+import axios from '../../../axios'
 import { useAppDispatch } from "../../../store/hooks.tsx"
 import { fetchGetComments } from "../../../store/comment.ts"
 
@@ -32,8 +32,10 @@ export const CommentSection = () => {
                 postId
             }
 
-            const { data } = await axios.post('/comments', fields);
-
+            await axios.post('/comments', fields);
+            axios.get(`/comments/${postId}`).then(res => {
+                setData(res.data);
+            })
         } catch (err) {
             console.warn(err);
             alert("ошибка при добавлении комментария")
@@ -44,9 +46,6 @@ export const CommentSection = () => {
     React.useEffect(() => {
         axios.get(`/comments/${postId}`).then(res => {
             setData(res.data);
-        }).catch(err => {
-            console.warn(err);
-            alert('ошибка при получении комментариев');
         })
     }, [])
 
@@ -55,7 +54,7 @@ export const CommentSection = () => {
             <InputText setText={setCommentText} onClick={onSubmit} placeholder={"комментарий"} sx={commentInputStyles} />
             <Box>
                 {data !== undefined && data.map((item: any) => (
-                    <Comment name={item.user.name} text={item.text}/>
+                    <Comment name={item.user.name} text={item.text} />
                 ))}
             </Box>
         </Box>
