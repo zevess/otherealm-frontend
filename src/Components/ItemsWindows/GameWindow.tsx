@@ -16,32 +16,39 @@ import { useAppDispatch } from "../../store/hooks";
 import { filmItemFetch } from "../../store/fetches/filmFetch";
 import { ItemDescription } from "./ItemComponents/ItemDescription";
 import { gameItemFetch } from "../../store/fetches/gameFetch";
-import { AddToSection } from "../CreateSection";
 
+import axios from '../../axios'
+import { addFavourites, clearFavourite } from "../../store/favourite";
+import { AddToSection } from "../SectionsPopup/AddToSections";
 
 export const GameWindow = () => {
 
     const dispatch = useAppDispatch();
     const params = useParams();
     const gameId = String(params.id);
-    console.log(gameId);
+
     const rawgToken = useAppSelector((state) => state.gameData.rawgToken);
-    React.useEffect(()=>{
-        dispatch(gameItemFetch({gameId, rawgToken} ));
+    React.useEffect(() => {
+        dispatch(gameItemFetch({ gameId, rawgToken }));
+
     }, [])
-    
+
     const [alignment, setAlignment] = React.useState('comments');
 
     const currentGameItem = useAppSelector((state) => state.gameData.currentGameItem)
-    
-    
+
+
     const title = `${currentGameItem?.name}`;
     let fontSize;
-    if (title.length > 100) fontSize = '20px';    
+    if (title.length > 100) fontSize = '20px';
 
-    if(currentGameItem == undefined){
-        return <CircularProgress/>
+    if (currentGameItem == undefined) {
+        return <CircularProgress />
     }
+
+
+
+
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '1500px', marginLeft: 'auto', marginRight: 'auto' }} >
@@ -54,30 +61,71 @@ export const GameWindow = () => {
                             <Box zIndex={1} height={'571px'} component={'img'} src={`${currentGameItem?.background_image}`} sx={{
                                 aspectRatio: '380/571', objectFit: 'cover'
                             }}></Box>
-                            
+
                             <ItemTitle title={`${title}`} originalTitle={`${currentGameItem?.name_original}`} />
                             <ItemType itemType={`game`} />
                         </Box>
                         <Box width={'64%'} display={'flex'} flexDirection={'column'} >
-                            
+
                             <Box width={'100%'} bgcolor={'rgba(239, 239, 239, 1)'} display={'flex'} height={'70px'}>
                                 <Box width={'100%'} border={'solid 1px black'} borderTop={'none'} borderLeft={'none'} height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
                                     <Typography variant="h5">инфо</Typography>
                                 </Box>
-                                <AddToSection/>
-                                {/* <ButtonUsage onClick={() => alert("W")} style={{ width: '30%', backgroundColor: 'rgba(239, 239, 239, 1)' }}>
-                                    добавить в раздел
-                                </ButtonUsage> */}
+                                <AddToSection />
                             </Box>
-                            <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'}> 
-                                <Box display={'flex'}>
-                                    
+
+                            <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'} alignItems={'flex-start'} >
+                                <Box display={'flex'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>оценка METACRITIC: </Typography>
+                                    <Typography variant='h5' paddingRight={'10px'}>{currentGameItem.metacritic}</Typography>
+                                </Box>
+                                <Box display={'flex'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>дата выхода: </Typography>
+                                    <Typography variant='h5' paddingRight={'10px'}>{currentGameItem.released}</Typography>
+                                </Box>
+                                <Box display={'flex'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>разработчики: </Typography>
+                                    {currentGameItem.developers.map((devs, index) => (
+                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{devs.name}</Typography>
+                                    ))}
+                                </Box>
+                                <Box display={'flex'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>издатели: </Typography>
+                                    {currentGameItem.publishers.map((publisher, index) => (
+                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{publisher.name}</Typography>
+                                    ))}
+                                </Box>
+                                <Box display={'flex'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>жанры: </Typography>
+                                    {currentGameItem.genres.map((genre, index) => (
+                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{genre.name}</Typography>
+                                    ))}
+                                </Box>
+
+                                <Box display={'flex'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>платформы: </Typography>
+                                    {currentGameItem.platforms.map((platform, index) => (
+                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{platform.platform.name},</Typography>
+                                    ))}
+                                </Box>
+
+                                <Box display={'flex'} flexWrap={'wrap'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>актеры: </Typography>
+                                    {/* {currentFilmItem.persons?.map((person, index) =>(
+                                        (person.enProfession == 'actor') && <Typography paddingRight={'10px'} variant="h5" key={index++}>{person.name},</Typography>
+                                    ))} */}
                                 </Box>
                             </Box>
-                            
+
+                            <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'}>
+                                <Box display={'flex'}>
+
+                                </Box>
+                            </Box>
+
                         </Box>
                     </Box>
-                    <ItemDescription description={`${currentGameItem?.description_raw}`}/>
+                    <ItemDescription description={`${currentGameItem?.description_raw}`} />
 
                 </Box>
 

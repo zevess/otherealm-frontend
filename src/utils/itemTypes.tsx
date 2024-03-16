@@ -4,12 +4,12 @@ interface objectProps {
 
 export const itemTypes: objectProps = {
     "all": "все",
-    "films": "фильмы",
-    "tvseries": "сериалы",
-    "cartoons": "мультфильмы",
+    "movie": "фильмы",
+    "tv-series": "сериалы",
+    "cartoon": "мультфильмы",
     "anime": "аниме",
-    "games": "игры",
-    "books": "книги"
+    "game": "игры",
+    "book": "книги"
 }
 
 

@@ -51,32 +51,15 @@ function App() {
     dispatch(fetchAuthMe())
   }, [])
   const userId = (useAppSelector((state) => state.authData.data?._id));
-  console.log(userId);
-
-  const [sections, setSections] = React.useState()
-  React.useEffect(() => {
-      if (userId !== undefined) {
-          axios.get(`/favourite/${userId}`).then(res => {
-              setSections(res.data);
-              dispatch(addFavourites(res.data));
-          }).catch(err => {
-              console.warn(err);
-              alert('ошибка при получении разделов')
-          })
-      }
-  }, [userId])
-
-  // if(selectIsAuth == null){
-  //   return <Navigate to={"/auth"}/>
-  // }
-
+  const userNick = (useAppSelector((state) => state.authData.data?.nick));
+  console.log(userId, userNick);
   return (
 
     <>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route path='/search' element={<Search />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/:nick' element={<Profile />} />
           <Route path='/item/movie/:id' element={<FilmWindow />} />
           <Route path='/item/anime/:id' element={<FilmWindow />} />
           <Route path='/item/cartoon/:id' element={<FilmWindow />} />

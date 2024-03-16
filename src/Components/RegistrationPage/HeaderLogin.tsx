@@ -14,7 +14,7 @@ export const HeaderLogin = () => {
     const dispatch = useAppDispatch();
 
     const isAuth = useAppSelector((state) => state.authData.data);
-
+    const userNick = useAppSelector((state) => state.authData.data?.nick);
     const onClickLogout = () => {
         if (window.confirm('вы уверены что хотите выйти?')) {
             dispatch(logout())
@@ -37,7 +37,7 @@ export const HeaderLogin = () => {
                             поиск
                         </Box>
                     </Link>
-                    <Link to={"/profile"}>
+                    <Link to={`/profile/${userNick}`}>
                         <Box display={'flex'} alignItems={'center'}>
                             <PersonOutlineOutlinedIcon />
                             <p>профиль</p>

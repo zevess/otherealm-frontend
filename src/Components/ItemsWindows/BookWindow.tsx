@@ -11,6 +11,7 @@ import { ItemDescription } from "./ItemComponents/ItemDescription";
 import { CommentSection } from "./CommentWindow/CommentSection";
 import { DiscussSection } from "./DiscussWindow/DiscussSection";
 import { handleChange } from "../../utils/handleChange";
+import { AddToSection } from "../SectionsPopup/AddToSections";
 
 export const BookWindow = () => {
 
@@ -58,9 +59,7 @@ export const BookWindow = () => {
                                 <Box width={'100%'} border={'solid 1px black'} borderTop={'none'} borderLeft={'none'} height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
                                     <Typography variant="h5">инфо</Typography>
                                 </Box>
-                                <ButtonUsage onClick={() => alert("W")} style={{ width: '30%', backgroundColor: 'rgba(239, 239, 239, 1)' }}>
-                                    добавить в раздел
-                                </ButtonUsage>
+                                <AddToSection/>
                             </Box>
                             <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'}> 
                                 <Box display={'flex'}>

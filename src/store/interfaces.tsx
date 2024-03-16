@@ -129,12 +129,26 @@ export interface currentGameItemProps {
             id: number,
             name: string
         }
+    ],
+    genres: [
+        {
+            id: number,
+            name: string
+        }
     ]
+    platforms: [
+        {
+            platform:{
+                name: string
+            }
+        }
+    ],
 }
 
 export interface authDataProps {
     name: string,
     email: string,
+    nick?: string,
     _id: string
 }
 

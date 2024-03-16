@@ -54,7 +54,7 @@ export const CommentSection = () => {
             <InputText setText={setCommentText} onClick={onSubmit} placeholder={"комментарий"} sx={commentInputStyles} />
             <Box>
                 {data !== undefined && data.map((item: any) => (
-                    <Comment name={item.user.name} text={item.text} />
+                    <Comment name={item.user.name} nick={item.user.nick} text={item.text} />
                 ))}
             </Box>
         </Box>

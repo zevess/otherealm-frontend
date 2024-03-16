@@ -12,7 +12,9 @@ interface initialStateProps {
     totalGamePage: number,
     currentBookPage: number,
     totalBookPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    currentFilterItem: string
+    currentFavouriteItem: string
 }
 
 const initialState: initialStateProps = {
@@ -24,7 +26,9 @@ const initialState: initialStateProps = {
     totalGamePage: 1,
     currentBookPage: 1,
     totalBookPage: 1,
-    isFetching: false
+    isFetching: false,
+    currentFilterItem: "ВСЕ",
+    currentFavouriteItem: ''
 };
 
 
@@ -59,9 +63,16 @@ export const stateSlice = createSlice({
         setIsFetching: (state, action: PayloadAction<boolean>) =>{
             state.isFetching = action.payload
         },
+
+        setCurrentFilterItem: (state, action: PayloadAction<string>) =>{
+            state.currentFilterItem = action.payload
+        },
+        setCurrentFavouriteItem: (state, action: PayloadAction<string>) =>{
+            state.currentFavouriteItem = action.payload
+        },
     },
     
 })
 
-export const { addItemTitle, setSearchSection, setMediaPage, setTotalMediaPage, setGamePage, setTotalGamePage,  setBookPage, setTotalBookPage } = stateSlice.actions;
+export const { addItemTitle, setSearchSection, setMediaPage, setTotalMediaPage, setGamePage, setTotalGamePage,  setBookPage, setTotalBookPage, setCurrentFavouriteItem, setCurrentFilterItem } = stateSlice.actions;
 export default stateSlice.reducer;

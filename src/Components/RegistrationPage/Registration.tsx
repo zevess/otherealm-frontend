@@ -46,9 +46,12 @@ export const Registration: FC<AuthProps> = ({onClick}) => {
 
     const dispatch = useAppDispatch();
 
+    
+
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         defaultValues: {
             name: '',
+            nick: '',
             email: '',
             password: '',
         }, mode: 'onChange'
@@ -67,6 +70,7 @@ export const Registration: FC<AuthProps> = ({onClick}) => {
         } else {
             alert('не удалось зарегистрироваться');
         }
+
     }
     
     return (
@@ -78,16 +82,22 @@ export const Registration: FC<AuthProps> = ({onClick}) => {
                         error={Boolean(errors.email?.message)}
                         helperText={errors.email?.message}
                         {...register('email', { required: 'укажите почту' })}></TextField>
-                    <TextField sx={{ width: '60%', margin: '10px' }} variant="filled" label='укажите ник'
+                    <TextField sx={{ width: '60%', margin: '10px' }} variant="filled" label='укажите имя'
                         error={Boolean(errors.name?.message)}
                         helperText={errors.name?.message}
-                        {...register('name', { required: 'укажите ник' })}></TextField>
+                        {...register('name', { required: 'укажите имя' })}></TextField>
+                    <TextField sx={{ width: '60%', margin: '10px' }} variant="filled" label='укажите ник'
+                        error={Boolean(errors.nick?.message)}
+                        helperText={errors.nick?.message}
+                        {...register('nick', { required: 'укажите ник', pattern: {
+                            value: /^[a-zA-Z0-9_]+$/,
+                            message: 'ник должен содержать только английские буквы, цифры или _'
+                        } })}></TextField>
                     <TextField sx={{ width: '60%', margin: '10px' }} variant="filled" type="password" autoComplete="current-password" label='укажите пароль' error={Boolean(errors.password?.message)}
                         helperText={errors.password?.message}
                         {...register('password', { required: 'укажите пароль' })} />
                     <Button size="large" disabled={!isValid} type="submit" variant="contained">зарегистрироваться</Button>
                 </form>
-
             </Box>
 
             <hr style={{ borderTop: '2px solid black', width: '80%' }}></hr>
@@ -132,7 +142,7 @@ export const Login: FC<AuthProps> = ({onClick}) => {
                     <TextField sx={{ width: '60%', margin: '10px' }} variant="filled" label='укажите почту'
                         error={Boolean(errors.email?.message)}
                         helperText={errors.email?.message}
-                        {...register('email', { required: 'укажите почту' })}></TextField>
+                        {...register('email', { required: 'укажите почту'})}></TextField>
                     <TextField sx={{ width: '60%', margin: '10px' }} variant="filled" type="password" autoComplete="current-password" label='укажите пароль' error={Boolean(errors.password?.message)}
                         helperText={errors.password?.message}
                         {...register('password', { required: 'укажите пароль' })} />

@@ -15,6 +15,7 @@ import { useAppSelector } from "../../store";
 import { useAppDispatch } from "../../store/hooks";
 import { filmItemFetch } from "../../store/fetches/filmFetch";
 import { ItemDescription } from "./ItemComponents/ItemDescription";
+import { AddToSection } from "../SectionsPopup/AddToSections";
 
 
 export const FilmWindow = () => {
@@ -22,7 +23,7 @@ export const FilmWindow = () => {
     const dispatch = useAppDispatch();
     const params = useParams();
     const paramsId = String(params.id);
-    console.log(paramsId);
+    // console.log(paramsId);
 
     const [alignment, setAlignment] = React.useState('comments');
 
@@ -64,35 +65,33 @@ export const FilmWindow = () => {
                                 <Box width={'100%'} border={'solid 1px black'} borderTop={'none'} borderLeft={'none'} height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
                                     <Typography variant="h5">инфо</Typography>
                                 </Box>
-                                <ButtonUsage onClick={() => alert("W")} style={{ width: '30%', backgroundColor: 'rgba(239, 239, 239, 1)' }}>
-                                    добавить в раздел
-                                </ButtonUsage>
+                                <AddToSection/>
                             </Box>
                             <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'} alignItems={'flex-start'} >
-                                <Box display={'flex'}>
-                                    <Typography variant='h5' paddingRight={'10px'}>страны: </Typography>
+                                <Box display={'flex'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>страны: </Typography>
                                     {currentFilmItem?.countries?.map((country, index) => (
-                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{country.name}{index !== currentFilmItem.countries?.length - 1 && ", "}</Typography>
+                                        <Typography paddingRight={'10px'} variant="h5" key={index++}>{country.name}{index !== currentFilmItem.countries?.length - 1 && ", "}</Typography>
                                     ))}
                                 </Box>
-                                <Typography variant="h5">год: {currentFilmItem.year}</Typography>
-                                <Box display={'flex'}>
-                                    <Typography variant="h5" paddingRight={'10px'}>жанры: </Typography>
+                                <Typography fontWeight={'bold'} paddingBottom={'15px'} variant="h5">год: {currentFilmItem.year}</Typography>
+                                <Box display={'flex'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>жанры: </Typography>
                                     {currentFilmItem.genres?.map((genre, index) =>(
                                         <Typography paddingRight={'10px'} variant="h5" key={index}>{genre.name}{index !== currentFilmItem.genres?.length - 1 && ','}</Typography>
                                     ))}
                                 </Box>
-                                <Box display={'flex'}>
-                                    <Typography variant="h5" paddingRight={'10px'}>режиссер: </Typography>
+                                <Box display={'flex'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>режиссер: </Typography>
                                     {currentFilmItem.persons?.map((person, index) =>(
                                         person.enProfession == 'director' && <Typography paddingRight={'10px'} variant="h5" key={index}>{person.name}</Typography>
-                                        // <Typography paddingRight={'10px'} variant="h5" key={index}>{person.name}{index !== currentFilmItem.persons?.length - 1 && ','}</Typography>
+
                                     ))}
                                 </Box>
-                                <Box display={'flex'}>
-                                    <Typography variant="h5" paddingRight={'10px'}>актеры: </Typography>
+                                <Box display={'flex'} flexWrap={'wrap'} paddingBottom={'15px'}>
+                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>актеры: </Typography>
                                     {currentFilmItem.persons?.map((person, index) =>(
-                                        (person.enProfession == 'actor') && <Typography paddingRight={'10px'} variant="h5" key={index++}>{person.name}</Typography>
+                                        (person.enProfession == 'actor') && <Typography paddingRight={'10px'} variant="h5" key={index++}>{person.name},</Typography>
                                     ))}
                                 </Box>
                             </Box>

@@ -34,6 +34,9 @@ export const favouritesSlice = createSlice({
         isFavourire: (state, action) =>{
             state.favourites.items = action.payload
         },
+        clearFavourite: (state) => {
+            state.favourites.items = [];
+        }
     },
     extraReducers: (builder) =>{
         builder
@@ -72,6 +75,6 @@ export const favouritesSlice = createSlice({
 
 // export const selectIsAuth = (state: any) => Boolean(state.auth.data);
 
-export const { addFavourites, isFavourire } = favouritesSlice.actions;
+export const { addFavourites, isFavourire, clearFavourite } = favouritesSlice.actions;
 
 export default favouritesSlice.reducer
