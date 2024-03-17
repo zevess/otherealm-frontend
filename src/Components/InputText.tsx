@@ -8,14 +8,15 @@ export const inputStyles = {
 
 interface InputTextProps {
     placeholder: string,
+    text: any,
     sx: object,
     setText: React.Dispatch<React.SetStateAction<string>>,
     onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export const InputText: FC<InputTextProps> = ({placeholder, sx, setText, onClick}) => {
+export const InputText: FC<InputTextProps> = ({placeholder, text, sx, setText, onClick}) => {
     return (
-        <TextField variant="outlined" multiline maxRows={2} placeholder={placeholder} sx={sx} inputProps={{
+        <TextField value={text} variant="outlined" multiline maxRows={2} placeholder={placeholder} sx={sx} inputProps={{
             style: {
                 fontSize: '30px', padding: '5px', lineHeight: '1.4', minHeight: '50px', maxHeight: '400px', overflow: 'visible'
             }

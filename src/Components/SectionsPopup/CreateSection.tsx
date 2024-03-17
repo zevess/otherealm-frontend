@@ -1,6 +1,6 @@
 import { Box, Checkbox, FormControlLabel, FormGroup, IconButton, TextField } from "@mui/material"
 import { PopupWithTrigger } from "../Popup.tsx"
-import React from "react"
+import React, { FC } from "react"
 import AddIcon from '@mui/icons-material/Add';
 import axios from '../../axios.ts'
 import { CheckBox } from "@mui/icons-material";
@@ -9,22 +9,23 @@ import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
 import { useAppDispatch } from "../../store/hooks.tsx";
 import { addFavourites, clearFavourite, isFavourire } from "../../store/favourite.ts";
 
-export const CreateSection = () => {
+interface CreateSectionProps{
+    updateFavourites: () => void
+}
+
+export const CreateSection:FC<CreateSectionProps> = ({updateFavourites}) => {
 
     const [title, setTitle] = React.useState('');
 
     const onSubmit = async () => {
         try {
-
-            const fields = {
-                title
-            }
+            const fields = {title}
             await axios.post('/favourite', fields)
-
         } catch (err) {
             console.warn(err);
             alert('ошибка при создании раздела')
         }
+        updateFavourites();
     }
 
     return (
@@ -37,7 +38,6 @@ export const CreateSection = () => {
                     <AddIcon />
                 </IconButton>
             </Box>
-
         </PopupWithTrigger>
     )
 }

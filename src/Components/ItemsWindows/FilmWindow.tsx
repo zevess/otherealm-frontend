@@ -81,7 +81,7 @@ export const FilmWindow = () => {
                                         <Typography paddingRight={'10px'} variant="h5" key={index}>{genre.name}{index !== currentFilmItem.genres?.length - 1 && ','}</Typography>
                                     ))}
                                 </Box>
-                                <Box display={'flex'} paddingBottom={'15px'}>
+                                <Box display={'flex'} paddingBottom={'15px'} flexWrap={'wrap'}>
                                     <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>режиссер: </Typography>
                                     {currentFilmItem.persons?.map((person, index) =>(
                                         person.enProfession == 'director' && <Typography paddingRight={'10px'} variant="h5" key={index}>{person.name}</Typography>

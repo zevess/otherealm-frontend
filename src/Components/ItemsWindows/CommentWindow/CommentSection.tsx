@@ -13,12 +13,8 @@ export const commentInputStyles = {
 
 export const CommentSection = () => {
 
-    const dispatch = useAppDispatch()
     const [text, setCommentText] = React.useState('');
     const [data, setData] = React.useState()
-
-    const params = useParams();
-    // const paramsId = String(params.id);
 
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
@@ -31,10 +27,12 @@ export const CommentSection = () => {
                 text,
                 postId
             }
-
+    
             await axios.post('/comments', fields);
+            setCommentText('');
             axios.get(`/comments/${postId}`).then(res => {
                 setData(res.data);
+                
             })
         } catch (err) {
             console.warn(err);
@@ -51,7 +49,7 @@ export const CommentSection = () => {
 
     return (
         <Box display={'flex'} flexDirection={'column'}>
-            <InputText setText={setCommentText} onClick={onSubmit} placeholder={"комментарий"} sx={commentInputStyles} />
+            <InputText text={text} setText={setCommentText} onClick={onSubmit} placeholder={"комментарий"} sx={commentInputStyles} />
             <Box>
                 {data !== undefined && data.map((item: any) => (
                     <Comment name={item.user.name} nick={item.user.nick} text={item.text} />

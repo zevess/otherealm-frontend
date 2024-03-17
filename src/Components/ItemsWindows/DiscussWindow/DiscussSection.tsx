@@ -3,27 +3,36 @@ import { DiscussInput } from "./DiscussInput"
 import { DiscussButton } from "./DiscussButton"
 import { ModalWindow } from "../../ModalWindow"
 import React from "react"
-import { DiscussModal } from "../../DiscussModal/DiscussModal"
+import { DiscussModal } from "./DiscussModal"
 import { DiscussLinkItem } from "./DiscussLinkItem"
+import axios from '../../../axios'
 
 export const DiscussSection = () => {
     const [modalOpen, setModalOpen] = React.useState(false)
-    const handleClose = () => setModalOpen(false);
+    const [data, setData] = React.useState<any>();
 
+    const currentUrl = window.location.href;
+    const parts = currentUrl.split('/');
+    const itemId = String(parts.slice(-2).join(''))
+
+    React.useEffect(() => {
+        axios.get(`/discuss/${itemId}`).then(res => {
+            setData(res.data);
+        })
+    }, [])
     return (
         <Box display={'flex'} flexDirection={'column'} >
             <Box display={'flex'} justifyContent={'space-around'} >
                 <DiscussInput />
                 <DiscussButton setModalOpen={setModalOpen} />
-                <ModalWindow open={modalOpen} handleClose={handleClose}>
-                    <DiscussModal/>
+                <ModalWindow open={modalOpen} handleClose={() => setModalOpen(false)}>
+                    <DiscussModal setData={setData} setModalOpen={setModalOpen} />
                 </ModalWindow>
             </Box>
             <Box>
-                <DiscussLinkItem/>
-                <DiscussLinkItem/>
-                <DiscussLinkItem/>
-                <DiscussLinkItem/>
+                {data !== undefined && data.map((item: any) => (
+                    <DiscussLinkItem  linkTo={item._id} author={item.user.name} title={item.title}/>
+                ))}
             </Box>
         </Box>
     )
