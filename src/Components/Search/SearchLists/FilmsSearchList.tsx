@@ -15,7 +15,7 @@ export const FilmsSearchList = () => {
     const totalMediaPage = useAppSelector(state => state.state.totalMediaPage)
     const filmsLoadingStatus = useAppSelector(state => state.filmData.filmsLoadingStatus)
 
-    console.log(filmsLoadingStatus);
+    console.log(filmResult);
 
     if (filmsLoadingStatus === 'loading'){
         return <CircularProgress/>

@@ -18,6 +18,7 @@ import React from 'react'
 import { fetchAuthMe } from './store/auth'
 import axios from './axios'
 import { addFavourites } from './store/favourite'
+import { Welcome } from './Components/RegistrationPage/Welcome'
 
 
 // const router = createBrowserRouter(
@@ -57,7 +58,8 @@ function App() {
 
     <>
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route element={<Layout />}>
+          <Route path='/' element={<Welcome />} />
           <Route path='/search' element={<Search />} />
           <Route path='/profile/:nick' element={<Profile />} />
           <Route path='/item/movie/:id' element={<FilmWindow />} />
@@ -67,7 +69,7 @@ function App() {
           <Route path='/item/tv-series/:id' element={<FilmWindow />} />
           <Route path='/item/game/:id' element={<GameWindow />} />
           <Route path='/item/book/:id' element={<BookWindow />} />
-          <Route path='/discuss' element={<ItemDiscussWindow />} />
+          <Route path='/discuss/:itemId/:discussId' element={<ItemDiscussWindow />} />
           <Route path='/franchise' element={<FranchiseWindow />} />
           <Route path='/auth' element={<Authorize />} />
         </Route>

@@ -47,7 +47,9 @@ export const GameWindow = () => {
     }
 
 
-
+    const currentUrl = window.location.href;
+    const parts = currentUrl.split('/');
+    const postId = String(parts.slice(-2).join(''))
 
 
     return (
@@ -137,7 +139,7 @@ export const GameWindow = () => {
             </ToggleButtonGroup>
 
             <Box width={'90%'}>
-                {alignment == 'comments' ? <CommentSection /> : <DiscussSection />}
+                {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
             </Box>
         </div>
     )

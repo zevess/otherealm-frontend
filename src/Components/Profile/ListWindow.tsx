@@ -105,11 +105,11 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
                         {favourites.map((item) =>(
                             <ToggleButton sx={{ maxWidth: '200px', height: 'auto', borderLeft: '1px solid rgba(0, 0, 0, 0.12)', marginBottom: '20px'}} id={item?._id} key={item?._id} value={item?.title}>
                                 {item?.title}
-                                <IconButton onClick={() => {
+                                {isNotSameUser && <IconButton onClick={() => {
                                     setToggleSetting(true)
                                     } }>
                                     <SettingsOutlinedIcon/>    
-                                </IconButton>    
+                                </IconButton>}  
                             </ToggleButton>
                         ))}
                     </ToggleButtonGroup>

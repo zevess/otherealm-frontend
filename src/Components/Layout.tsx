@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@mui/material"
+import { ThemeProvider, Typography } from "@mui/material"
 import { FranchiseCard } from "./Cards/FranchiseCard"
 import { Welcome } from "./RegistrationPage/Welcome"
 import { HeaderLogin } from "./RegistrationPage/HeaderLogin"

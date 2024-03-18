@@ -50,7 +50,7 @@ export const DiscussModal: FC<DiscussModalProps> = ({setModalOpen, setData}) => 
                     borderRadius: '20px'
                 }
             }} sx={{ width: '100%', marginBottom: '20px' }}></TextField>
-            <TextField value={text} onChange={(event) => setText(event.target.value)} variant="outlined" multiline placeholder="введите текст обсуждения" inputProps={{
+            <TextField value={text} onChange={(event) => setText(event.target.value)} variant="outlined" multiline placeholder="введите текст обсуждения (не менее 10 символов)" inputProps={{
                 style: {
                     fontSize: '20px', lineHeight: '1.4',  overflow: 'visible'
                 }

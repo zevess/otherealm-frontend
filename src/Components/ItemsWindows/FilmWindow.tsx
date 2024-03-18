@@ -44,6 +44,11 @@ export const FilmWindow = () => {
         return <CircularProgress />
     }
 
+    const currentUrl = window.location.href;
+    const parts = currentUrl.split('/');
+    const postId = String(parts.slice(-2).join(''))
+    console.log(postId);
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '1500px', marginLeft: 'auto', marginRight: 'auto' }} >
             <Box maxWidth={'1500px'} >
@@ -110,7 +115,7 @@ export const FilmWindow = () => {
             </ToggleButtonGroup>
 
             <Box width={'90%'}>
-                {alignment == 'comments' ? <CommentSection /> : <DiscussSection />}
+                {alignment == 'comments' ? <CommentSection postId={postId}/> : <DiscussSection />}
             </Box>
         </div>
     )

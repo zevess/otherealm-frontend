@@ -6,8 +6,11 @@ import React from "react"
 import { DiscussModal } from "./DiscussModal"
 import { DiscussLinkItem } from "./DiscussLinkItem"
 import axios from '../../../axios'
+import { useAppDispatch } from "../../../store/hooks"
+import { addDiscuss, clearDiscuss } from "../../../store/discuss"
 
 export const DiscussSection = () => {
+    const dispatch = useAppDispatch()
     const [modalOpen, setModalOpen] = React.useState(false)
     const [data, setData] = React.useState<any>();
 
@@ -18,8 +21,17 @@ export const DiscussSection = () => {
     React.useEffect(() => {
         axios.get(`/discuss/${itemId}`).then(res => {
             setData(res.data);
+            dispatch(addDiscuss(res.data));
         })
+
+        return () =>{
+            dispatch(clearDiscuss())
+        }
+
     }, [])
+
+    console.log(data);
+
     return (
         <Box display={'flex'} flexDirection={'column'} >
             <Box display={'flex'} justifyContent={'space-around'} >
@@ -31,7 +43,7 @@ export const DiscussSection = () => {
             </Box>
             <Box>
                 {data !== undefined && data.map((item: any) => (
-                    <DiscussLinkItem  linkTo={item._id} author={item.user.name} title={item.title}/>
+                    <DiscussLinkItem linkTo={item?._id} author={item.user.name} title={item?.title}/>
                 ))}
             </Box>
         </Box>

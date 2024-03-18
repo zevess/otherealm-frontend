@@ -44,11 +44,11 @@ export const Profile = () => {
     <>
       <ProfileName name={nameSelector} />
       <Box display={"flex"} justifyContent={'center'}>
-        <Box display={'flex'} flexDirection={'column'} marginRight={'20px'}>
+        {/* <Box display={'flex'} flexDirection={'column'} marginRight={'20px'}>
           <SectionToggleGroup items={sections} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSection)} alignment={section}></SectionToggleGroup>
-        </Box>
-        {/* <ColorToggleButton/> */}
-        {section == 'list' ? <ListWindow type={type} setType={setType} /> : <FranchiseList />}
+        </Box> */}
+        <ListWindow type={type} setType={setType} />
+        {/* {section == 'list' ? <ListWindow type={type} setType={setType} /> : <FranchiseList />} */}
       </Box>
     </>
   )

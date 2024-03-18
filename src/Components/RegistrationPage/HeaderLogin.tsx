@@ -26,9 +26,10 @@ export const HeaderLogin = () => {
 
     return (
         <Header>
-            <Box component={'img'} sx={{ width: '150px' }} src="/src/assets/img/ЛОГО.svg"></Box>
-
-
+            <Link to={'/'}>
+                <Box component={'img'} sx={{ width: '150px' }} src="/src/assets/img/ЛОГО.svg"></Box>
+            </Link>
+            
             {isAuth ? (
                 <>
                     <Link to={"/search"}>

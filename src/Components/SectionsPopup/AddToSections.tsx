@@ -63,11 +63,12 @@ export const AddToSection = () => {
         if (userId !== undefined) {
             axios.get(`/favourite/${userId}`).then(res => {
                 dispatch(addFavourites(res.data));
-            }).catch(err => {
-                console.warn(err);
-                alert('ошибка при получении разделов')
             })
         }
+        // .catch(err => {
+        //     console.warn(err);
+        //     alert('ошибка при получении разделов')
+        // })
         return () => {
             dispatch(clearFavourite());
         }

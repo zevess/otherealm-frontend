@@ -38,6 +38,10 @@ export const BookWindow = () => {
     if(currentBookItem == undefined){
         return <CircularProgress/>
     }
+
+    const currentUrl = window.location.href;
+    const parts = currentUrl.split('/');
+    const postId = String(parts.slice(-2).join(''))
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '1500px', marginLeft: 'auto', marginRight: 'auto' }} >
             <Box maxWidth={'1500px'} minWidth={'1500px'}>
@@ -81,7 +85,7 @@ export const BookWindow = () => {
             </ToggleButtonGroup>
 
             <Box width={'90%'}>
-                {alignment == 'comments' ? <CommentSection /> : <DiscussSection />}
+                {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
             </Box>
         </div>
     )

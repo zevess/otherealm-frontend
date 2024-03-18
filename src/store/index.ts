@@ -7,6 +7,7 @@ import gameDataReducer from "./reducers/gameDataReducer";
 import authReducer from './auth'
 import commentsReducer from './comment'
 import favouriteReducer from './favourite'
+import discussReducer from './discuss'
 
 export const store = configureStore({
     reducer:{
@@ -16,7 +17,8 @@ export const store = configureStore({
         gameData: gameDataReducer,
         authData: authReducer,
         commentsData: commentsReducer,
-        favouriteData: favouriteReducer
+        favouriteData: favouriteReducer,
+        discussData: discussReducer,
     }
 })
 
