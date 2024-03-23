@@ -3,7 +3,7 @@ import { ItemCard } from "../Cards/ItemCard"
 import React, { FC } from "react"
 import { ItemTypeToggleGroup } from "../Toggles/ItemTypeToggleGroup"
 import { divideItems, itemTypes } from "../../utils/itemTypes"
-import { DivideToggleGroup } from "../Toggles/DivideToggleGroup"
+
 import { handleChange } from "../../utils/handleChange"
 import { PopupWithTrigger } from "../Popup"
 import { CreateSection } from "../SectionsPopup/CreateSection.tsx"
@@ -43,6 +43,7 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
     let currentItems: any[] = [];
     let currentFavId: any;
 
+    
     const updateFavourites = () =>{
         if (selectedUserId !== undefined) {
             axios.get(`/favourite/${selectedUserId}`).then(res => {
@@ -75,14 +76,45 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
         }
     })
 
-    const filteredItems = currentFilterItem === 'all' ? currentItems : currentItems.filter(item => item.itemType === currentFilterItem); 
-    
+    let filteredItems;
+    const movieItems = currentItems.filter(item => item.itemType === 'movie');
+    const gameItems = currentItems.filter(item => item.itemType === 'game');
+    const cartoonItems = currentItems.filter(item => item.itemType === 'cartoon' || item.itemType === 'animated-series');
+    const tvSeriesItems = currentItems.filter(item => item.itemType === 'tv-series');
+    const animeItems = currentItems.filter(item => item.itemType === 'anime');
+    const bookItems = currentItems.filter(item => item.itemType === 'book');
+
+    if (currentFilterItem === 'all'){
+        filteredItems = currentItems
+    } 
+    if (currentFilterItem === 'movie'){
+        filteredItems = movieItems
+    }
+    if (currentFilterItem === 'game'){
+        filteredItems = gameItems
+    }
+    if (currentFilterItem === 'cartoon'){
+        filteredItems = cartoonItems
+    }
+    if (currentFilterItem === 'tv-series'){
+        filteredItems = tvSeriesItems
+    }
+    if (currentFilterItem === 'anime'){
+        filteredItems = animeItems
+    }
+    if (currentFilterItem === 'book'){
+        filteredItems = bookItems
+    }
+
+
     const favId = String(currentFavId);
 
     const editFields = {
         editTitle,
         favId
     }
+    
+
 
     return (
         <Box sx={{ width: '1300px', maxWidth: '1300px', minHeight: '500px', backgroundColor: 'white', borderRadius: '24px', border: 'solid 1px black' }}>
@@ -153,73 +185,5 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
         </Box>
     )
 }
-
-
-// itemBackgroundImage
-// : 
-// "https://media.rawg.io/media/games/e1f/e1ffbeb1bac25b19749ad285ca29e158.jpg"
-// itemId
-// : 
-// "58751"
-// itemTitle
-// : 
-// "Halo Infinite"
-// itemType
-// : 
-// "game"
-// 0: {
-//     createdAt: "2024-03-15T18:00:03.759Z"
-//     items: [
-//         0: {
-//             itemBackgroundImage: "https://media.rawg.io/media/games/e1f/e1ffbeb1bac25b19749ad285ca29e158.jpg"
-//             itemId: "58751"
-//             itemTitle: "Halo Infinite"
-//             itemType: "game"
-//             _id: "65f48d0d4317b9bd403a51a3"
-//         }
-        
-        
-//         1: {
-//             itemBackgroundImage: "https://media.rawg.io/media/games/045/0457f748c9492261ccb46147edf9c761.jpg"
-//             itemId: "28613"
-//             itemTitle: "Halo: Reach"
-//             itemType: "game"
-//             _id: "65f49a81caea7c858de577c7"
-//         }
-//     ]
-//     title: "1"
-//     updatedAt: "2024-03-15T18:59:13.284Z"
-//     user: "65f09a6dad36e583b431cbc8"
-//     __v: 0
-//     _id: "65f48ca34317b9bd403a518a"
-// }
-
-// 1: {
-//     createdAt: "2024-03-15T18:00:08.666Z"
-//     items: [
-//         0: {
-//             itemBackgroundImage: "https://media.rawg.io/media/games/e1f/e1ffbeb1bac25b19749ad285ca29e158.jpg"
-//             itemId: "58751"
-//             itemTitle: "Halo Infinite"
-//             itemType: "game"
-//             _id: "65f48d0d4317b9bd403a51a3"
-//         }
-        
-        
-//         1: {
-//             itemBackgroundImage: "https://media.rawg.io/media/games/045/0457f748c9492261ccb46147edf9c761.jpg"
-//             itemId: "28613"
-//             itemTitle: "Halo: Reach"
-//             itemType: "game"
-//             _id: "65f49a81caea7c858de577c7"
-//         }
-//     ]
-//     title: "2"
-//     updatedAt: "2024-03-15T18:58:50.991Z"
-//     user: "65f09a6dad36e583b431cbc8"
-//     __v: 0
-//     _id: "65f48ca84317b9bd403a518f"
-// }
-
 
 

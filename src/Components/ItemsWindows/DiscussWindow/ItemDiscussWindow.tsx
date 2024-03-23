@@ -45,12 +45,6 @@ export const ItemDiscussWindow = () =>{
             <hr style={{ borderTop: '6px solid black', width: '90%', marginTop: '50px', marginBottom: '50px' }}></hr>
             <Typography sx={{marginBottom: '200px'}} variant="h4">{discussData.text}</Typography>
             <CommentSection postId={discussId}/>
-            {/* <InputText text={commentText} setText={setCommentText} onClick={()=>alert(commentText)} placeholder="ответить" sx={discussInputStyles}/> */}
-            {/* <Comment/>
-            <Comment/>
-            <Comment/>
-            <Comment/>
-            <Comment/> */}
         </Box>        
     )
 }

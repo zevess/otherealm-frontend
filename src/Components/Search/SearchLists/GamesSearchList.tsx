@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Pagination } from "@mui/material";
+import { Box, CircularProgress, Pagination, Typography } from "@mui/material";
 import { useAppSelector } from "../../../store";
 import { useAppDispatch } from "../../../store/hooks";
 import { ItemCard } from "../../Cards/ItemCard";
@@ -16,12 +16,24 @@ export const GamesSearchList = () => {
     const totalGamePage = useAppSelector(state => state.state.totalGamePage);
     const gamesLoadingStatus = useAppSelector(state => state.gameData.gamesLoadingStatus)
 
-    if(gamesLoadingStatus == 'loading'){
-        return <CircularProgress/>
+    if (gamesLoadingStatus == 'loading') {
+        return <CircularProgress />
+    }
+
+
+    if (gamesResult?.length == 0) {
+        return (
+            <Box>
+                <Typography variant="h2">
+                    Ничего не найдено
+                    Повторите позже или измените запрос
+                </Typography>
+            </Box>
+        )
     }
 
     return (
-        <>
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <Box display={'flex'} flexWrap={'wrap'} alignItems={'flex-start'}>
                 {gamesResult !== undefined && gamesResult.map((item: any) => (
                     <ItemCard itemPoster={item.background_image ? item.background_image : '../src/assets/img/noImg.png'} id={item.id} key={item.id} itemTitle={item.name} itemType="game" itemAltenativeTitle={item.alternativeName} />
@@ -29,10 +41,11 @@ export const GamesSearchList = () => {
             </Box>
             <Pagination page={currentGamePageSelector} count={totalGamePage} onChange={(event, value) => {
                 dispatch(setGamePage(value));
-                dispatch(gameFetch({searchTitle, rawgToken, currentGamePage: value}))
-                
-            }}/>
-        </>
+                dispatch(gameFetch({ searchTitle, rawgToken, currentGamePage: value }))
+            }} />
+        </Box>
+
+
 
     )
 }

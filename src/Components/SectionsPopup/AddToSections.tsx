@@ -94,7 +94,6 @@ export const AddToSection = () => {
             if(!checked){
                 await axios.patch(`/favourite/remove/${id}`, fields);
             }
-            
 
         } catch (err) {
             console.warn(err);

@@ -20,8 +20,6 @@ export const CommentSection:FC<CommentSectionProps> = ({postId}) => {
     const [text, setCommentText] = React.useState('');
     const [data, setData] = React.useState()
 
-   
-
     const onSubmit = async () => {
         try {
             const fields = {
@@ -40,8 +38,6 @@ export const CommentSection:FC<CommentSectionProps> = ({postId}) => {
             alert("ошибка при добавлении комментария")
         }
     }
-
-
     React.useEffect(() => {
         axios.get(`/comments/${postId}`).then(res => {
             setData(res.data);

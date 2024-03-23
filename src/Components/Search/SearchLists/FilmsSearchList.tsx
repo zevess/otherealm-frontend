@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Pagination } from "@mui/material";
+import { Box, CircularProgress, Pagination, Typography } from "@mui/material";
 import { useAppSelector } from "../../../store";
 import { useAppDispatch } from "../../../store/hooks";
 import { ItemCard } from "../../Cards/ItemCard";
@@ -17,12 +17,23 @@ export const FilmsSearchList = () => {
 
     console.log(filmResult);
 
-    if (filmsLoadingStatus === 'loading'){
-        return <CircularProgress/>
+    if (filmsLoadingStatus === 'loading') {
+        return <CircularProgress />
+    }
+
+    if (filmResult?.length == 0) {
+        return (
+            <Box>
+                <Typography variant="h2">
+                    Ничего не найдено
+                    Повторите позже или измените запрос
+                </Typography>
+            </Box>
+        )
     }
 
     return (
-        <>
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <Box display={'flex'} flexWrap={'wrap'} alignItems={'flex-start'}>
                 {filmResult !== undefined && filmResult.map((item) => (
                     <ItemCard itemPoster={item.poster?.url ? item.poster.url : '../src/assets/img/noImg.png'} itemTitle={item.name} id={item.id} key={item.id} itemType={item.type} itemAltenativeTitle={item.alternativeName} />
@@ -30,8 +41,8 @@ export const FilmsSearchList = () => {
             </Box>
             <Pagination page={currentMediaPageSelector} count={totalMediaPage} onChange={(event, value) => {
                 dispatch(setMediaPage(value))
-                dispatch(filmFetch({searchTitle, currentMediaPage: value, kpToken}))
+                dispatch(filmFetch({ searchTitle, currentMediaPage: value, kpToken }))
             }} />
-        </>
+        </Box>
     )
 }

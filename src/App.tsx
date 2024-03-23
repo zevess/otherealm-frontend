@@ -16,46 +16,16 @@ import { Authorize, Registration } from './Components/RegistrationPage/Registrat
 import { useAppDispatch } from './store/hooks'
 import React from 'react'
 import { fetchAuthMe } from './store/auth'
-import axios from './axios'
-import { addFavourites } from './store/favourite'
 import { Welcome } from './Components/RegistrationPage/Welcome'
-
-
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path='/' element={<Layout />}>
-//       <Route path='/search' element={<Search />} />
-//       <Route path='/profile' element={<Profile />} />
-//       <Route path='/item/movie/:id' element={<FilmWindow />} />
-//       <Route path='/item/anime/:id' element={<FilmWindow />} />
-//       <Route path='/item/cartoon/:id' element={<FilmWindow />} />
-//       <Route path='/item/animated-series/:id' element={<FilmWindow />} />
-//       <Route path='/item/tv-series/:id' element={<FilmWindow />} />
-//       <Route path='/item/game/:id' element={<GameWindow />} />
-//       <Route path='/item/book/:id' element={<BookWindow />} />
-//       <Route path='/discuss' element={<ItemDiscussWindow />} />
-//       <Route path='/franchise' element={<FranchiseWindow />} />
-//       {/* <Route path='/register' element={<Registration/>}/> */}
-//       <Route path='/auth' element={<Authorize />} />
-//     </Route>
-//   )
-// )
+import { ErrorBoundary } from './Components/ErrorPage'
 
 function App() {
-
   const dispatch = useAppDispatch();
-
-  const selectIsAuth = useAppSelector((state) => state.authData.data);
-  console.log(selectIsAuth)
-
   React.useEffect(() => {
     dispatch(fetchAuthMe())
   }, [])
-  const userId = (useAppSelector((state) => state.authData.data?._id));
-  const userNick = (useAppSelector((state) => state.authData.data?.nick));
-  console.log(userId, userNick);
-  return (
 
+  return (
     <>
       <Routes>
         <Route element={<Layout />}>
@@ -70,8 +40,8 @@ function App() {
           <Route path='/item/game/:id' element={<GameWindow />} />
           <Route path='/item/book/:id' element={<BookWindow />} />
           <Route path='/discuss/:itemId/:discussId' element={<ItemDiscussWindow />} />
-          <Route path='/franchise' element={<FranchiseWindow />} />
           <Route path='/auth' element={<Authorize />} />
+          <Route path='/error' element={<ErrorBoundary/>}/>
         </Route>
       </Routes>
     </>

@@ -73,14 +73,14 @@ export const FilmWindow = () => {
                                 <AddToSection/>
                             </Box>
                             <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'} alignItems={'flex-start'} >
-                                <Box display={'flex'} paddingBottom={'15px'}>
+                                <Box display={'flex'} paddingBottom={'15px'} flexWrap={'wrap'}>
                                     <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>страны: </Typography>
                                     {currentFilmItem?.countries?.map((country, index) => (
                                         <Typography paddingRight={'10px'} variant="h5" key={index++}>{country.name}{index !== currentFilmItem.countries?.length - 1 && ", "}</Typography>
                                     ))}
                                 </Box>
                                 <Typography fontWeight={'bold'} paddingBottom={'15px'} variant="h5">год: {currentFilmItem.year}</Typography>
-                                <Box display={'flex'} paddingBottom={'15px'}>
+                                <Box display={'flex'} paddingBottom={'15px'} flexWrap={'wrap'}>
                                     <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>жанры: </Typography>
                                     {currentFilmItem.genres?.map((genre, index) =>(
                                         <Typography paddingRight={'10px'} variant="h5" key={index}>{genre.name}{index !== currentFilmItem.genres?.length - 1 && ','}</Typography>

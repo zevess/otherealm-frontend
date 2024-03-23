@@ -77,51 +77,38 @@ export const GameWindow = () => {
                             </Box>
 
                             <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'} alignItems={'flex-start'} >
-                                <Box display={'flex'} paddingBottom={'15px'}>
+                                <Box display={'flex'} paddingBottom={'15px'} flexWrap={'wrap'}>
                                     <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>оценка METACRITIC: </Typography>
                                     <Typography variant='h5' paddingRight={'10px'}>{currentGameItem.metacritic}</Typography>
                                 </Box>
-                                <Box display={'flex'} paddingBottom={'15px'}>
+                                <Box display={'flex'} paddingBottom={'15px'} flexWrap={'wrap'}>
                                     <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>дата выхода: </Typography>
                                     <Typography variant='h5' paddingRight={'10px'}>{currentGameItem.released}</Typography>
                                 </Box>
-                                <Box display={'flex'} paddingBottom={'15px'}>
+                                <Box display={'flex'} paddingBottom={'15px'} flexWrap={'wrap'}>
                                     <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>разработчики: </Typography>
                                     {currentGameItem.developers.map((devs, index) => (
                                         <Typography paddingRight={'10px'} variant="h5" key={index}>{devs.name}</Typography>
                                     ))}
                                 </Box>
-                                <Box display={'flex'} paddingBottom={'15px'}>
+                                <Box display={'flex'} paddingBottom={'15px'} flexWrap={'wrap'}>
                                     <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>издатели: </Typography>
                                     {currentGameItem.publishers.map((publisher, index) => (
                                         <Typography paddingRight={'10px'} variant="h5" key={index}>{publisher.name}</Typography>
                                     ))}
                                 </Box>
-                                <Box display={'flex'} paddingBottom={'15px'}>
+                                <Box display={'flex'} paddingBottom={'15px'} flexWrap={'wrap'}>
                                     <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>жанры: </Typography>
                                     {currentGameItem.genres.map((genre, index) => (
                                         <Typography paddingRight={'10px'} variant="h5" key={index}>{genre.name}</Typography>
                                     ))}
                                 </Box>
 
-                                <Box display={'flex'} paddingBottom={'15px'}>
+                                <Box display={'flex'} paddingBottom={'15px'} flexWrap={'wrap'}>
                                     <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>платформы: </Typography>
                                     {currentGameItem.platforms.map((platform, index) => (
                                         <Typography paddingRight={'10px'} variant="h5" key={index}>{platform.platform.name},</Typography>
                                     ))}
-                                </Box>
-
-                                <Box display={'flex'} flexWrap={'wrap'} paddingBottom={'15px'}>
-                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>актеры: </Typography>
-                                    {/* {currentFilmItem.persons?.map((person, index) =>(
-                                        (person.enProfession == 'actor') && <Typography paddingRight={'10px'} variant="h5" key={index++}>{person.name},</Typography>
-                                    ))} */}
-                                </Box>
-                            </Box>
-
-                            <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'}>
-                                <Box display={'flex'}>
-
                                 </Box>
                             </Box>
 

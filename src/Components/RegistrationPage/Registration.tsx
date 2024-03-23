@@ -1,5 +1,4 @@
 import { Box, Button, TextField, Typography } from "@mui/material"
-import { About } from "./About"
 import { HeaderLogin } from "./HeaderLogin"
 import { Welcome } from "./Welcome"
 import { fetchAuth, fetchRegister} from "../../store/auth"
@@ -43,11 +42,7 @@ interface AuthProps{
 }
 
 export const Registration: FC<AuthProps> = ({onClick}) => {
-
     const dispatch = useAppDispatch();
-
-    
-
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         defaultValues: {
             name: '',
@@ -56,12 +51,8 @@ export const Registration: FC<AuthProps> = ({onClick}) => {
             password: '',
         }, mode: 'onChange'
     });
-
-
-
     const onSubmit = async (values: any) => {
         const data = await dispatch(fetchRegister(values));
-
         if (!data.payload) {
             return alert('не удалось зарегистироваться')
         }
@@ -70,9 +61,7 @@ export const Registration: FC<AuthProps> = ({onClick}) => {
         } else {
             alert('не удалось зарегистрироваться');
         }
-
     }
-    
     return (
         <>
             <Typography variant="h5">РЕГИСТРАЦИЯ</Typography>
@@ -111,7 +100,6 @@ export const Registration: FC<AuthProps> = ({onClick}) => {
 export const Login: FC<AuthProps> = ({onClick}) => {
 
     const dispatch = useAppDispatch();
-
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         defaultValues: {
             email: '',
@@ -119,11 +107,8 @@ export const Login: FC<AuthProps> = ({onClick}) => {
         }, mode: 'onChange'
     });
 
-
-
     const onSubmit = async (values: any) => {
         const data = await dispatch(fetchAuth(values));
-
         if (!data.payload) {
             return alert('не удалось зарегистироваться')
         }
@@ -150,7 +135,6 @@ export const Login: FC<AuthProps> = ({onClick}) => {
                 </form>
 
             </Box>
-
             <hr style={{ borderTop: '2px solid black', width: '80%' }}></hr>
             <p>нет аккаунта?</p>
             <Button size="small" onClick={onClick}>создать аккаунт</Button>

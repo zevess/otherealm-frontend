@@ -89,22 +89,21 @@ export const Search = () => {
         <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <InputText setText={setText} onClick={() => {
                 getFilms(searchTitle, currentMediaPage, kpToken)
-                // openLib()
-                getBooks(searchTitle, gbToken, currentBookPage);
-                getGame(searchTitle, rawgToken, currentGamePage);
-            }} placeholder="поиск фильма, игры, литературы" sx={inputStyles} />
+                getBooks(searchTitle, gbToken, currentBookPage)
+                getGame(searchTitle, rawgToken, currentGamePage)
+            } } placeholder="поиск фильма, игры, литературы" sx={inputStyles} text={text} />
             <Box width={'60%'}>
                 <SearchToggleGroup items={searchToggleItems} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSearchAlignment)} alignment={searchAlignment}></SearchToggleGroup>
                 <Box marginLeft={'auto'} marginRight={'auto'} width={'auto'} maxWidth={'700px'} height={'auto'} border={'solid 1px black'} bgcolor={'white'}>
                     <Typography variant="h5">Все результаты взяты из открытых источников:</Typography>
-                    <Box display={'flex'} justifyContent={'space-evenly'}>
+                    <Box display={'flex'} justifyContent={'space-evenly'} flexWrap={'wrap'}>
                         <a href="https://api.kinopoisk.dev/documentation">api.kinopoisk.dev</a>
                         <a href="https://rawg.io">rawg.io</a>
                         <a href="https://developers.google.com/books?hl=ru">developers.google.com/books</a>
                     </Box>
                     <Typography variant="h5">соответственно</Typography>
                     <Typography variant="h5">Результаты могут отличаться от ожидаемых.</Typography>
-                    <Typography variant="h5">Для получения более точных вводите названия на оригинальном языке.</Typography>
+                    <Typography variant="h5">Для получения более точных вводите полные названия на оригинальном языке.</Typography>
                 </Box>
                 <SearchResult />
             </Box>

@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Pagination } from "@mui/material";
+import { Box, CircularProgress, Pagination, Typography } from "@mui/material";
 import { useAppSelector } from "../../../store";
 import { useAppDispatch } from "../../../store/hooks";
 import { ItemCard } from "../../Cards/ItemCard";
@@ -15,15 +15,26 @@ export const BooksSearchList = () => {
 
     const currentBookPage = useAppSelector(state => state.state.currentBookPage);
     const bookResult = useAppSelector(state => state.bookData.bookResult?.items);
+    const bookResultLength = useAppSelector(state => state.bookData.bookResult?.totalItems);
     const totalBookPage = useAppSelector(state => state.state.totalBookPage)
     const booksLoadingStatus = useAppSelector(state => state.bookData.booksLoadingStatus)
 
-    if(booksLoadingStatus == 'loading'){
-        return <CircularProgress/>
+    if (booksLoadingStatus == 'loading') {
+        return <CircularProgress />
     }
 
+    if (bookResultLength == 0) {
+        return (
+            <Box>
+                <Typography variant="h2">
+                    Ничего не найдено
+                    Повторите позже или измените запрос
+                </Typography>
+            </Box>
+        )
+    }
     return (
-        <>
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <Box display={'flex'} flexWrap={'wrap'} alignItems={'flex-start'}>
                 {bookResult !== undefined && bookResult.map((item: any) => (
                     <ItemCard itemPoster={item?.volumeInfo?.imageLinks?.thumbnail ? item?.volumeInfo?.imageLinks?.thumbnail : '../src/assets/img/noImg.png'} itemTitle={item?.volumeInfo?.title} id={item?.id} key={item?.id} itemType="book" itemAltenativeTitle={item.alternativeName} />
@@ -31,9 +42,10 @@ export const BooksSearchList = () => {
             </Box>
             <Pagination page={currentBookPage} count={4} onChange={(event, value) => {
                 dispatch(setBookPage(value))
-                dispatch(booksFetch({searchTitle, gbToken, currentBookPage: value}))
+                dispatch(booksFetch({ searchTitle, gbToken, currentBookPage: value }))
             }} />
-        </>
+        </Box>
+
 
     )
 }
