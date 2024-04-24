@@ -39,7 +39,7 @@ export const DiscussModal: FC<DiscussModalProps> = ({setModalOpen, setData}) => 
         }
     }
     return (
-        <Box border={'solid 5px #7b7eb4'} bgcolor={"white"} width={'60%'} padding={'20px'} height={'auto'} maxHeight={'80%'} position={'absolute'} overflow={'scroll'} top={'50%'} left={'50%'} sx={{ transform: 'translate(-50%, -50%)', borderRadius: '18px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className="discussModal">
             <Typography variant="h2" textAlign={'center'} marginBottom={'20px'} padding={'10px'}>создать обсуждение</Typography>
             <TextField value={title} onChange={(event) => setTitle(event.target.value)} variant="outlined" multiline placeholder="введите название обсуждения" inputProps={{
                 style: {
@@ -61,7 +61,7 @@ export const DiscussModal: FC<DiscussModalProps> = ({setModalOpen, setData}) => 
             }} sx={{ width: '100%', marginBottom: '40px' }}></TextField>
 
             <ColorButtonBlue size="large" onClick={onSubmit}>создать обсуждение</ColorButtonBlue>
-        </Box>
+        </div>
 
     )
 }

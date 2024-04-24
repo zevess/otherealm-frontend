@@ -40,11 +40,11 @@ export const ItemDiscussWindow = () =>{
 
 
     return(
-        <Box height={'auto'} width={'75%'} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} marginLeft={'auto'} marginRight={'auto'}>
-            <DiscussItemTitleCard title={discussData.title} author={discussData.user?.name}/>
+        <div className="discussItem">
+            <DiscussItemTitleCard avatar={discussData.user?.avatarUrl} nick={discussData.user?.nick} title={discussData.title} author={discussData.user?.name}/>
             <hr style={{ borderTop: '6px solid black', width: '90%', marginTop: '50px', marginBottom: '50px' }}></hr>
             <Typography sx={{marginBottom: '200px'}} variant="h4">{discussData.text}</Typography>
             <CommentSection postId={discussId}/>
-        </Box>        
+        </div>        
     )
 }

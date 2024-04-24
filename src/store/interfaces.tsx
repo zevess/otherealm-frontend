@@ -138,7 +138,7 @@ export interface currentGameItemProps {
     ]
     platforms: [
         {
-            platform:{
+            platform: {
                 name: string
             }
         }
@@ -149,11 +149,27 @@ export interface authDataProps {
     name: string,
     email: string,
     nick?: string,
-    _id: string
+    _id: string,
+    avatarUrl: string,
+    backgroundUrl: string
+}
+
+export interface userPosts {
+    posts: [
+        {
+            _id: string,
+            title: string,
+            text: string,
+            viewsCount: number,
+            imageUrl: string,
+            user: string,
+            createdAt: string,
+            updatedAt: string,
+        }
+    ]
 }
 
 export interface CommentProps {
-
     comments: [
         {
             _id: string,
@@ -173,6 +189,4 @@ export interface CommentProps {
             __v: 0
         },
     ]
-
-
 }

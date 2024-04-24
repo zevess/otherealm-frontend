@@ -22,13 +22,12 @@ export const Layout = () => {
 
     const dispatch = useAppDispatch();
     const selectIsAuth = useAppSelector((state) => state.authData.data);
-    console.log(selectIsAuth)
 
     React.useEffect(() => {
         dispatch(fetchAuthMe())
     }, [])
 
-    console.log(selectIsAuth);
+    // console.log(selectIsAuth);
     
     return (
         <ThemeProvider theme={layoutTheme}>

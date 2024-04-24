@@ -45,8 +45,10 @@ export const ItemType:FC<ItemTypeProps> = ({itemType}) => {
     }
 
     return (
-        <Box sx={{ aspectRatio: '200/57', width: '200px', backgroundColor: typeColor, position: 'absolute', marginLeft: '1100px', marginTop: '130px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '6px 0px 6px 6px', border: 'solid 2px black' }}>
+        <div className="searchItemContent__main-type" style={{backgroundColor: typeColor}}>
             <Typography variant="h5" borderColor={'solid 1px black'}>{itemTypeRu}</Typography>
-        </Box>
+        </div>
+            
+        
     )
 }

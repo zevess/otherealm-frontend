@@ -6,7 +6,8 @@ interface DiscussLinkItemProps{
     author: string,
     title: string,
     param?: string,
-    linkTo: string
+    linkTo: string,
+    avatar?: string
 }
 
 export const DiscussLinkItem: FC<DiscussLinkItemProps> = ({title, author, linkTo}) => {
@@ -19,10 +20,10 @@ export const DiscussLinkItem: FC<DiscussLinkItemProps> = ({title, author, linkTo
 
     return (
         <Link to={`/discuss/${itemId}/${linkTo}`}>
-            <Box maxWidth={'100%'} bgcolor={'white'} minHeight={'140px'} border={'solid 3px black'} borderRadius={'30px'} padding={'20px'} margin={'20px'}>
+            <div className="discussLink">
                 <Typography variant="h6" textAlign={'left'}>автор: {author}</Typography>
                 <Typography variant="h2">{title}</Typography>
-            </Box>
+            </div>
         </Link>
     )
 }

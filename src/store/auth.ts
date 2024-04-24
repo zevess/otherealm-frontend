@@ -1,6 +1,6 @@
 import axios from '../axios.ts'
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import { authDataProps } from './interfaces.tsx';
+import { authDataProps, userPosts } from './interfaces.tsx';
 
 export const fetchAuth = createAsyncThunk('/auth/fetchAuth', async(params) => {
     const {data} = await axios.post('/auth/login', params);
@@ -25,13 +25,15 @@ export const fetchUser = createAsyncThunk('/auth/getUser', async(params) => {
 export interface authProps {
     data: authDataProps | null
     status: string,
-    selectedUserData: authDataProps | null
+    selectedUserData: authDataProps | null,
+    userPosts: userPosts | []
 }
 
 const initialState: authProps = {
     data: null,
     status: "loading",
-    selectedUserData: null
+    selectedUserData: null,
+    userPosts: []
 }
 
 export const authSlice = createSlice({
@@ -43,7 +45,10 @@ export const authSlice = createSlice({
         },
         setSelectedUserData: (state, action) =>{
             state.selectedUserData = action.payload
-        }
+        },
+        setSelectedUserPosts: (state, action) =>{
+            state.userPosts = action.payload
+        },
     },
     extraReducers: (builder) =>{
         builder
@@ -106,6 +111,6 @@ export const authSlice = createSlice({
 
 // export const selectIsAuth = (state: any) => Boolean(state.auth.data);
 
-export const { logout, setSelectedUserData } = authSlice.actions
+export const { logout, setSelectedUserData, setSelectedUserPosts } = authSlice.actions
 
 export default authSlice.reducer

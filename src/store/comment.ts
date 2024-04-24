@@ -6,7 +6,7 @@ export const fetchComment = createAsyncThunk('/comments', async(params) => {
     return data
 })
 
-export const fetchGetComments = createAsyncThunk('/comments/:postId', async(postId) => {
+export const fetchGetComments = createAsyncThunk('/comments/fetchComments', async(postId) => {
     const {data} = await axios.get(`/comments/${postId}`);
     return data
 })
@@ -21,7 +21,11 @@ const initialState = {
 export const commentsSlice = createSlice({
     name: 'comments',
     initialState,
-    reducers:{},
+    reducers:{
+        addComments: (state, action) =>{
+            state.comments.items = action.payload;
+        }
+    },
     extraReducers: (builder) =>{
         builder
         //comment
@@ -44,6 +48,6 @@ export const commentsSlice = createSlice({
 })
 
 // export const selectIsAuth = (state: any) => Boolean(state.auth.data);
-
+export const {addComments} = commentsSlice.actions
 
 export default commentsSlice.reducer

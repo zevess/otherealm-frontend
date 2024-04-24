@@ -3,11 +3,7 @@ import { PopupWithTrigger } from "../Popup.tsx"
 import React, { FC } from "react"
 import AddIcon from '@mui/icons-material/Add';
 import axios from '../../axios.ts'
-import { CheckBox } from "@mui/icons-material";
-import { useAppSelector } from "../../store/index.ts";
-import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
-import { useAppDispatch } from "../../store/hooks.tsx";
-import { addFavourites, clearFavourite, isFavourire } from "../../store/favourite.ts";
+
 
 interface CreateSectionProps{
     updateFavourites: () => void

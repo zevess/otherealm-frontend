@@ -5,7 +5,7 @@ import React, { FC } from "react"
 import { useParams } from "react-router-dom"
 import axios from '../../../axios'
 import { useAppDispatch } from "../../../store/hooks.tsx"
-import { fetchGetComments } from "../../../store/comment.ts"
+import { addComments } from "../../../store/comment.ts"
 
 export const commentInputStyles = {
     backgroundColor: 'white', textAlign: 'left', marginBottom: '20px', width: '100%'
@@ -17,6 +17,7 @@ interface CommentSectionProps{
 
 export const CommentSection:FC<CommentSectionProps> = ({postId}) => {
 
+    const dispatch = useAppDispatch();
     const [text, setCommentText] = React.useState('');
     const [data, setData] = React.useState()
 
@@ -29,6 +30,7 @@ export const CommentSection:FC<CommentSectionProps> = ({postId}) => {
     
             await axios.post('/comments', fields);
             setCommentText('');
+
             axios.get(`/comments/${postId}`).then(res => {
                 setData(res.data);
                 
@@ -40,6 +42,7 @@ export const CommentSection:FC<CommentSectionProps> = ({postId}) => {
     }
     React.useEffect(() => {
         axios.get(`/comments/${postId}`).then(res => {
+            dispatch(addComments(res.data));
             setData(res.data);
         })
     }, [])
@@ -49,7 +52,7 @@ export const CommentSection:FC<CommentSectionProps> = ({postId}) => {
             <InputText text={text} setText={setCommentText} onClick={onSubmit} placeholder={"комментарий (не менее 3 символов)"} sx={commentInputStyles} />
             <Box>
                 {data !== undefined && data.map((item: any) => (
-                    <Comment name={item?.user.name} nick={item?.user.nick} text={item.text} />
+                    <Comment avatar={item?.user.avatarUrl} name={item?.user.name} nick={item?.user.nick} text={item.text} />
                 ))}
             </Box>
         </Box>

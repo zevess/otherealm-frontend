@@ -14,8 +14,8 @@ export const itemTypes: objectProps = {
 
 
 export const sections: objectProps = {
-    "list": "списки",
-    "franchises": "франшизы"
+    "posts": "посты",
+    "list": "списки"
 }
 
 

@@ -33,19 +33,19 @@ export const DiscussSection = () => {
     console.log(data);
 
     return (
-        <Box display={'flex'} flexDirection={'column'} >
-            <Box display={'flex'} justifyContent={'space-around'} >
+        <div className="discussSection">
+            <div className="discussSection__inputs">
                 <DiscussInput />
                 <DiscussButton setModalOpen={setModalOpen} />
                 <ModalWindow open={modalOpen} handleClose={() => setModalOpen(false)}>
                     <DiscussModal setData={setData} setModalOpen={setModalOpen} />
                 </ModalWindow>
-            </Box>
+            </div>
             <Box>
                 {data !== undefined && data.map((item: any) => (
                     <DiscussLinkItem linkTo={item?._id} author={item.user.name} title={item?.title}/>
                 ))}
             </Box>
-        </Box>
+        </div>
     )
 }

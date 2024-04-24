@@ -35,7 +35,7 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
     const currentFilterItem = (useAppSelector((state) => state.state.currentFilterItem));
 
     const isNotSameUser = (userId == selectedUserId)
-    
+
     const [alignment, setAlignment] = React.useState();
     const [editTitle, setEditTitle] = React.useState('');
     const [toggleSetting, setToggleSetting] = React.useState(Boolean);
@@ -43,8 +43,8 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
     let currentItems: any[] = [];
     let currentFavId: any;
 
-    
-    const updateFavourites = () =>{
+
+    const updateFavourites = () => {
         if (selectedUserId !== undefined) {
             axios.get(`/favourite/${selectedUserId}`).then(res => {
                 setAlignment((res.data)?.[0]?.title);
@@ -69,8 +69,8 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
         }
     }, [selectedUserId])
 
-    favourites.map((item: any) =>{
-        if(alignment == item?.title){
+    favourites.map((item: any) => {
+        if (alignment == item?.title) {
             currentItems = item?.items;
             currentFavId = item?._id
         }
@@ -84,25 +84,25 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
     const animeItems = currentItems.filter(item => item.itemType === 'anime');
     const bookItems = currentItems.filter(item => item.itemType === 'book');
 
-    if (currentFilterItem === 'all'){
+    if (currentFilterItem === 'all') {
         filteredItems = currentItems
-    } 
-    if (currentFilterItem === 'movie'){
+    }
+    if (currentFilterItem === 'movie') {
         filteredItems = movieItems
     }
-    if (currentFilterItem === 'game'){
+    if (currentFilterItem === 'game') {
         filteredItems = gameItems
     }
-    if (currentFilterItem === 'cartoon'){
+    if (currentFilterItem === 'cartoon') {
         filteredItems = cartoonItems
     }
-    if (currentFilterItem === 'tv-series'){
+    if (currentFilterItem === 'tv-series') {
         filteredItems = tvSeriesItems
     }
-    if (currentFilterItem === 'anime'){
+    if (currentFilterItem === 'anime') {
         filteredItems = animeItems
     }
-    if (currentFilterItem === 'book'){
+    if (currentFilterItem === 'book') {
         filteredItems = bookItems
     }
 
@@ -113,76 +113,80 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
         editTitle,
         favId
     }
-    
+
 
 
     return (
-        <Box sx={{ width: '1300px', maxWidth: '1300px', minHeight: '500px', backgroundColor: 'white', borderRadius: '24px', border: 'solid 1px black' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-evenly', padding: '12px' }}>
+        <div className="listWindowWrapper">
+            <div className="listWindowWrapper-types">
                 <ItemTypeToggleGroup items={itemTypes} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setType)} alignment={type} />
-            </Box>
-            <div style={{ display: "flex" }}>
-                <div className="listItems" style={{ display: 'flex', alignItems: 'flex-start', flexWrap: 'wrap', marginLeft: '40px' }}>
+            </div>
+            <div className="listWindow">
+                <div className="listWindowCards">
                     {(filteredItems !== undefined) && filteredItems.map((item: any) => (
-                        <ItemCard id={item.itemId} itemTitle={item.itemTitle} itemType={item.itemType} itemPoster={item.itemBackgroundImage}/>
-                    ))} 
+                        <ItemCard id={item.itemId} itemTitle={item.itemTitle} itemType={item.itemType} itemPoster={item.itemBackgroundImage} />
+                    ))}
                 </div>
-                <Box display={'flex'} flexDirection={'column'} alignItems={'center'} marginLeft={'auto'}>                    
+                <div className="listWindowTogglesSection">
                     <ToggleButtonGroup value={alignment} exclusive onChange={
                         (event, newAlignment) => {
                             handleChange(event, newAlignment, setAlignment);
-                            // setSelectedToggle(event.target.id);
+
                         }
-                        } sx={{display: 'flex', flexDirection: 'column'}}>
-                        {favourites.map((item) =>(
-                            <ToggleButton sx={{ maxWidth: '200px', height: 'auto', borderLeft: '1px solid rgba(0, 0, 0, 0.12)', marginBottom: '20px'}} id={item?._id} key={item?._id} value={item?.title}>
+                    } className="listWindowToggleGroup">
+                        {favourites.map((item) => (
+                            <ToggleButton sx={{ maxWidth: '200px', height: 'auto', borderLeft: '1px solid rgba(0, 0, 0, 0.12)', marginBottom: '20px' }} id={item?._id} key={item?._id} value={item?.title}>
                                 {item?.title}
                                 {isNotSameUser && <IconButton onClick={() => {
                                     setToggleSetting(true)
-                                    } }>
-                                    <SettingsOutlinedIcon/>    
-                                </IconButton>}  
+                                }}>
+                                    <SettingsOutlinedIcon />
+                                </IconButton>}
                             </ToggleButton>
                         ))}
                     </ToggleButtonGroup>
-                    {isNotSameUser && <CreateSection updateFavourites={updateFavourites}/>}
-                </Box>
+                    {isNotSameUser && <CreateSection updateFavourites={updateFavourites} />}
+                </div>
 
                 {toggleSetting && <ModalWindow open={toggleSetting} handleClose={() => setToggleSetting(false)}>
-                    <Box width={'40%'} minHeight={'30%'} bgcolor={'white'} position={'absolute'} top={'35%'} left={'30%'} border={'2px solid black'} boxShadow={'24'} padding={'15px'}>
-                        <Typography  textAlign={'center'} variant="h4">{alignment}</Typography>
-                        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                            <TextField onChange={(event) => setEditTitle(event.target.value)} sx={{ width: '50%', margin: '10px' }} size="medium" placeholder="изменить название раздела"></TextField>
-                            <Box padding={'12px'} width={'50%'} justifyContent={'space-between'} display={'flex'}>
-                                <ColorButton onClick={() =>{
-                                    axios.delete(`/favourite/remove/${favId}`).then(() => {
-                                        setToggleSetting(false)
-                                        if(favourites.length == 1){
-                                            dispatch(clearFavourite());
-                                        }
-                                        // console.log(favourites.length);
-                                    }).catch(err =>{
-                                        console.warn(err);
-                                    }).finally(() => updateFavourites()) 
-                                }} >удалить</ColorButton>
-                                <Button variant="contained" onClick={()=>{
-                                    axios.post(`/favourite/edit/${selectedUserId}`, editFields).then(() => {
-                                        updateFavourites()
-                                        setToggleSetting(false)
-                                        
-                                    }).catch(err =>{
-                                        console.warn(err);
-                                        alert('раздел с таким названием уже есть');
-                                    })
-                                }}>сохранить</Button>
-                            </Box>
+                    <div className="sectionToggleSettings">
+                        <Box width={'100%'}>
+                            <Typography textAlign={'center'} variant="h4">{alignment}</Typography>
+
+                            <div className="sectionToggleSettings-inputs">
+                                <TextField onChange={(event) => setEditTitle(event.target.value)} sx={{ width: '50%', margin: '10px' }} size="medium" placeholder="изменить название раздела"></TextField>
+
+                                <div className="sectionToggleSettings-inputs__buttons">
+                                    <ColorButton onClick={() => {
+                                        axios.delete(`/favourite/remove/${favId}`).then(() => {
+                                            setToggleSetting(false)
+                                            if (favourites.length == 1) {
+                                                dispatch(clearFavourite());
+                                            }
+                                        }).catch(err => {
+                                            console.warn(err);
+                                        }).finally(() => updateFavourites())
+                                    }} >удалить</ColorButton>
+                                    <Button variant="contained" onClick={() => {
+                                        axios.post(`/favourite/edit/${selectedUserId}`, editFields).then(() => {
+                                            updateFavourites()
+                                            setToggleSetting(false)
+
+                                        }).catch(err => {
+                                            console.warn(err);
+                                            alert('раздел с таким названием уже есть');
+                                        })
+                                    }}>сохранить</Button>
+                                </div>
+                            </div>
                         </Box>
-                        
-                    </Box>
+
+
+                    </div>
                 </ModalWindow>}
 
             </div>
-        </Box>
+        </div>
     )
 }
 

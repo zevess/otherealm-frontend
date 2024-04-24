@@ -7,10 +7,12 @@ interface ItemDescriptionProps{
 
 export const ItemDescription: FC<ItemDescriptionProps> = ({description}) => {
     return (
-        <Box width={'80%'} display={'flex'} marginLeft={'auto'} marginRight={'auto'}>
+        <div className="searchItemContent__description">
             <Typography variant="h6">
                 {description}
             </Typography>
-        </Box>
+        </div>
+            
+        
     )
 }

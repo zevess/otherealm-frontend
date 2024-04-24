@@ -18,6 +18,8 @@ import React from 'react'
 import { fetchAuthMe } from './store/auth'
 import { Welcome } from './Components/RegistrationPage/Welcome'
 import { ErrorBoundary } from './Components/ErrorPage'
+import { FullPost } from './Components/Posts/FullPost'
+import { AddPost } from './Components/Posts/AddPost'
 
 function App() {
   const dispatch = useAppDispatch();
@@ -40,6 +42,11 @@ function App() {
           <Route path='/item/game/:id' element={<GameWindow />} />
           <Route path='/item/book/:id' element={<BookWindow />} />
           <Route path='/discuss/:itemId/:discussId' element={<ItemDiscussWindow />} />
+          
+          <Route path='/post/:postId' element={<FullPost/>} />
+          <Route path='/post/:postId/edit' element={<AddPost/>} />
+          <Route path='/post/add' element={<AddPost/>} />
+          
           <Route path='/auth' element={<Authorize />} />
           <Route path='/error' element={<ErrorBoundary/>}/>
         </Route>
