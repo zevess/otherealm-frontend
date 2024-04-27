@@ -1,4 +1,4 @@
-import { Avatar, Box, CircularProgress, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
+import { Avatar, Box, CircularProgress, Divider, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
 import { FranchiseCard } from "../Cards/FranchiseCard"
 import { ButtonUsage } from "../Button"
 import React, { FC, useEffect } from "react";
@@ -49,74 +49,77 @@ export const FilmWindow = () => {
 
     return (
         <div className="searchItemWrapper">
-            <div className="searchItem">
-                <img className="searchItem__background" src={`${currentFilmItem?.poster?.url}`} alt="" />
-                <div className="searchItemContent">
+
+            <div className="searchItem" >
+
+                <div className="searchItemContent" >
+                    <div className="searchItemContent__left">
+                        <img className="searchItemPoster" src={`${currentFilmItem.poster?.url}`} alt="" />
+                        <AddToSection />
+                    </div>
+
+
+                    <div className="searchItemNames">
+                        <ItemType itemType={`${currentFilmItem.type}`} />
+                        <ItemTitle title={`${currentFilmItem.name}`} originalTitle={`${currentFilmItem.alternativeName}`} />
+                    </div>
+
+
                     <div className="searchItemContent__details">
-                        <div className="searchItemContent__main">
 
-                            <img className="searchItemContent__main-poster" src={`${currentFilmItem?.poster?.url}`} alt="" />
-
-                            <ItemTitle title={`${title}`} originalTitle={`${currentFilmItem?.alternativeName}`} />
-                            <ItemType itemType={`${currentFilmItem?.type}`} />
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'} className="detailsItemText">страны: </Typography>
+                            {currentFilmItem?.countries?.map((country, index) => (
+                                <Typography paddingRight={'10px'} variant="h5" key={index++} className="detailsItemText">{country.name}{index !== currentFilmItem.countries?.length - 1 && ", "}</Typography>
+                            ))}
                         </div>
-                        <div className="searchItemContent__options">
+                        <Typography fontWeight={'bold'} paddingBottom={'15px'} variant="h5" >год: {currentFilmItem.year}</Typography>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">жанры: </Typography>
+                            {currentFilmItem.genres?.map((genre, index) => (
+                                <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{genre.name}{index !== currentFilmItem.genres?.length - 1 && ','}</Typography>
+                            ))}
+                        </div>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText" >режиссер: </Typography>
+                            {currentFilmItem.persons?.map((person, index) => (
+                                person.enProfession == 'director' && <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{person.name}</Typography>
 
-                            <div className="searchItemContent__options-item">
-                                <div className="searchItemContent__options-name">
-                                    <Typography variant="h5">инфо</Typography>
-                                </div>
-                                <AddToSection />
-                            </div>
-                            <div className="searchItemContent__info">
-
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>страны: </Typography>
-                                    {currentFilmItem?.countries?.map((country, index) => (
-                                        <Typography paddingRight={'10px'} variant="h5" key={index++}>{country.name}{index !== currentFilmItem.countries?.length - 1 && ", "}</Typography>
-                                    ))}
-                                </div>
-                                <Typography fontWeight={'bold'} paddingBottom={'15px'} variant="h5">год: {currentFilmItem.year}</Typography>
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>жанры: </Typography>
-                                    {currentFilmItem.genres?.map((genre, index) => (
-                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{genre.name}{index !== currentFilmItem.genres?.length - 1 && ','}</Typography>
-                                    ))}
-                                </div>
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>режиссер: </Typography>
-                                    {currentFilmItem.persons?.map((person, index) => (
-                                        person.enProfession == 'director' && <Typography paddingRight={'10px'} variant="h5" key={index}>{person.name}</Typography>
-
-                                    ))}
-                                </div>
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>актеры: </Typography>
-                                    {currentFilmItem.persons?.map((person, index) => (
-                                        (person.enProfession == 'actor') && <Typography paddingRight={'10px'} variant="h5" key={index++}>{person.name},</Typography>
-                                    ))}
-                                </div>
-                            </div>
+                            ))}
+                        </div>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">актеры: </Typography>
+                            {currentFilmItem.persons?.map((person, index) => (
+                                (person.enProfession == 'actor') && <Typography paddingRight={'10px'} variant="h5" key={index++} className="detailsItemText">{person.name},</Typography>
+                            ))}
                         </div>
                     </div>
-                    <ItemDescription description={`${currentFilmItem?.description}`} />
+
+
                 </div>
+                {currentFilmItem.description !== null && (
+                    <>
+                        <Divider sx={{ marginTop: '16px', marginBottom: '16px' }} />
+                        <ItemDescription description={`${currentFilmItem.description}`} />
+                    </>
+                )}
+
             </div>
 
+            <div className="socialSection">
+                <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} className="searchItemToggles">
+                    <ToggleButton className="searchItemTogglesItem" value={'comments'}>
+                        комментарии <InsertCommentOutlinedIcon />
+                    </ToggleButton>
+                    <ToggleButton className="searchItemTogglesItem" value={'discuss'} style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                        обсуждения <ForumOutlinedIcon />
+                    </ToggleButton>
+                </ToggleButtonGroup>
 
-
-            <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} className="searchItemToggles">
-                <ToggleButton value={'comments'}>
-                    комментарии <InsertCommentOutlinedIcon />
-                </ToggleButton>
-                <ToggleButton value={'discuss'} style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.12)' }}>
-                    обсуждения <ForumOutlinedIcon />
-                </ToggleButton>
-            </ToggleButtonGroup>
-
-            <Box width={'90%'}>
-                {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
-            </Box>
+                <Box width={'90%'}>
+                    {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
+                </Box>
+            </div>
         </div>
     )
 }

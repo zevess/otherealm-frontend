@@ -22,7 +22,7 @@ export const DiscussLinkItem: FC<DiscussLinkItemProps> = ({title, author, linkTo
         <Link to={`/discuss/${itemId}/${linkTo}`}>
             <div className="discussLink">
                 <Typography variant="h6" textAlign={'left'}>автор: {author}</Typography>
-                <Typography variant="h2">{title}</Typography>
+                <Typography variant="h2" className="discussLinkTitle">{title}</Typography>
             </div>
         </Link>
     )

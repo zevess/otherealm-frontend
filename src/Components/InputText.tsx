@@ -9,21 +9,19 @@ export const inputStyles = {
 interface InputTextProps {
     placeholder: string,
     text: any,
-    sx: object,
+    sx?: object,
     setText: React.Dispatch<React.SetStateAction<string>>,
     onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export const InputText: FC<InputTextProps> = ({placeholder, text, sx, setText, onClick}) => {
+export const InputText: FC<InputTextProps> = ({placeholder, text, setText, onClick}) => {
     return (
-        <TextField value={text} variant="outlined" multiline maxRows={2} placeholder={placeholder} sx={sx} inputProps={{
+        <TextField value={text} variant="outlined" multiline maxRows={2} placeholder={placeholder} inputProps={{
             style: {
-                fontSize: '30px', padding: '5px', lineHeight: '1.4', minHeight: '50px', maxHeight: '400px', overflow: 'visible'
+                padding: '5px', lineHeight: '1.4', maxHeight: '400px', overflow: 'visible'
             }
         }} InputProps={{
-            style: {
-                borderRadius: '30px'
-            },
+            
             endAdornment: (
                 <InputAdornment position="end">
                     <IconButton color="primary" onClick={onClick}>
@@ -31,7 +29,7 @@ export const InputText: FC<InputTextProps> = ({placeholder, text, sx, setText, o
                     </IconButton>
                 </InputAdornment>
             )
-        }} onChange={(event) =>{
+        }} className="commentInputField" onChange={(event) =>{
             setText(event.target.value)
         }}></TextField>
     )

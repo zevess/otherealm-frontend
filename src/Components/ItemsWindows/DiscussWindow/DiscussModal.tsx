@@ -40,7 +40,7 @@ export const DiscussModal: FC<DiscussModalProps> = ({setModalOpen, setData}) => 
     }
     return (
         <div className="discussModal">
-            <Typography variant="h2" textAlign={'center'} marginBottom={'20px'} padding={'10px'}>создать обсуждение</Typography>
+            <Typography variant="h2" textAlign={'center'} marginBottom={'20px'} padding={'10px'} className="discussModalTitle">создать обсуждение</Typography>
             <TextField value={title} onChange={(event) => setTitle(event.target.value)} variant="outlined" multiline placeholder="введите название обсуждения" inputProps={{
                 style: {
                     fontSize: '30px',  lineHeight: '1.4'

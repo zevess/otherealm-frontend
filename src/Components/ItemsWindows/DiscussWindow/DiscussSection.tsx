@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import { Box, Button } from "@mui/material"
 import { DiscussInput } from "./DiscussInput"
 import { DiscussButton } from "./DiscussButton"
 import { ModalWindow } from "../../ModalWindow"
@@ -8,6 +8,7 @@ import { DiscussLinkItem } from "./DiscussLinkItem"
 import axios from '../../../axios'
 import { useAppDispatch } from "../../../store/hooks"
 import { addDiscuss, clearDiscuss } from "../../../store/discuss"
+import { ColorButtonBlue } from "../../CustomButton"
 
 export const DiscussSection = () => {
     const dispatch = useAppDispatch()
@@ -35,8 +36,10 @@ export const DiscussSection = () => {
     return (
         <div className="discussSection">
             <div className="discussSection__inputs">
-                <DiscussInput />
-                <DiscussButton setModalOpen={setModalOpen} />
+                {/* <DiscussInput /> */}
+                {/* <DiscussButton setModalOpen={setModalOpen} /> */}
+                {/* <Button onClick={() => setModalOpen} className="discussCreateButton">создать обсуждение</Button> */}
+                <ColorButtonBlue onClick={() => setModalOpen(true)} className="discussCreateButton">создать обсуждение</ColorButtonBlue>
                 <ModalWindow open={modalOpen} handleClose={() => setModalOpen(false)}>
                     <DiscussModal setData={setData} setModalOpen={setModalOpen} />
                 </ModalWindow>

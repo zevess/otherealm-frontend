@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../store/hooks";
 import React from "react";
 import { bookItemFetch } from "../../store/fetches/bookFetch";
 import { useAppSelector } from "../../store";
-import { Box, CircularProgress, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, CircularProgress, Divider, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { ItemType } from "./ItemComponents/ItemType";
 import { ItemTitle } from "./ItemComponents/ItemTitle";
 import { ButtonUsage } from "../Button";
@@ -48,42 +48,43 @@ export const BookWindow = () => {
     return (
 
         <div className="searchItemWrapper">
-            <div className="searchItem">
-                <img className="searchItem__background" src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : '../src/assets/img/noImg.png'} alt="" />
-                <div className="searchItemContent">
-                    <div className="searchItemContent__details">
-                        <div className="searchItemContent__main">
 
-                            <img className="searchItemContent__main-poster" src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : '../src/assets/img/noImg.png'} alt="" />
+            <div className="searchItem" >
 
-                            <ItemTitle title={`${title}`}/>
-                            <ItemType itemType={`book`} />
-                        </div>
-                        <div className="searchItemContent__options">
-
-                            <div className="searchItemContent__options-item">
-                                <div className="searchItemContent__options-name">
-                                    <Typography variant="h5">инфо</Typography>
-                                </div>
-                                <AddToSection />
-                            </div>
-                            <div className="searchItemContent__info">
-
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>автор: </Typography>
-                                    {/* {currentBookItem?.volumeInfo?.authors.map((author, index) => (
-                                        <Typography paddingRight={'10px'} variant="h5" key={index++}>{author}</Typography>
-                                    ))} */}
-                                </div>
-                                
-                            </div>
-                        </div>
+                <div className="searchItemContent" >
+                    <div className="searchItemContent__right">
+                        <img className="searchItemPoster" src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : '../src/assets/img/noImg.png'} alt="" />
+                        <AddToSection />
                     </div>
-                    <ItemDescription description={`${currentBookItem.volumeInfo?.description}`} />
+
+                    <div className="searchItemContent__left">
+                        <div className="searchItemNames">
+                            <ItemType itemType={`book`} />
+                            <ItemTitle title={`${title}`} />
+                        </div>
+
+
+                        <div className="searchItemContent__details">
+
+                            <div className="searchItemContent__details-item">
+                                <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>автор: </Typography>
+                                {currentBookItem?.volumeInfo?.authors.map((author, index) => (
+                                    <Typography paddingRight={'10px'} variant="h5" key={index++}>{author}</Typography>
+                                ))}
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
+                {currentBookItem.volumeInfo?.description !== null && (
+                    <>
+                        <Divider sx={{ marginTop: '16px', marginBottom: '16px' }} />
+                        <ItemDescription description={`${currentBookItem.volumeInfo?.description}`} />
+                    </>
+                )}
+
             </div>
-
-
 
             <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} className="searchItemToggles">
                 <ToggleButton value={'comments'}>
@@ -98,50 +99,6 @@ export const BookWindow = () => {
                 {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
             </Box>
         </div>
-        // <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '1500px', marginLeft: 'auto', marginRight: 'auto' }} >
-        //     <Box maxWidth={'1500px'} minWidth={'1500px'}>
-        //         <Box component={'img'} src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : '../src/assets/img/noImg.png'} width={'100%'} height={'483px'} borderRadius={'16px'} sx={{ objectFit: 'cover', filter: 'blur(5px)' }}></Box>
-        //         <Box bgcolor={'white'} border={'solid 2px black'} height={'auto'} paddingBottom={'20px'} >
-        //             <Box display={'flex'} justifyContent={'flex-end'}>
-        //                 <Box marginTop={'-20%'} display={'flex'} alignItems={'flex-start'} >
 
-        //                     <Box zIndex={1} height={'571px'} component={'img'} src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : '../src/assets/img/noImg.png'} sx={{
-        //                         aspectRatio: '380/571', objectFit: 'cover'
-        //                     }}></Box>
-
-        //                     <ItemTitle title={`${title}`}/>
-        //                     <ItemType itemType={`book`} />
-        //                 </Box>
-        //                 <Box width={'64%'} display={'flex'} flexDirection={'column'} >
-
-        //                     <Box width={'100%'} bgcolor={'rgba(239, 239, 239, 1)'} display={'flex'} height={'70px'}>
-        //                         <Box width={'100%'} border={'solid 1px black'} borderTop={'none'} borderLeft={'none'} height={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-        //                             <Typography variant="h5">инфо</Typography>
-        //                         </Box>
-        //                         <AddToSection/>
-        //                     </Box>
-        //                     <Box marginRight={'auto'} marginLeft={'40px'} marginTop={'20px'} display={'flex'} flexDirection={'column'}> 
-        //                         <Box display={'flex'}>
-
-        //                         </Box>
-        //                     </Box>
-
-        //                 </Box>
-        //             </Box>
-        //             <ItemDescription description={`${currentBookItem?.volumeInfo?.description}`}/>
-
-        //         </Box>
-
-        //     </Box>
-
-        //     <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} sx={{ width: '90%', display: 'flex', justifyContent: 'space-between', marginTop: '60px', marginBottom: '40px' }}>
-        //         <ToggleButton value={'comments'}>комментарии</ToggleButton>
-        //         <ToggleButton value={'discuss'} style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.12)' }}>обсуждения</ToggleButton>
-        //     </ToggleButtonGroup>
-
-        //     <Box width={'90%'}>
-        //         {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
-        //     </Box>
-        // </div>
     )
 }

@@ -49,12 +49,13 @@ export const CommentSection:FC<CommentSectionProps> = ({postId}) => {
 
     return (
         <Box display={'flex'} flexDirection={'column'}>
-            <InputText text={text} setText={setCommentText} onClick={onSubmit} placeholder={"комментарий (не менее 3 символов)"} sx={commentInputStyles} />
+            <InputText text={text} setText={setCommentText} onClick={onSubmit} placeholder={"комментарий (не менее 3 символов)"} />
             <Box>
                 {data !== undefined && data.map((item: any) => (
                     <Comment avatar={item?.user.avatarUrl} name={item?.user.name} nick={item?.user.nick} text={item.text} />
                 ))}
             </Box>
+            
         </Box>
     )
 }

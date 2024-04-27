@@ -9,9 +9,11 @@ interface ItemTitleProps{
 export const ItemTitle:FC<ItemTitleProps> = ({title, originalTitle}) => {
     return (
         <div className="searchItemContent__main-title">
-            <Typography variant="h4">{title}</Typography>
+            <p style={{fontSize: '24px', margin: '0'}}>{title}</p>
+            {/* <Typography variant="h4">{title}</Typography> */}
             <hr />
-            <Typography variant="h6">{originalTitle}</Typography>
+            <p style={{margin: 0}}>{originalTitle}</p>
+            {/* <Typography variant="h6">{originalTitle}</Typography> */}
         </div>
             
         

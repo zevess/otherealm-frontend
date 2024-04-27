@@ -17,8 +17,8 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar }) => {
             <div className="commentSectionComment__user">
                 <Link to={`/profile/${nick}`}>
                     <div className="commentSectionComment__user-info">
-                        <Avatar src={`http://localhost:4444${avatar}`} sx={{ width: '80px', height: '80px' }}></Avatar>
-                        <Typography variant="h5">{name}</Typography>
+                        <Avatar className="commentAvatar" src={`http://localhost:4444${avatar}`}></Avatar>
+                        <Typography variant="h5" className="commentUserNick">{name}</Typography>
                     </div>
                         
                     

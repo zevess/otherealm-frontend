@@ -1,4 +1,4 @@
-import { Avatar, Box, CircularProgress, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
+import { Avatar, Box, CircularProgress, Divider, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
 
 import React, { FC, useEffect } from "react";
 
@@ -47,85 +47,86 @@ export const GameWindow = () => {
     const parts = currentUrl.split('/');
     const postId = String(parts.slice(-2).join(''))
 
-
     return (
 
         <div className="searchItemWrapper">
-            <div className="searchItem">
-                <img className="searchItem__background" src={`${currentGameItem?.background_image}`} alt="" />
-                <div className="searchItemContent">
+            <div className="searchItem" >
+
+                <div className="searchItemContent" >
+                    <div className="searchItemContent__left">
+                        <img className="searchItemPoster" src={`${currentGameItem?.background_image}`} alt="" />
+                        <AddToSection />
+                    </div>
+
+
+                    <div className="searchItemNames">
+                        <ItemType itemType={`game`} />
+                        <ItemTitle title={`${title}`} originalTitle={`${currentGameItem?.name_original}`} />
+                    </div>
+
                     <div className="searchItemContent__details">
-                        <div className="searchItemContent__main">
 
-                            <img className="searchItemContent__main-poster" src={`${currentGameItem?.background_image}`} alt="" />
-
-                            <ItemTitle title={`${title}`} originalTitle={`${currentGameItem?.name_original}`} />
-                            <ItemType itemType={`game`} />
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'} className="detailsItemText">оценка METACRITIC: </Typography>
+                            <Typography variant='h5' paddingRight={'10px'} className="detailsItemText">{currentGameItem.metacritic}</Typography>
                         </div>
-                        <div className="searchItemContent__options">
 
-                            <div className="searchItemContent__options-item">
-                                <div className="searchItemContent__options-name">
-                                    <Typography variant="h5">инфо</Typography>
-                                </div>
-                                <AddToSection />
-                            </div>
-                            <div className="searchItemContent__info">
-
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>оценка METACRITIC: </Typography>
-                                    <Typography variant='h5' paddingRight={'10px'}>{currentGameItem.metacritic}</Typography>
-                                </div>
-
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>дата выхода: </Typography>
-                                    <Typography variant='h5' paddingRight={'10px'}>{currentGameItem.released}</Typography>
-                                </div>
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>разработчики: </Typography>
-                                    {currentGameItem.developers.map((devs, index) => (
-                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{devs.name}</Typography>
-                                    ))}
-                                </div>
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>издатели: </Typography>
-                                    {currentGameItem.publishers.map((publisher, index) => (
-                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{publisher.name}</Typography>
-                                    ))}
-                                </div>
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>жанры: </Typography>
-                                    {currentGameItem.genres.map((genre, index) => (
-                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{genre.name}</Typography>
-                                    ))}
-                                </div>
-                                <div className="searchItemContent__info-item">
-                                    <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'}>платформы: </Typography>
-                                    {currentGameItem.platforms.map((platform, index) => (
-                                        <Typography paddingRight={'10px'} variant="h5" key={index}>{platform.platform.name},</Typography>
-                                    ))}
-                                </div>
-                            </div>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'} className="detailsItemText">дата выхода: </Typography>
+                            <Typography variant='h5' paddingRight={'10px'} className="detailsItemText">{currentGameItem.released}</Typography>
+                        </div>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">разработчики: </Typography>
+                            {currentGameItem.developers.map((devs, index) => (
+                                <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{devs.name}</Typography>
+                            ))}
+                        </div>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">издатели: </Typography>
+                            {currentGameItem.publishers.map((publisher, index) => (
+                                <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{publisher.name}</Typography>
+                            ))}
+                        </div>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">жанры: </Typography>
+                            {currentGameItem.genres.map((genre, index) => (
+                                <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{genre.name}</Typography>
+                            ))}
+                        </div>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">платформы: </Typography>
+                            {currentGameItem.platforms.map((platform, index) => (
+                                <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{platform.platform.name},</Typography>
+                            ))}
                         </div>
                     </div>
-                    <ItemDescription description={`${currentGameItem?.description_raw}`} />
+
+
                 </div>
+                {currentGameItem?.description_raw !== null && (
+                    <>
+                        <Divider sx={{ marginTop: '16px', marginBottom: '16px' }} />
+                        <ItemDescription description={`${currentGameItem?.description_raw}`} />
+                    </>
+                )}
+
             </div>
 
+            <div className="socialSection">
+                <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} className="searchItemToggles">
+                    <ToggleButton className="searchItemTogglesItem" value={'comments'}>
+                        комментарии <InsertCommentOutlinedIcon />
+                    </ToggleButton>
+                    <ToggleButton className="searchItemTogglesItem" value={'discuss'} style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                        обсуждения <ForumOutlinedIcon />
+                    </ToggleButton>
+                </ToggleButtonGroup>
 
+                <Box width={'100%'} >
+                    {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
+                </Box>
+            </div>
 
-            <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} className="searchItemToggles">
-                <ToggleButton value={'comments'}>
-                    комментарии <InsertCommentOutlinedIcon />
-                </ToggleButton>
-                <ToggleButton value={'discuss'} style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.12)' }}>
-                    обсуждения <ForumOutlinedIcon />
-                </ToggleButton>
-            </ToggleButtonGroup>
-
-            <Box width={'90%'}>
-                {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
-            </Box>
         </div>
 
     )
