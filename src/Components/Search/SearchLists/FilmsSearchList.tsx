@@ -11,6 +11,7 @@ export const FilmsSearchList = () => {
     const searchTitle = searchTitleSelector.replace(' ', '_');
     const kpToken = useAppSelector((state) => state.filmData.kpToken)
     const filmResult = useAppSelector(state => state.filmData.filmResult?.docs);
+    const filmResultCount = useAppSelector(state => state.filmData.filmResult?.total);
     const currentMediaPageSelector = useAppSelector(state => state.state.currentMediaPage);
     const totalMediaPage = useAppSelector(state => state.state.totalMediaPage)
     const filmsLoadingStatus = useAppSelector(state => state.filmData.filmsLoadingStatus)
@@ -21,7 +22,7 @@ export const FilmsSearchList = () => {
         return <CircularProgress />
     }
 
-    if (filmResult?.length == 0) {
+    if (!filmResult || filmResultCount == 0) {
         return (
             <Box>
                 <Typography variant="h2">
@@ -33,16 +34,16 @@ export const FilmsSearchList = () => {
     }
 
     return (
-        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-            <Box display={'flex'} flexWrap={'wrap'} alignItems={'flex-start'}>
+        <div className="searchResult">
+            <div className="searchResultItems">
                 {filmResult !== undefined && filmResult.map((item) => (
                     <ItemCard itemPoster={item.poster?.url ? item.poster.url : '../src/assets/img/noImg.png'} itemTitle={item.name} id={item.id} key={item.id} itemType={item.type} itemAltenativeTitle={item.alternativeName} />
                 ))}
-            </Box>
+            </div>
             <Pagination page={currentMediaPageSelector} count={totalMediaPage} onChange={(event, value) => {
                 dispatch(setMediaPage(value))
                 dispatch(filmFetch({ searchTitle, currentMediaPage: value, kpToken }))
             }} />
-        </Box>
+        </div>
     )
 }

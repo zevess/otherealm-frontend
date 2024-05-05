@@ -86,28 +86,30 @@ export const Search = () => {
     }
 
     return (
-        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+        <div className="searchWrapper">
             <InputText setText={setText} onClick={() => {
                 getFilms(searchTitle, currentMediaPage, kpToken)
                 getBooks(searchTitle, gbToken, currentBookPage)
                 getGame(searchTitle, rawgToken, currentGamePage)
-            } } placeholder="поиск фильма, игры, литературы" sx={inputStyles} text={text} />
-            <Box width={'60%'}>
-                <SearchToggleGroup items={searchToggleItems} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSearchAlignment)} alignment={searchAlignment}></SearchToggleGroup>
-                <Box marginLeft={'auto'} marginRight={'auto'} width={'auto'} maxWidth={'700px'} height={'auto'} border={'solid 1px black'} bgcolor={'white'}>
-                    <Typography variant="h5">Все результаты взяты из открытых источников:</Typography>
+            } } placeholder="поиск фильма, игры, литературы" text={text} />
+            <div className="searchContent">
+                <SearchToggleGroup items={searchToggleItems} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSearchAlignment)} alignment={searchAlignment} ></SearchToggleGroup>
+                <div className="searchSource">
+                    <p  className="searchSourceText">Все результаты взяты из открытых источников:</p>
                     <Box display={'flex'} justifyContent={'space-evenly'} flexWrap={'wrap'}>
-                        <a href="https://api.kinopoisk.dev/documentation">api.kinopoisk.dev</a>
-                        <a href="https://rawg.io">rawg.io</a>
-                        <a href="https://developers.google.com/books?hl=ru">developers.google.com/books</a>
+                        <a className="searchSourceLink" href="https://api.kinopoisk.dev/documentation">api.kinopoisk.dev </a>
+                        <p className="searchSourceText">|</p>
+                        <a className="searchSourceLink" href="https://rawg.io">rawg.io</a>
+                        <p className="searchSourceText">|</p>
+                        <a className="searchSourceLink" href="https://developers.google.com/books?hl=ru">developers.google.com/books</a>
                     </Box>
-                    <Typography variant="h5">соответственно</Typography>
-                    <Typography variant="h5">Результаты могут отличаться от ожидаемых.</Typography>
-                    <Typography variant="h5">Для получения более точных вводите полные названия на оригинальном языке.</Typography>
-                </Box>
+                    <p className="searchSourceText">соответственно</p>
+                    <p className="searchSourceText">Результаты могут отличаться от ожидаемых.</p>
+                    <p className="searchSourceText">Для получения более точных вводите полные названия на оригинальном языке.</p>
+                </div>
                 <SearchResult />
-            </Box>
-        </Box>
+            </div>
+        </div>
     )
 }
 

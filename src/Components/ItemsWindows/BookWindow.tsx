@@ -52,30 +52,38 @@ export const BookWindow = () => {
             <div className="searchItem" >
 
                 <div className="searchItemContent" >
-                    <div className="searchItemContent__right">
+                    <div className="searchItemContent__left">
                         <img className="searchItemPoster" src={`${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` ? `${currentBookItem?.volumeInfo?.imageLinks?.thumbnail}` : '../src/assets/img/noImg.png'} alt="" />
                         <AddToSection />
                     </div>
 
-                    <div className="searchItemContent__left">
-                        <div className="searchItemNames">
-                            <ItemType itemType={`book`} />
-                            <ItemTitle title={`${title}`} />
-                        </div>
 
-
-                        <div className="searchItemContent__details">
-
-                            <div className="searchItemContent__details-item">
-                                <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>автор: </Typography>
-                                {currentBookItem?.volumeInfo?.authors.map((author, index) => (
-                                    <Typography paddingRight={'10px'} variant="h5" key={index++}>{author}</Typography>
-                                ))}
-                            </div>
-
-                        </div>
-
+                    <div className="searchItemNames">
+                        <ItemType itemType={`book`} />
+                        <ItemTitle title={`${title}`} />
                     </div>
+
+
+                    <div className="searchItemContent__details">
+
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>автор: </Typography>
+                            {currentBookItem?.volumeInfo?.authors?.map((author, index) => (
+                                <Typography paddingRight={'10px'} variant="h5" key={index++}>{author}</Typography>
+                            ))}
+                        </div>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>дата публикации: </Typography>
+                            <Typography paddingRight={'10px'} variant="h5">{currentBookItem.volumeInfo?.publishedDate}</Typography>
+                        </div>
+
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} variant='h5' paddingRight={'10px'}>количество страниц: </Typography>
+                            <Typography paddingRight={'10px'} variant="h5">{currentBookItem.volumeInfo?.pageCount}</Typography>
+                        </div>
+                    </div>
+
+
                 </div>
                 {currentBookItem.volumeInfo?.description !== null && (
                     <>
@@ -86,18 +94,20 @@ export const BookWindow = () => {
 
             </div>
 
-            <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} className="searchItemToggles">
-                <ToggleButton value={'comments'}>
-                    комментарии <InsertCommentOutlinedIcon />
-                </ToggleButton>
-                <ToggleButton value={'discuss'} style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.12)' }}>
-                    обсуждения <ForumOutlinedIcon />
-                </ToggleButton>
-            </ToggleButtonGroup>
+            <div className="socialSection">
+                <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} className="toggleGroup">
+                    <ToggleButton className="toggleGroupItem" value={'comments'}>
+                        комментарии <InsertCommentOutlinedIcon />
+                    </ToggleButton>
+                    <ToggleButton className="toggleGroupItem" value={'discuss'} style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                        обсуждения <ForumOutlinedIcon />
+                    </ToggleButton>
+                </ToggleButtonGroup>
 
-            <Box width={'90%'}>
-                {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
-            </Box>
+                <Box width={'90%'}>
+                    {alignment == 'comments' ? <CommentSection postId={postId} /> : <DiscussSection />}
+                </Box>
+            </div>
         </div>
 
     )

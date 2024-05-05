@@ -47,17 +47,17 @@ export const Profile = () => {
   }
 
   return (
-    <>
+    <div className="profileWrapper">
       <ProfileName name={nameSelector} />
-      <Box display={"flex"} justifyContent={'center'}>
+      <div className="profileLists">
 
         <Box display={'flex'} flexDirection={'column'} marginRight={'20px'} position={'static'}>
           <SectionToggleGroup items={sections} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSection)} alignment={section}></SectionToggleGroup>
         </Box>
         {section == 'list' ? <ListWindow type={type} setType={setType} /> : <PostList />}
 
-      </Box>
-    </>
+      </div>
+    </div>
   )
 }
 

@@ -16,9 +16,9 @@ interface InputTextProps {
 
 export const InputText: FC<InputTextProps> = ({placeholder, text, setText, onClick}) => {
     return (
-        <TextField value={text} variant="outlined" multiline maxRows={2} placeholder={placeholder} inputProps={{
+        <TextField value={text} variant="outlined" multiline={true}  placeholder={placeholder} inputProps={{
             style: {
-                padding: '5px', lineHeight: '1.4', maxHeight: '400px', overflow: 'visible'
+                padding: '5px', lineHeight: '1.4'
             }
         }} InputProps={{
             

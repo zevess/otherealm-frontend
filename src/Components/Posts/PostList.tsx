@@ -1,4 +1,3 @@
-import { Box, Button } from "@mui/material"
 import { Post } from "./Post"
 import { ColorButtonBlue } from "../CustomButton"
 import { Link } from "react-router-dom"
@@ -7,6 +6,7 @@ import React from "react"
 import axios from '../../axios'
 import { useAppDispatch } from "../../store/hooks"
 import { setSelectedUserPosts } from "../../store/auth"
+import { userPosts } from "../../store/interfaces"
 
 export const PostList = () => {
 
@@ -28,12 +28,12 @@ export const PostList = () => {
 
     return (
         <div className="postListWrapper">
-            <Box display={'flex'} flexDirection={'column'}  >
-                {postsSelector !== undefined && postsSelector?.map((item: any) => (
+            <div className="postsList"  >
+                {postsSelector !== undefined && (postsSelector as userPosts[])?.map((item: any) => (
                     <Post avatar={item.user.avatarUrl} id={item._id} user={item.user.name} imageUrl={item.imageUrl} title={item.title} date={item.createdAt} isText={item.text}/>
                 ))}
 
-            </Box>
+            </div>
             {isNotSameUser && <Link to={'/post/add'}>
                 <ColorButtonBlue>создать запись</ColorButtonBlue>
             </Link>}

@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Divider, Typography } from "@mui/material"
 import { FC } from "react"
 import { Link, useParams } from "react-router-dom"
 
@@ -22,6 +22,7 @@ export const DiscussLinkItem: FC<DiscussLinkItemProps> = ({title, author, linkTo
         <Link to={`/discuss/${itemId}/${linkTo}`}>
             <div className="discussLink">
                 <Typography variant="h6" textAlign={'left'}>автор: {author}</Typography>
+                <Divider/>
                 <Typography variant="h2" className="discussLinkTitle">{title}</Typography>
             </div>
         </Link>

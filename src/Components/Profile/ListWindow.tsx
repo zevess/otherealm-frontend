@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, TextField, ToggleButton, ToggleButtonGroup, Typography, styled } from "@mui/material"
+import { Box, Button, Divider, IconButton, TextField, ToggleButton, ToggleButtonGroup, Typography, styled } from "@mui/material"
 import { ItemCard } from "../Cards/ItemCard"
 import React, { FC } from "react"
 import { ItemTypeToggleGroup } from "../Toggles/ItemTypeToggleGroup"
@@ -69,6 +69,11 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
         }
     }, [selectedUserId])
 
+    interface favouriteType{
+        _id: string,
+        title: string,
+    }
+
     favourites.map((item: any) => {
         if (alignment == item?.title) {
             currentItems = item?.items;
@@ -121,6 +126,7 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
             <div className="listWindowWrapper-types">
                 <ItemTypeToggleGroup items={itemTypes} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setType)} alignment={type} />
             </div>
+            <Divider sx={{ width: '90%', margin: '0 auto' }} />
             <div className="listWindow">
                 <div className="listWindowCards">
                     {(filteredItems !== undefined) && filteredItems.map((item: any) => (
@@ -128,14 +134,13 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
                     ))}
                 </div>
                 <div className="listWindowTogglesSection">
-                    <ToggleButtonGroup value={alignment} exclusive onChange={
+                    <ToggleButtonGroup className="listWindowToggleGroup" value={alignment} exclusive onChange={
                         (event, newAlignment) => {
                             handleChange(event, newAlignment, setAlignment);
 
-                        }
-                    } className="listWindowToggleGroup">
-                        {favourites.map((item) => (
-                            <ToggleButton sx={{ maxWidth: '200px', height: 'auto', borderLeft: '1px solid rgba(0, 0, 0, 0.12)', marginBottom: '20px' }} id={item?._id} key={item?._id} value={item?.title}>
+                        }}>
+                        {favourites.map((item: favouriteType) => (
+                            <ToggleButton className="listWindowToggleGroup__button" id={item?._id} key={item?._id} value={item?.title}>
                                 {item?.title}
                                 {isNotSameUser && <IconButton onClick={() => {
                                     setToggleSetting(true)
@@ -154,7 +159,7 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
                             <Typography textAlign={'center'} variant="h4">{alignment}</Typography>
 
                             <div className="sectionToggleSettings-inputs">
-                                <TextField onChange={(event) => setEditTitle(event.target.value)} sx={{ width: '50%', margin: '10px' }} size="medium" placeholder="изменить название раздела"></TextField>
+                                <TextField onChange={(event) => setEditTitle(event.target.value)} size="medium" placeholder="изменить название раздела" className="sectionToggleSettings-inputs__textfield"></TextField>
 
                                 <div className="sectionToggleSettings-inputs__buttons">
                                     <ColorButton onClick={() => {

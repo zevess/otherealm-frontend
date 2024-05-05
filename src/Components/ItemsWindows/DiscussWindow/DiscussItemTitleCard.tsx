@@ -13,18 +13,19 @@ export const DiscussItemTitleCard: FC<DiscussItemTitleCardProps> = ({ author, ti
     return (
 
         <div className="discussItemTitle">
-            
-            <div className="discussItemTitle__user" >
-                <Typography variant="h6">автор:</Typography>
+
+            <div className="commentUser">
                 <Link to={`/profile/${nick}`}>
-                    <div className="discussItemTitle__user-profile">
-                        <Avatar src={`http://localhost:4444${avatar}`} sx={{ width: '80px', height: '80px' }}></Avatar>
-                        <Typography variant="h5">{author}</Typography>
+                    <div className="commentUser__info">
+                        <Avatar className="commentUser__info-avatar" src={`http://localhost:4444${avatar}`}></Avatar>
+                        <Typography variant="h5" className="commentUser__info-nick">{author}</Typography>
                     </div>
                 </Link>
+
+
+                <hr style={{ borderLeft: '4px solid black', height: 'auto' }}></hr>
             </div>
-            <hr style={{ borderLeft: '4px solid black', height: 'auto' }}></hr>
-            <Typography variant="h2">{title}</Typography>
+            <Typography variant="h4" className="discussTitle" >{title}</Typography>
         </div>
 
     )

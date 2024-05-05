@@ -16,7 +16,7 @@ export const AddPost = () => {
     const [text, setText] = React.useState('');
     const [imageUrl, setImageUrl] = React.useState('');
 
-    const inputFileRef = React.useRef(null);
+    const inputFileRef = React.useRef<any>(null);
 
     const userNick = useAppSelector((state) => state.authData.data?.nick)
     const userId = (useAppSelector((state) => state.authData.data?._id));
@@ -59,7 +59,7 @@ export const AddPost = () => {
             toolbar: [
                 "bold", "strikethrough", {
                     name: "underline",
-                    action: function (editor) {
+                    action: function (editor: any) {
                         var cm = editor.codemirror;
                         var selectedText = cm.getSelection();
                         cm.replaceSelection("<u>" + selectedText + "</u>");
@@ -74,7 +74,7 @@ export const AddPost = () => {
         } as SimpleMDE.Options;
     }, []);
 
-    const handleChangePreview = async (event) => {
+    const handleChangePreview = async (event: any) => {
         const formData = new FormData();
         const file = event.target.files[0];
         formData.append('image', file);

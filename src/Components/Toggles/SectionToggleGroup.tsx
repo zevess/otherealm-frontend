@@ -15,7 +15,7 @@ interface SectionToggleGroupProps{
 
 export const SectionToggleGroup: FC<SectionToggleGroupProps> = ({alignment, items, handleChange}) => {
     return (
-        <ToggleButtonGroup exclusive onChange={handleChange} value={alignment} sx={{ width: '100%', display: 'flex', flexDirection: 'column'}}>
+        <ToggleButtonGroup exclusive onChange={handleChange} value={alignment} className="profileToggles">
             {Object.keys(items).map((value, key) => (
                 <ToggleButton value={value} key={key} style={{width: 'auto', height: 'auto', borderLeft: '1px solid rgba(0, 0, 0, 0.12)', marginBottom: '20px'}}>{items[value]}</ToggleButton>
             ))}

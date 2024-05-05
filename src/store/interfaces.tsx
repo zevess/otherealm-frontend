@@ -169,7 +169,29 @@ export interface userPosts {
     ]
 }
 
-export interface CommentProps {
+export interface postProps {
+    _id: string,
+    title: string,
+    text: string,
+    viewsCount: number,
+    imageUrl: string,
+    createdAt: string,
+    updatedAt: string,
+    user: {
+        _id: string,
+        name: string,
+        nick: string,
+        avatarUrl: string,
+        email: string,
+        passwordHash: string,
+        createdAt: string,
+        updatedAt: string,
+        __v: 0
+    },
+
+}
+
+export interface CommentsProps {
     comments: [
         {
             _id: string,
@@ -190,3 +212,77 @@ export interface CommentProps {
         },
     ]
 }
+
+export interface CommentProps {
+    _id: string,
+    user: {
+        _id: string,
+        name: string,
+        nick: string,
+        avatarUrl: string,
+        email: string,
+        passwordHash: string,
+        createdAt: string,
+        updatedAt: string,
+        __v: 0
+    },
+    postId: string,
+    text: string,
+    createdAt: string,
+    updatedAt: string,
+    __v: 0
+
+
+}
+
+export interface discussProps {
+    _id: string,
+    title: string,
+    text: string,
+    viewsCount: number,
+    imageUrl: string,
+    itemId: string,
+    user: {
+        _id: string,
+        name: string,
+        nick: string,
+        avatarUrl: string
+        email: string,
+        passwordHash: string,
+        createdAt: string,
+        updatedAt: string,
+        __v: 0
+    },
+    createdAt: string,
+    updatedAt: string,
+}
+
+// export interface favouriteItemProps{
+//     createdAt: string,
+//     items: [
+//         {
+//             itemBackgroundImage: string,
+//             itemId: string,
+//             itemTitle: string,
+//             itemType: string,
+//             _id: string
+//         }
+//     ],
+//     title: string,
+//     _id: string,
+//     user: string
+// }
+export interface favouriteItemProps {
+    itemBackgroundImage: string,
+    itemId: string,
+    itemTitle: string,
+    itemType: string,
+    _id: string
+}
+
+export interface favouriteProps{
+    title: string,
+    user: string,
+    items: favouriteItemProps[]
+}
+

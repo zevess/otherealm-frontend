@@ -107,11 +107,11 @@ export const FilmWindow = () => {
             </div>
 
             <div className="socialSection">
-                <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} className="searchItemToggles">
-                    <ToggleButton className="searchItemTogglesItem" value={'comments'}>
+                <ToggleButtonGroup color="primary" exclusive onChange={(event, newAlignment) => handleChange(event, newAlignment, setAlignment)} value={alignment} className="toggleGroup">
+                    <ToggleButton className="toggleGroupItem" value={'comments'}>
                         комментарии <InsertCommentOutlinedIcon />
                     </ToggleButton>
-                    <ToggleButton className="searchItemTogglesItem" value={'discuss'} style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                    <ToggleButton className="toggleGroupItem" value={'discuss'} style={{ borderLeft: '1px solid rgba(0, 0, 0, 0.12)' }}>
                         обсуждения <ForumOutlinedIcon />
                     </ToggleButton>
                 </ToggleButtonGroup>

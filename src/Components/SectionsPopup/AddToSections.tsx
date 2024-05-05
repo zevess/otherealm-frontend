@@ -5,6 +5,7 @@ import axios from '../../axios'
 import { PopupWithTrigger } from "../Popup";
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { addFavourites, clearFavourite } from "../../store/favourite";
+import { favouriteItemProps, favouriteProps } from "../../store/interfaces";
 
 export const AddToSection = () => {
 
@@ -49,15 +50,17 @@ export const AddToSection = () => {
     
     const userId = (useAppSelector((state) => state.authData.data?._id));
     const favourites = useAppSelector((state) => state.favouriteData.favourites.items);
+    // console.log(favourites)
+    
+    const [favouriteArr, setFavouriteArr] = React.useState<any>({});
 
-    const [favouriteArr, setFavouriteArr] = React.useState({});
-
-    favourites.forEach((item) => {
+    favourites.forEach((item: any) => {
+        console.log(item);
         const foundItem = item.items.find((i: any) => i.itemId === String(itemId));
         favouriteArr[item.title] = { checked: foundItem ? true : false, _id: item._id };
     })
 
-    const [arrFavourite, setArrFavourite] = React.useState(favouriteArr);
+    const [arrFavourite, setArrFavourite] = React.useState<any>(favouriteArr);
 
     React.useEffect(() =>{
         if (userId !== undefined) {
@@ -76,7 +79,7 @@ export const AddToSection = () => {
     
     const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const { checked, value, id } = event.target;
-        setArrFavourite((prevState) => {
+        setArrFavourite((prevState: any) => {
             return {
                 ...prevState,
                 [value]: { ...prevState[value], checked }
@@ -100,7 +103,7 @@ export const AddToSection = () => {
             alert('ошибка при добавлении в раздел')
         }
     }
-    console.log(favouriteArr);
+    // console.log(favouriteArr);
 
     return (
         <PopupWithTrigger id="popup-with-portal" buttonLabel="ДОБАВИТЬ В РАЗДЕЛ">

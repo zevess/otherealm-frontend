@@ -13,18 +13,6 @@ export default function DisabledPortalPopup() {
         padding: '40px',
       }}
     >
-      {/* <PopupWithTrigger id="popup-with-portal" buttonLabel="With a portal" />
-      <PopupWithTrigger
-        id="popup-without-portal"
-        buttonLabel="No portal, default strategy"
-        disablePortal
-      />
-      <PopupWithTrigger
-        id="popup-without-portal-fixed"
-        buttonLabel="No portal, 'fixed' strategy"
-        disablePortal
-        strategy="fixed"
-      /> */}
     </Box>
   );
 }

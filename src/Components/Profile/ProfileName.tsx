@@ -19,11 +19,11 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
     const avatar = useAppSelector((state) => state.authData.selectedUserData?.avatarUrl);
     const background = useAppSelector((state) => state.authData.selectedUserData?.backgroundUrl);
 
-    const inputAvatarRef = React.useRef(null)
-    const inputBGRef = React.useRef(null)
+    const inputAvatarRef = React.useRef<any>(null)
+    const inputBGRef = React.useRef<any>(null)
     const [avatarUrl, setImageUrl] = React.useState('')
 
-    const handleChangeAvatar = async (event) => {
+    const handleChangeAvatar = async (event: any) => {
         const formData = new FormData();
         const file = event.target.files[0];
         console.log(file)
@@ -40,7 +40,7 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
         }))
     }
 
-    const handleChangeBG = async (event) => {
+    const handleChangeBG = async (event: any) => {
         const formData = new FormData();
         const file = event.target.files[0];
         console.log(file)
@@ -80,17 +80,16 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
             </Box>
 
             <div className="profileHead__user">
-                <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                <Box sx={{ display: 'flex' }}>
                     {isNotSameUser ? 
                     <>
                         <input accept="image/*" ref={inputAvatarRef} type="file" onChange={handleChangeAvatar} hidden />
                         <IconButton onClick={() => inputAvatarRef.current.click()}>
-                            <Avatar src={`http://localhost:4444${avatar}`} sx={{ width: '170px', height: '170px' }} />
+                            <Avatar src={`http://localhost:4444${avatar}`} className="profileHead__user-avatar"/>
                         </IconButton>
-                    </> : <Avatar src={`http://localhost:4444${avatar}`} sx={{ width: '170px', height: '170px' }} /> }
+                    </> : <Avatar src={`http://localhost:4444${avatar}`} className="profileHead__user-avatar"/> }
 
-
-                    <Typography variant="h2" sx={{ marginTop: 'auto', marginLeft: '25px' }}>{name}</Typography>
+                    <p className="profileHead__user-name">{name}</p>
                 </Box>
                 <hr style={{ borderTop: '6px solid black', width: 'auto' }}></hr>
             </div>

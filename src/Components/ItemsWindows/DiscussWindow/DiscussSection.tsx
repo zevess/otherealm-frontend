@@ -36,9 +36,6 @@ export const DiscussSection = () => {
     return (
         <div className="discussSection">
             <div className="discussSection__inputs">
-                {/* <DiscussInput /> */}
-                {/* <DiscussButton setModalOpen={setModalOpen} /> */}
-                {/* <Button onClick={() => setModalOpen} className="discussCreateButton">создать обсуждение</Button> */}
                 <ColorButtonBlue onClick={() => setModalOpen(true)} className="discussCreateButton">создать обсуждение</ColorButtonBlue>
                 <ModalWindow open={modalOpen} handleClose={() => setModalOpen(false)}>
                     <DiscussModal setData={setData} setModalOpen={setModalOpen} />

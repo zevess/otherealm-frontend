@@ -21,7 +21,7 @@ export const GamesSearchList = () => {
     }
 
 
-    if (gamesResult?.length == 0) {
+    if ( !gamesResult) {
         return (
             <Box>
                 <Typography variant="h2">
@@ -33,19 +33,16 @@ export const GamesSearchList = () => {
     }
 
     return (
-        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-            <Box display={'flex'} flexWrap={'wrap'} alignItems={'flex-start'}>
+        <div className="searchResult">
+            <div className="searchResultItems">
                 {gamesResult !== undefined && gamesResult.map((item: any) => (
                     <ItemCard itemPoster={item.background_image ? item.background_image : '../src/assets/img/noImg.png'} id={item.id} key={item.id} itemTitle={item.name} itemType="game" itemAltenativeTitle={item.alternativeName} />
                 ))}
-            </Box>
+            </div>
             <Pagination page={currentGamePageSelector} count={totalGamePage} onChange={(event, value) => {
                 dispatch(setGamePage(value));
                 dispatch(gameFetch({ searchTitle, rawgToken, currentGamePage: value }))
             }} />
-        </Box>
-
-
-
+        </div>
     )
 }

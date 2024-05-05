@@ -88,6 +88,34 @@ button:focus-visible {
   }
 }
 
+.authWrapper{
+  width: 100%;
+}
+
+.authWindow{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  border: solid 2px #9095f7;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.authWindowContent{
+  width: 100%;
+}
+
+.authWindowContent__forms-input{
+  width: 60%;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+
 .headerNav {
   width: 100%;
   display: flex;
@@ -129,9 +157,52 @@ button:focus-visible {
   padding: 20px;
 }
 
-.profileHead__user-name .profileHead__user-avatar {
-  width: 170px;
-  height: 170px;
+.profileHead__user-avatar {
+  width: 170px !important;
+  height: 170px !important; 
+}
+
+.profileHead__user-name{
+  font-size: 50px;
+  margin: 0;
+  margin-left: 25px;
+  margin-top: auto;
+}
+
+.itemCard{
+  /* position: relative; */
+  width: 214px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+}
+
+.itemCardContainer{
+  position: relative;
+  width: 100%;
+  height: 309px;
+}
+
+.itemCardImg{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.itemCardType{
+  aspect-ratio: 127/36;
+  /* width: 127px; */
+  height: 36px;
+  /* position: absolute; */
+  border-radius: 6px 0px 6px 6px;
+  /* right: -3; */
+  /* top: 0; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-size: 16px;
 }
 
 .itemCard:hover .itemCardType {
@@ -158,6 +229,10 @@ button:focus-visible {
   transition: border-color 0.25s;
 }
 
+
+
+
+
 .editor {
   margin: 30px -30px;
 
@@ -174,12 +249,53 @@ button:focus-visible {
   }
 }
 
+
+.searchWrapper{
+  display: flex;
+  flex-direction: column;
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 90%;
+}
+
+
+.searchResult{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchSource{
+  margin: 0 auto;
+  width: auto;
+  max-width: 750px;
+  height: auto;
+  padding: 10px;
+  border: solid 1px black;
+  background-color: white;
+}
+
+.searchSourceLink{
+  text-decoration: underline;
+}
+
+.searchSourceText{
+  margin: 0.6px;
+}
+
+.searchResultItems{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
 .searchItemWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* width: 100%; */
+  width: 100%;
 }
 
 .searchItem {
@@ -239,7 +355,7 @@ button:focus-visible {
   justify-content: center;
   border-radius: 6px 0px 6px 6px;
   border: solid 2px black;
-  
+
 }
 
 
@@ -273,12 +389,17 @@ button:focus-visible {
   max-width: 1500px;
 }
 
-.searchItemToggles {
+.toggleGroup {
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-top: 60px;
   margin-bottom: 40px;
+}
+
+.toggleGroup.search{
+  margin-top: 0;
+  justify-content: space-around
 }
 
 .searchItemBottomSection {
@@ -293,7 +414,7 @@ button:focus-visible {
 
 }
 
-.commentSectionComment {
+.comment {
   min-width: 200px;
   /* width: auto; */
   background-color: white;
@@ -304,29 +425,33 @@ button:focus-visible {
   margin-bottom: 30px;
 }
 
-.commentSectionComment__user {
+.commentUser {
   display: flex;
   justify-content: center;
   margin-right: 10px;
   width: fit-content;
 }
 
-.commentSectionComment__user-info {
+.commentUser__info {
   margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
 }
 
-.commentAvatar{
+.commentUser__info-nick{
+  margin: 0;
+}
+
+.commentUser__info-avatar {
   width: 80px !important;
   height: 80px !important;
 }
 
 
 
-.commentInputField{
+.commentInputField {
   background-color: white;
   line-height: 1.6px;
   margin-bottom: 16px !important;
@@ -342,12 +467,13 @@ button:focus-visible {
   display: flex;
 
 }
-.discussCreateButton{
-  width: 40% ;
+
+.discussCreateButton {
+  width: 40%;
   max-width: 500px;
   padding: 6px;
   height: 120px;
- 
+
 }
 
 
@@ -391,9 +517,8 @@ button:focus-visible {
 }
 
 .discussItemTitle {
-  max-width: 100%;
+  width: 90%;
   background-color: white;
-  min-height: 140px;
   border: solid 3px black;
   border-radius: 30px;
   padding: 20px;
@@ -401,6 +526,13 @@ button:focus-visible {
   display: flex;
 }
 
+.discussTitle {
+  padding: 12px;
+}
+
+.customOverflow {
+  overflow-wrap: break-word;
+}
 
 .discussItemTitle__user {
   display: flex;
@@ -414,100 +546,24 @@ button:focus-visible {
   margin: 20px;
 }
 
-@media (max-width: 1086px) {
-  .searchItemContent {
-    grid-template-rows: repeat(1, 1fr);
-    grid-template-columns: auto;
-  }
 
-  .searchItemNames{
-    grid-row:  1;
-    align-items: center;
-  }
 
-  .searchItemContent__left{
-    justify-self: center;
-    margin-top: 16px;
-  }
-  .searchItemContent__main-type{
-    margin-left: auto;
-    margin-right: 6%;
-  }
 
-  #root {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .commentUserNick{
-    font-size: 20px !important;
-  }
-  
+.profileWrapper{
+  width: 100%;
 }
 
-@media (max-width: 480px) {
-
-  .searchItemToggles{
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .searchItemTogglesItem{
-    width: 80% !important;
-  }
-  
-  .searchItemPoster{
-    height: 451px;
-  }
-
-  .detailsItemText{
-    font-size: 18px !important;
-  }
-  
-  .commentAvatar{
-    width: 60px !important;
-    height: 60px !important;
-  }
-
-  .commentUserNick{
-    font-size: 16px !important;
-  }
-
+.profileLists{
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-@media (min-width: 320px) and (max-width: 479px) {
-  .searchItemPoster{
-    height: 370px;
-  }
-
-  .discussSection__inputs{
-    justify-content: center !important;
-  }
-
-  .discussCreateButton{
-    width: auto;
-  }
-
-  .discussLinkTitle{
-    font-size: 34px !important;
-    /* font-weight: bold; */
-  }
-  .discussModalTitle{
-    font-size: 34px !important;
-  }
-
-  .discussModal{
-    width: 80%;
-  }
-  .commentAvatar{
-    width: 50px !important;
-    height: 50px !important;
-  }
-
-  
+.profileToggles{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
-
-
 
 .listWindowWrapper {
   width: 80%;
@@ -527,12 +583,15 @@ button:focus-visible {
 
 .listWindow {
   display: flex;
+  margin-top: 12px;
+  width: 100%;
 }
 
 .listWindowCards {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
+  /* justify-content: ; */
   margin-left: 40px;
 }
 
@@ -548,20 +607,21 @@ button:focus-visible {
   flex-direction: column;
 }
 
-.listWindowToggleButton {
+.listWindowToggleGroup__button {
   max-width: 200px;
-  height: auto;
+  height: auto !important;
   border-left: 1px solid rgba(0, 0, 0, 0.12);
-  margin-bottom: 20px;
+  margin-bottom: 20px !important;
+  /* font-size: 16px !important; */
 }
 
 .sectionToggleSettings {
-  width: 40%;
+  width: 50%;
   min-height: 30%;
   background-color: white;
   position: absolute;
   top: 35%;
-  left: 30%;
+  left: 25%;
   border: 2px solid black;
   box-shadow: 24;
   padding: 15px;
@@ -571,6 +631,7 @@ button:focus-visible {
 }
 
 .sectionToggleSettings-inputs {
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -579,10 +640,17 @@ button:focus-visible {
 .sectionToggleSettings-inputs__buttons {
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 80%;
   padding: 12px;
   flex-wrap: wrap;
 }
+
+.sectionToggleSettings-inputs__textfield{
+  width: 80%; 
+  margin: 10px;
+  font-size: 12px;
+}
+
 
 
 .welcomeWrapper {
@@ -658,42 +726,26 @@ button:focus-visible {
   background-color: white;
 }
 
-@media (min-width: 320px) and (max-width: 768px) {
-  
 
-  .welcomeGif {
-    max-width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  .welcomeTextField-about {
-    width: 80%;
-  }
-
-  .welcomeOpportunities__title {
-    font-size: 24px;
-  }
-
-  .welcomeTextField {
-    font-size: 24px;
-  }
-
-  .welcomeTextField-about__end-text {
-    font-size: 24px;
-  }
-
-}
 
 .postListWrapper {
   width: 80%;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column-reverse;
+  /* align-items: flex-start; */
   justify-content: center;
 }
 
+.postsList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .postItem {
-  width: 90%;
+  width: 60%;
+  max-width: 710px;
   min-height: 150px;
   background-color: white;
   border: solid 1px black;
@@ -722,10 +774,22 @@ button:focus-visible {
   align-items: flex-start;
 }
 
+.postUserInfo {
+  margin: 0;
+}
+
+.postUserInfo.nick{
+  font-size: 26px;
+}
+
+.postUserInfo.date{
+  font-size: 12px;
+}
+
 .postItemDetails-user__avatar {
-  width: 80px;
-  height: 80px;
-  margin-right: 10px;
+  width: 80px !important;
+  height: 80px !important;
+  margin-right: 10px !important;
 }
 
 .postItemImg {
@@ -743,6 +807,10 @@ button:focus-visible {
   align-items: flex-start;
   margin-left: 25px;
   margin-bottom: 15px;
+}
+
+.postItemText{
+  font-size: 28px;
 }
 
 .addPostWrapper {
@@ -772,9 +840,491 @@ button:focus-visible {
   margin-top: 15px;
 }
 
+.fullPostWrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fullPost{
+  width: 70%;
+  max-width: 1200px;
+  min-height: 150px;
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 24px;
+  margin-top: 40px;
+  padding: 12px;
+}
+
+.fullPostTop{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.fullPostTop__user{
+  display: flex;
+  align-items: flex-end;
+  padding: 10px
+}
+
+.fullPostImg{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 16px;
+  object-fit: contain;
+}
+
+.fullPostTitle{
+  margin-top: 60px !important;
+  margin-bottom: 40px !important;
+}
+
 .hrHorizontal {
   border-top: 1px solid black;
   color: black;
   width: 100%;
   margin: 0 auto;
+}
+
+
+@media (min-width: 320px) and (max-width: 768px) {
+
+  .welcomeWrapper{
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .welcomeGif {
+    max-width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .welcomeTextField-about {
+    width: 80%;
+  }
+
+  .welcomeOpportunities__title {
+    font-size: 24px;
+  }
+
+  .welcomeTextField {
+    font-size: 24px;
+  }
+
+  .welcomeTextField-about__end-text {
+    font-size: 24px;
+  }
+
+}
+
+@media (max-width: 950px) {
+  .itemCard{
+    width: 165px;
+  }
+
+  .itemCardContainer{
+    height: 238px;
+  }  
+
+  .itemCardType{
+    height: 28px ;
+    font-size: 14px;
+  }
+
+  .postItem {
+    width: 80%;
+    /* max-width: 610px; */
+  }
+
+}
+
+@media (max-width: 830px) {
+  .listWindowCards{
+    margin-left: 0;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 780px) {
+  .profileLists{
+    flex-direction: column;   
+    align-items: center; 
+  }
+
+  .profileToggles{
+    width: 200px;
+  }
+  .listWindowWrapper{
+    width: 90%;
+  }
+
+  .itemCard{
+    margin: 8px;
+  }
+
+  .sectionToggleSettings{
+    width: 70%;
+    top: 35%;
+    left: 10%;
+  }
+
+  .postItem {
+    width: 80%;
+    /* max-width: 610px; */
+  }
+  .postItemText{
+    font-size: 26px;
+  }
+
+}
+
+
+@media (max-width: 656px) {
+  .authWindow{
+    width: 70%;
+  }
+
+  .listWindow{
+    flex-direction: column;
+  }
+
+  .listWindowCards{
+    order: 1;
+  }
+
+  .listWindowTogglesSection{
+    width: 100%;
+    
+  }
+
+  .listWindowToggleGroup{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .listWindowToggleGroup__button{
+    margin-bottom: 0 !important;
+  }
+
+  .profileHead__user-avatar{
+    width: 140px !important;
+    height: 140px !important;
+  }
+  
+  .profileHead__user-name{
+    font-size: 40px;
+    margin-left: 18px;
+  }
+
+  .postItem {
+    width: 80%;
+    /* max-width: 610px; */
+  }
+
+  .postItemText{
+    font-size: 24px;
+  }
+  .fullPost{
+    width: 80%;
+  }
+}
+
+@media (max-width: 535px) {
+  .postUserInfo.nick{
+    font-size: 22px;
+  }
+  
+  .postUserInfo.date{
+    font-size: 10px;
+  }
+  
+  .postItemDetails-user__avatar {
+    width: 60px !important;
+    height: 60px !important;
+    margin-right: 8px !important;
+  }
+
+  .fullPostTitle{
+    font-size: 28px !important;
+  }
+  .fullPost{
+    width: 80%;
+  }
+}
+
+@media (max-width: 472px) {
+
+  .authWindow{
+    width: 80%;
+  }
+
+  .itemCard{
+    margin: 10px;
+    width: 143px !important;
+  }
+
+  .itemCardContainer{
+    height: 206px;
+  }
+
+  .itemCardName{
+    font-size: 16px;
+  }
+
+  .profileHead__user{
+    width: 80%;
+  }
+
+  .profileHead__user-avatar{
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .profileHead__user-name{
+    font-size: 30px;
+    margin-left: 10px;
+  }
+
+  .sectionToggleSettings-inputs__textfield{
+    width: 90%; 
+    /* margin: 10px; */
+    font-size: 10px;
+  }
+
+  .postItem {
+    width: 90%;
+    /* max-width: 610px; */
+  }
+
+  .postItemText{
+    font-size: 22px;
+  }
+
+  .fullPost{
+    width: 80%;
+  }
+  .fullPostTitle{
+    font-size: 24px !important;
+  }
+}
+
+@media (max-width: 380px) {
+
+  .authWindowContent__forms{
+    width: 100%;
+  }
+
+  .authWindowContent__forms-input{
+    width: 80%;
+  }
+  /* .authWindow{
+    width: 85%;
+  } */
+  .listWindowWrapper{
+    width: 95%;
+  }
+
+  .postItem {
+    width: 90%;
+    /* max-width: 610px; */
+  }
+
+  .postItemText{
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .itemCard{
+    margin: 5px;
+    width: 126px !important;
+  }
+
+  .itemCardContainer{
+    height: 182px;
+  }
+
+  .itemCardName{
+    font-size: 12px;
+  }
+  .postItem {
+    width: 95%;
+    /* max-width: 610px; */
+  }
+  .postItemText{
+    font-size: 18px;
+  }
+
+  .fullPost{
+    width: 85%;
+  }
+
+  .fullPostTitle{
+    font-size: 20px !important;
+  }
+
+}
+
+@media (max-width: 1086px) {
+  .searchItemContent {
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: auto;
+  }
+
+  .searchItemNames {
+    grid-row: 1;
+    align-items: center;
+  }
+
+  .searchItemContent__left {
+    justify-self: center;
+    margin-top: 16px;
+  }
+
+  .searchItemContent__main-type {
+    margin-left: auto;
+    margin-right: 6%;
+  }
+
+  #root {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .commentUser__info {
+    margin: 10px;
+  }
+
+  .commentUser__info-nick {
+    font-size: 20px !important;
+  }
+
+  .commentText {
+    font-size: 20px !important;
+  }
+
+  /* .postItem {
+    width: 80%;
+    max-width: 610px;
+  } */
+}
+
+@media (max-width: 480px) {
+
+  .toggleGroup {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toggleGroupItem {
+    width: 80% !important;
+  }
+
+  .searchItemPoster {
+    height: 451px;
+  }
+
+  .detailsItemText {
+    font-size: 18px !important;
+  }
+
+  .commentUser__info {
+    margin: 6px;
+  }
+
+  .commentUser__info-avatar {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .commentUser__info-nick {
+    font-size: 16px !important;
+  }
+
+  .commentText {
+    font-size: 16px !important;
+  }
+
+  .discussLinkTitle {
+    font-size: 26px !important;
+    /* font-weight: bold; */
+  }
+
+  .discussItemTitle {
+    width: 90%;
+  }
+
+  .discussTitle {
+    font-size: 20px !important;
+
+  }
+
+  .searchSourceLink{
+    font-size: 16px;
+    
+  }
+
+}
+
+@media (min-width: 320px) and (max-width: 479px) {  
+
+  .searchItemPoster {
+    height: 370px;
+  }
+
+  .discussSection__inputs {
+    justify-content: center !important;
+  }
+
+  .discussCreateButton {
+    width: auto;
+  }
+
+  .discussLinkTitle {
+    font-size: 26px !important;
+  }
+
+  .discussModalTitle {
+    font-size: 34px !important;
+  }
+
+  .discussModal {
+    width: 80%;
+  }
+
+  .commentUser__info-avatar {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .discussItemTitle {
+    width: 100%;
+  }
+
+  .discussText{
+    font-size: 20px !important;
+  }
+
+  .discussTitle {
+    font-size: 16px !important;
+    padding: 0;
+  }
+
+  .commentUser{
+    padding-left: 0px ;
+  }
+
+  .addPost{
+    width: 85% !important;
+  }
+
 }

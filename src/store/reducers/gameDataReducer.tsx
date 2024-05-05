@@ -7,8 +7,9 @@ import { gameFetch, gameItemFetch } from "../fetches/gameFetch";
 interface initialStateProps {
     rawgToken: string,
     gameResult?: gameResultProps,
+    gamesLoadingStatus?: string,
     currentGameItem?: currentGameItemProps,
-    gamesLoadingStatus?: string
+    currentGameItemLoadingStatus?: string
 }
 
 const initialState: initialStateProps = {
@@ -39,9 +40,11 @@ export const gameDataSlice = createSlice({
             })
             .addCase(gameItemFetch.fulfilled, (state, action: PayloadAction<currentGameItemProps>) => {
                 console.log("Successfully");
+                state.currentGameItemLoadingStatus = 'done'
                 state.currentGameItem = action.payload
             })
-            .addCase(gameItemFetch.rejected, () => {
+            .addCase(gameItemFetch.rejected, (state) => {
+                state.currentGameItemLoadingStatus = 'done'
                 console.log('Rejected')
             })
     }

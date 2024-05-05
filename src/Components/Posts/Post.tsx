@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, Typography } from "@mui/material"
+import { Avatar, Box, Divider, IconButton, Typography } from "@mui/material"
 import ReactMarkdown from 'react-markdown'
 import { Link } from "react-router-dom"
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
@@ -22,8 +22,20 @@ export const Post: FC<PostProps> = ({ user, date, title, imageUrl, id, avatar, i
 
     const userId = (useAppSelector((state) => state.authData.data?._id));
     const selectedUserId = (useAppSelector((state) => state.authData.selectedUserData?._id));
-    const isNotSameUser = (userId == selectedUserId)
+    const isSameUser = (userId == selectedUserId)
 
+    const dateToForm = new Date(date);
+    const options = {
+        weekday: 'short' as const,
+        year: 'numeric' as const,
+        month: 'short' as const,
+        day: 'numeric' as const
+    }
+
+    const formatedDate = dateToForm.toLocaleString('ru-RU', options)
+   
+    const time = dateToForm.toTimeString().slice(0, 8);
+    
 
 
     return (
@@ -31,13 +43,14 @@ export const Post: FC<PostProps> = ({ user, date, title, imageUrl, id, avatar, i
 
             <div className="postItemDetails">
                 <div className="postItemDetails-user">
-                    <Avatar src={`http://localhost:4444${avatar}`} sx={{ width: '80px', height: '80px', marginRight: '10px' }} />
+                    <Avatar src={`http://localhost:4444${avatar}`} className="postItemDetails-user__avatar" />
                     <div className="postItemDetails-user__info">
-                        <Typography variant="h5">{user}</Typography>
-                        <Typography variant="subtitle2">{date}</Typography>
+                        <p className="postUserInfo nick">{user}</p>
+                        <Divider sx={{width: '100%'}}/>
+                        <p className="postUserInfo date">{formatedDate + '; ' + time}</p>
                     </div>
 
-                    {isNotSameUser && <Box marginLeft={'auto'}>
+                    {isSameUser && <Box marginLeft={'auto'}>
                         <Link to={`/post/${id}/edit`}>
                             <IconButton >
                                 <EditOutlinedIcon />
@@ -51,7 +64,7 @@ export const Post: FC<PostProps> = ({ user, date, title, imageUrl, id, avatar, i
             
             <Link to={`/post/${id}`}>
                 {imageUrl && <img className='postItemImg' src={`http://localhost:4444${imageUrl}`} ></img>}
-                <p style={{ fontSize: '30px' }}>{title}</p>
+                <p className="postItemText">{title}</p>
                 {isText && <p>...</p>}
 
                 <div className="postItemAlso">

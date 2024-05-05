@@ -12,13 +12,15 @@ interface CommentProps {
 
 export const Comment: FC<CommentProps> = ({ name, text, nick, avatar }) => {
     return (
-        <div className="commentSectionComment">
+        <div className="comment">
 
-            <div className="commentSectionComment__user">
+            <div className="commentUser">
                 <Link to={`/profile/${nick}`}>
-                    <div className="commentSectionComment__user-info">
-                        <Avatar className="commentAvatar" src={`http://localhost:4444${avatar}`}></Avatar>
-                        <Typography variant="h5" className="commentUserNick">{name}</Typography>
+                    <div className="commentUser__info">
+
+                        <Avatar className="commentUser__info-avatar" src={`http://localhost:4444${avatar}`}></Avatar>
+                        <p className="commentUser__info-nick">{name}</p>
+                    
                     </div>
                         
                     
@@ -29,7 +31,7 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar }) => {
             </div>
 
 
-            <Typography variant="h5" sx={{ textAlign: 'center', paddingTop: '10px', paddingBottom: '10px' }}>{text}</Typography>
+            <Typography variant="h5" sx={{ textAlign: 'start', paddingTop: '10px', paddingBottom: '10px' }} className="commentText">{text}</Typography>
         </div>
 
 

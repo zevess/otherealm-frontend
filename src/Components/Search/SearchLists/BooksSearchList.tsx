@@ -34,17 +34,17 @@ export const BooksSearchList = () => {
         )
     }
     return (
-        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-            <Box display={'flex'} flexWrap={'wrap'} alignItems={'flex-start'}>
+        <div className="searchResult">
+            <div className="searchResultItems">
                 {bookResult !== undefined && bookResult.map((item: any) => (
                     <ItemCard itemPoster={item?.volumeInfo?.imageLinks?.thumbnail ? item?.volumeInfo?.imageLinks?.thumbnail : '../src/assets/img/noImg.png'} itemTitle={item?.volumeInfo?.title} id={item?.id} key={item?.id} itemType="book" itemAltenativeTitle={item.alternativeName} />
                 ))}
-            </Box>
+            </div>
             <Pagination page={currentBookPage} count={4} onChange={(event, value) => {
                 dispatch(setBookPage(value))
                 dispatch(booksFetch({ searchTitle, gbToken, currentBookPage: value }))
             }} />
-        </Box>
+        </div>
 
 
     )
