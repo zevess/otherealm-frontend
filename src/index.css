@@ -132,6 +132,7 @@ button:focus-visible {
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  /* max-width: 1060px; */
 }
 
 .profileHead {
@@ -167,6 +168,12 @@ button:focus-visible {
   margin: 0;
   margin-left: 25px;
   margin-top: auto;
+}
+
+.profileHead__follow{
+  width: 70%;
+  max-width: 1060px;
+  display: flex;
 }
 
 .itemCard{

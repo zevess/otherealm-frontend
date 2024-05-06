@@ -151,7 +151,8 @@ export interface authDataProps {
     nick?: string,
     _id: string,
     avatarUrl: string,
-    backgroundUrl: string
+    backgroundUrl: string,
+    follows: string[]
 }
 
 export interface userPosts {

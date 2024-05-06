@@ -12,6 +12,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom"
 import axios from '../../axios'
 import { fetchUser, setSelectedUserData, setSelectedUserPosts } from "../../store/auth"
 import { PostList } from "../Posts/PostList"
+import { ColorButtonBlue } from "../CustomButton"
 
 
 export const Profile = () => {
@@ -53,7 +54,9 @@ export const Profile = () => {
 
         <Box display={'flex'} flexDirection={'column'} marginRight={'20px'} position={'static'}>
           <SectionToggleGroup items={sections} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSection)} alignment={section}></SectionToggleGroup>
+          
         </Box>
+        
         {section == 'list' ? <ListWindow type={type} setType={setType} /> : <PostList />}
 
       </div>
