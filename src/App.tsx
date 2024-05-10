@@ -20,6 +20,7 @@ import { Welcome } from './Components/RegistrationPage/Welcome'
 import { ErrorBoundary } from './Components/ErrorPage'
 import { FullPost } from './Components/Posts/FullPost'
 import { AddPost } from './Components/Posts/AddPost'
+import { PostsFeed } from './Components/Posts/PostsFeed'
 
 function App() {
   const dispatch = useAppDispatch();
@@ -32,8 +33,11 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path='/' element={<Welcome />} />
+          
           <Route path='/search' element={<Search />} />
+          
           <Route path='/profile/:nick' element={<Profile />} />
+          
           <Route path='/item/movie/:id' element={<FilmWindow />} />
           <Route path='/item/anime/:id' element={<FilmWindow />} />
           <Route path='/item/cartoon/:id' element={<FilmWindow />} />
@@ -41,12 +45,15 @@ function App() {
           <Route path='/item/tv-series/:id' element={<FilmWindow />} />
           <Route path='/item/game/:id' element={<GameWindow />} />
           <Route path='/item/book/:id' element={<BookWindow />} />
+          
           <Route path='/discuss/:itemId/:discussId' element={<ItemDiscussWindow />} />
           
           <Route path='/post/:postId' element={<FullPost/>} />
           <Route path='/post/:postId/edit' element={<AddPost/>} />
           <Route path='/post/add' element={<AddPost/>} />
           
+          <Route path='/feed' element={<PostsFeed/>} />
+
           <Route path='/auth' element={<Authorize />} />
           <Route path='/error' element={<ErrorBoundary/>}/>
         </Route>

@@ -28,7 +28,12 @@ export const divideItems: objectProps = {
 
 
 export const searchToggleItems: objectProps = {
-    "media": "поиск по фильмам/сериалам/мультфильмам/аниме",
+    "cinema": "поиск по фильмам/сериалам/мультфильмам/аниме",
     "games": "поиск по играм",
     "books": "поиск по книгам"
+}
+
+export const searchTypes: objectProps = {
+    "media": "поиск по медиа",
+    "users": "поиск пользователей"
 }

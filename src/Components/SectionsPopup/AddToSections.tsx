@@ -110,7 +110,7 @@ export const AddToSection = () => {
             <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
                 <FormGroup>
                     {(arrFavourite !== undefined) && favourites.map((items: any) => (
-                        <FormControlLabel control={<Checkbox checked={arrFavourite[items.title].checked} id={items._id} value={items.title} onChange={onChange} />} label={items.title} />
+                        <FormControlLabel key={items._id} control={<Checkbox key={items._id} checked={arrFavourite[items.title].checked} id={items._id} value={items.title} onChange={onChange} />} label={items.title} />
                     ))}
                 </FormGroup>
             </Box>

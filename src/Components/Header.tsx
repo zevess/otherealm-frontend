@@ -3,6 +3,7 @@ import { HeaderTemplate } from "./HeaderTemplate"
 import { Link } from "react-router-dom"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 import { useAppDispatch } from "../store/hooks";
 import { useSelector } from "react-redux";
 import { logout, } from "../store/auth";
@@ -39,7 +40,17 @@ export const Header = () => {
             <List className="drawerStyles">
                 <ListItem>
                     <ListItemButton>
-                        <Link to={"/search"} style={{ width: '100%', height: '100%' }}>
+                        <Link to={"/feed"}>
+                            <Box display={'flex'} alignItems={'center'}>
+                                <FeedOutlinedIcon />
+                                лента
+                            </Box>
+                        </Link>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem>
+                    <ListItemButton>
+                        <Link to={"/search"}>
                             <Box display={'flex'} alignItems={'center'}>
                                 <SearchOutlinedIcon />
                                 поиск
@@ -80,6 +91,13 @@ export const Header = () => {
                     </Link>
 
                     {windowWidth > 768 && <>
+                        <Link to={"/feed"}>
+                            <Box display={'flex'} alignItems={'center'}>
+                                <FeedOutlinedIcon />
+                                лента
+                            </Box>
+                        </Link>
+
                         <Link to={"/search"}>
                             <Box display={'flex'} alignItems={'center'}>
                                 <SearchOutlinedIcon />

@@ -8,6 +8,8 @@ import authReducer from './auth'
 import commentsReducer from './comment'
 import favouriteReducer from './favourite'
 import discussReducer from './discuss'
+import postsReducer from './posts'
+import usersReducer from './users'
 
 export const store = configureStore({
     reducer:{
@@ -19,6 +21,8 @@ export const store = configureStore({
         commentsData: commentsReducer,
         favouriteData: favouriteReducer,
         discussData: discussReducer,
+        postsData: postsReducer,
+        usersData: usersReducer,
     }
 })
 

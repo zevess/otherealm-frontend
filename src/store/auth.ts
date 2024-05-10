@@ -17,8 +17,8 @@ export const fetchAuthMe = createAsyncThunk('/auth/fetchAuthMe', async() => {
     return data
 })
 
-export const fetchUser = createAsyncThunk('/auth/getUser', async(params) => {
-    const {data} = await axios.get(`/auth/getUser/${params}`);
+export const fetchUser = createAsyncThunk('/profile/getUser', async(nick: string) => {
+    const {data} = await axios.get(`/profile/getUser/${nick}`);
     return data
 })
 
@@ -26,14 +26,16 @@ export interface authProps {
     data: authDataProps | null
     status: string,
     selectedUserData: authDataProps | null,
-    userPosts: userPosts | []
+    userPosts: userPosts | [],
+    feed: userPosts | [],
 }
 
 const initialState: authProps = {
     data: null,
     status: "loading",
     selectedUserData: null,
-    userPosts: []
+    userPosts: [],
+    feed: []
 }
 
 export const authSlice = createSlice({
@@ -49,6 +51,9 @@ export const authSlice = createSlice({
         setSelectedUserPosts: (state, action) =>{
             state.userPosts = action.payload
         },
+        setFeed: (state, action) =>{
+            state.feed = action.payload
+        }
     },
     extraReducers: (builder) =>{
         builder
@@ -111,6 +116,6 @@ export const authSlice = createSlice({
 
 // export const selectIsAuth = (state: any) => Boolean(state.auth.data);
 
-export const { logout, setSelectedUserData, setSelectedUserPosts } = authSlice.actions
+export const { logout, setSelectedUserData, setSelectedUserPosts, setFeed } = authSlice.actions
 
 export default authSlice.reducer

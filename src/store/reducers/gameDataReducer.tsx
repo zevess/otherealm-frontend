@@ -13,7 +13,7 @@ interface initialStateProps {
 }
 
 const initialState: initialStateProps = {
-    rawgToken: '436f7a5b62a84ceba29a4f7ec2c1f719',
+    rawgToken: 'b4fd0df38636414f98d77329eae07427',
     gameResult: undefined,
     currentGameItem: undefined,
 };

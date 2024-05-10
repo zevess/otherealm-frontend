@@ -464,6 +464,12 @@ button:focus-visible {
   margin-bottom: 16px !important;
 }
 
+.searchInputField {
+  background-color: white;
+  line-height: 1.6px;
+  margin-bottom: 16px !important;
+  width: 80%;
+}
 
 .discussSection {
   display: flex;
@@ -743,6 +749,10 @@ button:focus-visible {
   justify-content: center;
 }
 
+.postListWrapper.feed{
+  width: 100%;
+}
+
 .postsList{
   display: flex;
   flex-direction: column;
@@ -899,6 +909,23 @@ button:focus-visible {
   margin: 0 auto;
 }
 
+.profileCard{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 14px;
+  margin: 30px;
+  aspect-ratio: 400/155;
+  height: 155px;
+  background-color: white;
+  border-radius: 40px;
+  border: solid 2px black;
+}
+
+.userSearchItems{
+  display: flex;
+  flex-wrap: wrap;
+}
 
 @media (min-width: 320px) and (max-width: 768px) {
 

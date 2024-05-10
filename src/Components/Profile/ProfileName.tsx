@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom"
 import { setSelectedUserData } from "../../store/auth"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { ColorButtonBlue } from "../CustomButton"
+import { fetchFollowUser, fetchOneUser } from "../../store/users"
 
 interface ProfileNameProps {
     name: string
@@ -16,14 +17,25 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
 
     const params = useParams()
     const dispatch = useAppDispatch()
-    const userData = useAppSelector((state) => state.authData.data);
-    const avatar = useAppSelector((state) => state.authData.selectedUserData?.avatarUrl);
-    const background = useAppSelector((state) => state.authData.selectedUserData?.backgroundUrl);
+
+    const userData = useAppSelector((state) => state.usersData.currentUser.items);
+    const avatar = useAppSelector((state) => state.usersData.currentUser.items?.avatarUrl);
+    const background = useAppSelector((state) => state.usersData.currentUser.items?.backgroundUrl);
+    
+    const userFollows = (useAppSelector((state) => state.usersData.currentUser.items?.follows));
+    const userId = (useAppSelector((state) => state.authData.data?._id));
+    const selectedUser = (useAppSelector((state) => state.usersData.currentUser.items));
+    
+    const isSameUser = (userId == selectedUser?._id)
+    const isFollowed = selectedUser?._id !== undefined && userFollows?.includes(selectedUser._id)
+    const userToFollowId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
 
     const inputAvatarRef = React.useRef<any>(null)
     const inputBGRef = React.useRef<any>(null)
-    const [avatarUrl, setImageUrl] = React.useState('')
 
+    const [avatarUrl, setImageUrl] = React.useState('')
+    const [isHovered, setIsHovered] = React.useState(false)
+    const [follow, setFollow] = React.useState(isFollowed);
     const handleChangeAvatar = async (event: any) => {
         const formData = new FormData();
         const file = event.target.files[0];
@@ -35,9 +47,7 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
         const fields = {
             "avatarUrl": `${encodeURI(data.url)}`
         }
-        axios.patch(`/profile/avatar/${userData?._id}`, fields).then(() => axios.get(`/auth/getUser/${params.nick}`).then(res => {
-            dispatch(setSelectedUserData(res.data));
-        }))
+        axios.patch(`/profile/avatar/${userData?._id}`, fields).then(() => dispatch(fetchOneUser(`${userData?.nick}`)))
     }
 
     const handleChangeBG = async (event: any) => {
@@ -50,25 +60,9 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
         const fields = {
             "backgroundUrl": `${encodeURI(data.url)}`
         }
-        axios.patch(`/profile/background/${userData?._id}`, fields).then(() => axios.get(`/auth/getUser/${params.nick}`).then(res => {
-            dispatch(setSelectedUserData(res.data));
-        }))
+        axios.patch(`/profile/background/${userData?._id}`, fields).then(() => dispatch(fetchOneUser(`${userData?.nick}`)))
     }
 
-    const [isHovered, setIsHovered] = React.useState(false)
-
-
-    const userFollows = (useAppSelector((state) => state.authData.data?.follows));
-    const userId = (useAppSelector((state) => state.authData.data?._id));
-    const selectedUser = (useAppSelector((state) => state.authData.selectedUserData));
-
-    const isSameUser = (userId == selectedUser?._id)
-
-    const isFollowed = selectedUser?._id !== undefined && userFollows?.includes(selectedUser._id)
-    
-    const userToFollowId = (useAppSelector((state) => state.authData.selectedUserData?._id));
-
-    const [follow, setFollow] = React.useState(isFollowed);
 
 
     React.useEffect(() =>{
@@ -83,10 +77,10 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
                 userId,
                 userToFollowId
             }
-
-            await axios.patch('/profile/follow', fields).then(
-                () => setFollow(true)
-            )
+            dispatch(fetchFollowUser(fields)).then(() => setFollow(true));
+            // await axios.patch('/profile/follow', fields).then(
+            //     () => setFollow(true)
+            // )
 
         } catch (err) {
             console.warn(err);

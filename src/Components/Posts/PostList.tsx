@@ -7,21 +7,22 @@ import axios from '../../axios'
 import { useAppDispatch } from "../../store/hooks"
 import { setSelectedUserPosts } from "../../store/auth"
 import { userPosts } from "../../store/interfaces"
+import { fetchPosts } from "../../store/posts"
 
 export const PostList = () => {
 
     const userId = (useAppSelector((state) => state.authData.data?._id));
-    const selectedUserId = (useAppSelector((state) => state.authData.selectedUserData?._id));
+    const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
     const isNotSameUser = (userId == selectedUserId)
-    const postsSelector = useAppSelector((state) => state.authData.userPosts);
-    console.log(postsSelector);
+    const postsSelector = useAppSelector((state) => state.postsData.userPosts.userPosts);
+    // console.log(postsSelector);
     const dispatch = useAppDispatch();
 
     React.useEffect(() =>{
-        axios.get(`/posts/${selectedUserId}`).then(res => {
-          dispatch(setSelectedUserPosts(res.data));
-          console.log("-");
-        }).catch(err =>{
+        // axios.get(`/posts/${selectedUserId}`).then(res => {
+        //   dispatch(setSelectedUserPosts(res.data));
+        //   console.log("-");
+        dispatch(fetchPosts(`${selectedUserId}`)).catch(err =>{
           console.log(err);
         })
       }, []);
@@ -30,7 +31,7 @@ export const PostList = () => {
         <div className="postListWrapper">
             <div className="postsList"  >
                 {postsSelector !== undefined && (postsSelector as userPosts[])?.map((item: any) => (
-                    <Post avatar={item.user.avatarUrl} id={item._id} user={item.user.name} imageUrl={item.imageUrl} title={item.title} date={item.createdAt} isText={item.text}/>
+                    <Post key={item._id} avatar={item.user.avatarUrl} id={item._id} nick={item.user.nick} user={item.user.name} imageUrl={item.imageUrl} title={item.title} date={item.createdAt} isText={item.text}/>
                 ))}
 
             </div>

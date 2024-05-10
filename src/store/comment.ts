@@ -1,17 +1,25 @@
 import axios from '../axios.ts'
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import { CommentsProps } from './interfaces.tsx';
 
-export const fetchComment = createAsyncThunk('/comments', async(params) => {
-    const {data} = await axios.post('/comments', params);
-    return data
+export const fetchPostComment = createAsyncThunk('/comments', async(fields: object) => {
+    const data = await axios.post('/comments', fields);
+    return data.data
 })
 
-export const fetchGetComments = createAsyncThunk('/comments/fetchComments', async(postId) => {
-    const {data} = await axios.get(`/comments/${postId}`);
-    return data
+export const fetchGetComments = createAsyncThunk('/comments/fetchComments', async(postId: string) => {
+    const data = await axios.get(`/comments/${postId}`);
+    return data.data
 })
 
-const initialState = {
+export interface commentsProps{
+    comments:{
+        items: CommentsProps[],
+        status: string
+    }
+}
+
+const initialState: commentsProps = {
     comments: {
         items: [],
         status: "loading"
@@ -29,12 +37,12 @@ export const commentsSlice = createSlice({
     extraReducers: (builder) =>{
         builder
         //comment
-            .addCase(fetchComment.pending, (state) =>{
+            .addCase(fetchPostComment.pending, (state) =>{
                 state.comments.status = "loading"
             })
-            .addCase(fetchComment.fulfilled, (state, action) =>{
-                state.comments.status = "loaded",
-                state.comments.items = action.payload
+            .addCase(fetchPostComment.fulfilled, (state) =>{
+                state.comments.status = "loaded"
+                // state.comments.items = action.payload
             })
 
             .addCase(fetchGetComments.pending, (state) =>{

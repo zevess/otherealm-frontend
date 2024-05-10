@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import { FranchiseCard } from "../Cards/FranchiseCard"
+import { FranchiseCard } from "../Cards/ProfileCard"
 
 export const FranchiseList = () =>{
     return(

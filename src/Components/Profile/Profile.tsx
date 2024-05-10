@@ -13,14 +13,14 @@ import axios from '../../axios'
 import { fetchUser, setSelectedUserData, setSelectedUserPosts } from "../../store/auth"
 import { PostList } from "../Posts/PostList"
 import { ColorButtonBlue } from "../CustomButton"
+import { fetchOneUser } from "../../store/users"
 
 
 export const Profile = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const userId = String(useAppSelector((state) => state.authData.selectedUserData?._id));
 
-  const nameSelector = String(useAppSelector((state) => state.authData.selectedUserData?.name));
+  const nameSelector = String(useAppSelector((state) => state.usersData.currentUser.items?.name));
 
   const [type, setType] = React.useState(Object.keys(itemTypes)[0]);
   const [section, setSection] = React.useState('list')
@@ -32,15 +32,8 @@ export const Profile = () => {
 
 
   React.useEffect(() => {
-    axios.get(`/auth/getUser/${params.nick}`).then(res => {
-      dispatch(setSelectedUserData(res.data));
-      console.log("+");
-    }
-    ).catch(err => {
-      setError(true)
-    })
-    
-
+    dispatch(fetchOneUser(`${params.nick}`)).catch(err => setError(true))
+  
   }, []);
 
   if (error) {

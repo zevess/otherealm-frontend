@@ -155,6 +155,21 @@ export interface authDataProps {
     follows: string[]
 }
 
+export interface usersProps {
+    users: [
+        {
+            name: string,
+            email: string,
+            nick?: string,
+            _id: string,
+            avatarUrl: string,
+            backgroundUrl: string,
+            follows: string[]
+        }
+    ]
+
+}
+
 export interface userPosts {
     posts: [
         {
@@ -193,25 +208,27 @@ export interface postProps {
 }
 
 export interface CommentsProps {
-    comments: [
-        {
-            _id: string,
-            user: {
-                _id: string,
-                name: string,
-                email: string,
-                passwordHash: string,
-                createdAt: string,
-                updatedAt: string,
-                __v: 0
-            },
-            postId: string,
-            text: string,
-            createdAt: string,
-            updatedAt: string,
-            __v: 0
-        },
-    ]
+
+
+    _id: string,
+    user: {
+        _id: string,
+        name: string,
+        nick: string,
+        avatarUrl: string
+        email: string,
+        passwordHash: string,
+        createdAt: string,
+        updatedAt: string,
+        __v: 0
+    },
+    postId: string,
+    text: string,
+    createdAt: string,
+    updatedAt: string,
+    __v: 0
+
+
 }
 
 export interface CommentProps {
@@ -281,7 +298,10 @@ export interface favouriteItemProps {
     _id: string
 }
 
-export interface favouriteProps{
+export interface favouriteProps {
+    _id: string,
+    createdAt: string,
+    updatedAt: string,
     title: string,
     user: string,
     items: favouriteItemProps[]

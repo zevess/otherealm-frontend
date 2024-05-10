@@ -10,7 +10,7 @@ import { CreateSection } from "../SectionsPopup/CreateSection.tsx"
 import axios from '../../axios.ts'
 import { useAppSelector } from "../../store"
 import { useAppDispatch } from "../../store/hooks.tsx"
-import { addFavourites, clearFavourite } from "../../store/favourite.ts"
+import { addFavourites, clearFavourite, fetchUserFavourites } from "../../store/favourite.ts"
 import { setCurrentFavouriteItem } from "../../store/reducers/stateReducer.tsx"
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
@@ -30,7 +30,7 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
 
     const dispatch = useAppDispatch();
     const userId = (useAppSelector((state) => state.authData.data?._id));
-    const selectedUserId = (useAppSelector((state) => state.authData.selectedUserData?._id));
+    const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
     const favourites = useAppSelector((state) => state.favouriteData.favourites.items);
     const currentFilterItem = (useAppSelector((state) => state.state.currentFilterItem));
 
@@ -46,10 +46,9 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
 
     const updateFavourites = () => {
         if (selectedUserId !== undefined) {
-            axios.get(`/favourite/${selectedUserId}`).then(res => {
-                setAlignment((res.data)?.[0]?.title);
-                dispatch(addFavourites(res.data));
-            }).catch(err => {
+            dispatch(fetchUserFavourites(selectedUserId)).then(res =>{
+                setAlignment((res.payload)?.[0]?.title)
+            }).catch(err =>{
                 console.warn(err);
             })
         }
@@ -57,10 +56,9 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
 
     React.useEffect(() => {
         if (selectedUserId !== undefined) {
-            axios.get(`/favourite/${selectedUserId}`).then(res => {
-                setAlignment((res.data)?.[0]?.title);
-                dispatch(addFavourites(res.data));
-            }).catch(err => {
+            dispatch(fetchUserFavourites(selectedUserId)).then(res =>{
+                setAlignment((res.payload)?.[0]?.title)
+            }).catch(err =>{
                 console.warn(err);
             })
         }
@@ -130,7 +128,7 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
             <div className="listWindow">
                 <div className="listWindowCards">
                     {(filteredItems !== undefined) && filteredItems.map((item: any) => (
-                        <ItemCard id={item.itemId} itemTitle={item.itemTitle} itemType={item.itemType} itemPoster={item.itemBackgroundImage} />
+                        <ItemCard key={item._id} id={item.itemId} itemTitle={item.itemTitle} itemType={item.itemType} itemPoster={item.itemBackgroundImage} />
                     ))}
                 </div>
                 <div className="listWindowTogglesSection">

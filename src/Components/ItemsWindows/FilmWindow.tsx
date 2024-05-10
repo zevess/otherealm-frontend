@@ -1,6 +1,5 @@
 import { Avatar, Box, CircularProgress, Divider, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
-import { FranchiseCard } from "../Cards/FranchiseCard"
-import { ButtonUsage } from "../Button"
+
 import React, { FC, useEffect } from "react";
 import { deepOrange } from "@mui/material/colors";
 import { InputText } from "../InputText";

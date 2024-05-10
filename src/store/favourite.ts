@@ -1,21 +1,28 @@
 import axios from '../axios.ts'
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import { favouriteProps } from './interfaces.tsx';
 
 export const fetchFavourite = createAsyncThunk('/favourite', async(params) => {
     const {data} = await axios.post('/favourite', params);
     return data
 })
 
-export const fetchUserFavourites = createAsyncThunk('/favourite/:userId', async(userId) => {
+export const fetchUserFavourites = createAsyncThunk('/favourite/:userId', async(userId:string) => {
     const {data} = await axios.get(`/favourite/${userId}`);
     return data
 })
 
-
 export const fetchAddToFavourite = createAsyncThunk('/favourite/:postId', async(favouriteId) => {
-    const {data} = await axios.patch(`/favourite/${favouriteId}`);
+    const {data} = await axios.patch(`/favourite/add/${favouriteId}`);
     return data
 })
+
+export interface favouriteStateProps{
+    favourites:{
+        items: favouriteProps[],
+        status: string
+    }
+}
 
 const initialState = {
     favourites: {

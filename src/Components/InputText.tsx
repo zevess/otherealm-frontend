@@ -11,10 +11,11 @@ interface InputTextProps {
     text: any,
     sx?: object,
     setText: React.Dispatch<React.SetStateAction<string>>,
-    onClick: React.MouseEventHandler<HTMLButtonElement>
+    onClick: React.MouseEventHandler<HTMLButtonElement>,
+    forComments: boolean
 }
 
-export const InputText: FC<InputTextProps> = ({placeholder, text, setText, onClick}) => {
+export const InputText: FC<InputTextProps> = ({placeholder, text, setText, onClick, forComments}) => {
     return (
         <TextField value={text} variant="outlined" multiline={true}  placeholder={placeholder} inputProps={{
             style: {
@@ -29,7 +30,7 @@ export const InputText: FC<InputTextProps> = ({placeholder, text, setText, onCli
                     </IconButton>
                 </InputAdornment>
             )
-        }} className="commentInputField" onChange={(event) =>{
+        }} className={forComments ? "commentInputField": 'searchInputField'} onChange={(event) =>{
             setText(event.target.value)
         }}></TextField>
     )

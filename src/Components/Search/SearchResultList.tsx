@@ -8,7 +8,7 @@ export const SearchResult = () => {
     const searchSection = useAppSelector(state => state.state.currentSearchSection);
     return (
         <>
-            {searchSection == 'media' && <FilmsSearchList />}
+            {searchSection == 'cinema' && <FilmsSearchList />}
             {searchSection == 'books' && <BooksSearchList />}
             {searchSection == 'games' && <GamesSearchList />}
         </>

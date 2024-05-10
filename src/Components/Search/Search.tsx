@@ -7,15 +7,16 @@ import { useAppSelector } from "../../store"
 import { filmFetch } from "../../store/fetches/filmFetch"
 import { useAppDispatch } from "../../store/hooks"
 import { SearchToggleGroup } from "../Toggles/SearchToggleGroup"
-import { searchToggleItems, sections } from "../../utils/itemTypes"
+import { searchToggleItems, searchTypes, sections } from "../../utils/itemTypes"
 import { handleChange } from "../../utils/handleChange"
 import { SectionToggleGroup } from "../Toggles/SectionToggleGroup"
 import { booksFetch } from "../../store/fetches/bookFetch"
 import { addItemTitle, setMediaPage, setSearchSection, setTotalBookPage, setTotalGamePage, setTotalMediaPage } from "../../store/reducers/stateReducer"
 import { SearchResult } from "./SearchResultList"
 import { gameFetch } from "../../store/fetches/gameFetch"
-import { gameFetchTest } from "../../utils/test"
-import axios from "axios"
+import { MediaSearch } from "./MediaSearch"
+import { UserSearch } from "./UserSearch"
+
 
 export const Search = () => {
 
@@ -23,7 +24,8 @@ export const Search = () => {
 
     const [text, setText] = React.useState('');
 
-    const [searchAlignment, setSearchAlignment] = React.useState(Object.keys(searchToggleItems)[0]);
+    const [upSearchAlignment, setUpSearchAlignment] = React.useState(Object.keys(searchTypes)[0]);
+    const [downSearchAlignment, setDownSearchAlignment] = React.useState(Object.keys(searchToggleItems)[0]);
 
     const searchTitleSelector = useAppSelector((state) => state.state.searchTitle)
     const searchTitle = searchTitleSelector.replace(' ', '_');
@@ -54,8 +56,8 @@ export const Search = () => {
 
     React.useEffect(() => {
         dispatch(addItemTitle(text));
-    }, [text, searchAlignment])
-    dispatch(setSearchSection(searchAlignment));
+    }, [text, downSearchAlignment])
+    dispatch(setSearchSection(downSearchAlignment));
 
 
     const getFilms = (searchTitle: string, currentMediaPage: number, kpToken: string) => {
@@ -87,27 +89,22 @@ export const Search = () => {
 
     return (
         <div className="searchWrapper">
-            <InputText setText={setText} onClick={() => {
-                getFilms(searchTitle, currentMediaPage, kpToken)
-                getBooks(searchTitle, gbToken, currentBookPage)
-                getGame(searchTitle, rawgToken, currentGamePage)
-            } } placeholder="поиск фильма, игры, литературы" text={text} />
+
             <div className="searchContent">
-                <SearchToggleGroup items={searchToggleItems} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSearchAlignment)} alignment={searchAlignment} ></SearchToggleGroup>
-                <div className="searchSource">
-                    <p  className="searchSourceText">Все результаты взяты из открытых источников:</p>
-                    <Box display={'flex'} justifyContent={'space-evenly'} flexWrap={'wrap'}>
-                        <a className="searchSourceLink" href="https://api.kinopoisk.dev/documentation">api.kinopoisk.dev </a>
-                        <p className="searchSourceText">|</p>
-                        <a className="searchSourceLink" href="https://rawg.io">rawg.io</a>
-                        <p className="searchSourceText">|</p>
-                        <a className="searchSourceLink" href="https://developers.google.com/books?hl=ru">developers.google.com/books</a>
-                    </Box>
-                    <p className="searchSourceText">соответственно</p>
-                    <p className="searchSourceText">Результаты могут отличаться от ожидаемых.</p>
-                    <p className="searchSourceText">Для получения более точных вводите полные названия на оригинальном языке.</p>
-                </div>
-                <SearchResult />
+                { }
+                <SearchToggleGroup items={searchTypes} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setUpSearchAlignment)} alignment={upSearchAlignment}></SearchToggleGroup>
+                {upSearchAlignment == 'media' &&
+                    (<>
+                        <MediaSearch text={text} setText={setText} onClick={()=>{
+                            getFilms(searchTitle, currentMediaPage, kpToken)
+                            getBooks(searchTitle, gbToken, currentBookPage)
+                            getGame(searchTitle, rawgToken, currentGamePage)
+                        }} setDownSearchAlignment={setDownSearchAlignment} downSearchAlignment={downSearchAlignment}></MediaSearch>
+                    </>)
+                }
+
+                {upSearchAlignment == 'users' && <UserSearch />}
+
             </div>
         </div>
     )

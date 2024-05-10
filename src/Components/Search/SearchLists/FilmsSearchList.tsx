@@ -22,7 +22,7 @@ export const FilmsSearchList = () => {
         return <CircularProgress />
     }
 
-    if (!filmResult || filmResultCount == 0) {
+    if (filmResultCount == 0) {
         return (
             <Box>
                 <Typography variant="h2">

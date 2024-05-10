@@ -10,6 +10,7 @@ import { useAppSelector } from "../../store";
 
 interface PostProps {
     user: string,
+    nick: string,
     id: string,
     date: string,
     title: string,
@@ -18,11 +19,11 @@ interface PostProps {
     isText: string,
 }
 
-export const Post: FC<PostProps> = ({ user, date, title, imageUrl, id, avatar, isText }) => {
+export const Post: FC<PostProps> = ({ user, nick, date, title, imageUrl, id, avatar, isText }) => {
 
     const userId = (useAppSelector((state) => state.authData.data?._id));
     const selectedUserId = (useAppSelector((state) => state.authData.selectedUserData?._id));
-    const isSameUser = (userId == selectedUserId)
+    const isSameUser = (selectedUserId && (userId == selectedUserId))
 
     const dateToForm = new Date(date);
     const options = {
@@ -33,9 +34,9 @@ export const Post: FC<PostProps> = ({ user, date, title, imageUrl, id, avatar, i
     }
 
     const formatedDate = dateToForm.toLocaleString('ru-RU', options)
-   
+
     const time = dateToForm.toTimeString().slice(0, 8);
-    
+
 
 
     return (
@@ -43,12 +44,14 @@ export const Post: FC<PostProps> = ({ user, date, title, imageUrl, id, avatar, i
 
             <div className="postItemDetails">
                 <div className="postItemDetails-user">
-                    <Avatar src={`http://localhost:4444${avatar}`} className="postItemDetails-user__avatar" />
-                    <div className="postItemDetails-user__info">
-                        <p className="postUserInfo nick">{user}</p>
-                        <Divider sx={{width: '100%'}}/>
-                        <p className="postUserInfo date">{formatedDate + '; ' + time}</p>
-                    </div>
+                    <Link to={`/profile/${nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
+                        <Avatar src={`http://localhost:4444${avatar}`} className="postItemDetails-user__avatar" />
+                        <div className="postItemDetails-user__info">
+                            <p className="postUserInfo nick">{user}</p>
+                            <Divider sx={{ width: '100%' }} />
+                            <p className="postUserInfo date">{formatedDate + '; ' + time}</p>
+                        </div>
+                    </Link>
 
                     {isSameUser && <Box marginLeft={'auto'}>
                         <Link to={`/post/${id}/edit`}>
@@ -61,9 +64,9 @@ export const Post: FC<PostProps> = ({ user, date, title, imageUrl, id, avatar, i
                 </div>
                 <hr className="hrHorizontal"></hr>
             </div>
-            
+
             <Link to={`/post/${id}`}>
-                {imageUrl && <img className='postItemImg' src={`http://localhost:4444${imageUrl}`} ></img>}
+                {imageUrl && <img src={`http://localhost:4444${imageUrl}`} className='postItemImg' ></img>}
                 <p className="postItemText">{title}</p>
                 {isText && <p>...</p>}
 
