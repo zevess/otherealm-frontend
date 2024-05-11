@@ -18,6 +18,11 @@ export const fetchFollowUser = createAsyncThunk('/profile/follow', async(fields:
     return data
 })
 
+export const fetchUnfollowUser = createAsyncThunk('/profile/unfollow', async(fields: object) => {
+    const {data} = await axios.patch('/profile/unfollow', fields);
+    return data
+})
+
 export interface userStateProps{
     users:{
         items: usersProps[],
@@ -44,6 +49,9 @@ export const usersSlice = createSlice({
     name: 'users',
     initialState,
     reducers:{
+        clearUserState: (state) =>{
+            state.currentUser.items = null
+        }
     },
     extraReducers: (builder) =>{
         builder
@@ -79,11 +87,21 @@ export const usersSlice = createSlice({
             .addCase(fetchFollowUser.rejected, (state) =>{
                 state.currentUser.status = "error"
             })
+
+            .addCase(fetchUnfollowUser.pending, (state) =>{
+                state.currentUser.status = "loading"
+            })
+            .addCase(fetchUnfollowUser.fulfilled, (state) =>{
+                state.currentUser.status = "unfollow"
+            })
+            .addCase(fetchUnfollowUser.rejected, (state) =>{
+                state.currentUser.status = "error"
+            })
     }
 })
 
 // export const selectIsAuth = (state: any) => Boolean(state.auth.data);
 
-
+export const {clearUserState} = usersSlice.actions
 
 export default usersSlice.reducer

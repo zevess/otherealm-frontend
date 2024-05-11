@@ -600,6 +600,11 @@ button:focus-visible {
   width: 100%;
 }
 
+.listWindow.profiles{
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .listWindowCards {
   display: flex;
   align-items: flex-start;

@@ -46,9 +46,9 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
 
     const updateFavourites = () => {
         if (selectedUserId !== undefined) {
-            dispatch(fetchUserFavourites(selectedUserId)).then(res =>{
+            dispatch(fetchUserFavourites(selectedUserId)).then(res => {
                 setAlignment((res.payload)?.[0]?.title)
-            }).catch(err =>{
+            }).catch(err => {
                 console.warn(err);
             })
         }
@@ -56,9 +56,9 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
 
     React.useEffect(() => {
         if (selectedUserId !== undefined) {
-            dispatch(fetchUserFavourites(selectedUserId)).then(res =>{
+            dispatch(fetchUserFavourites(selectedUserId)).then(res => {
                 setAlignment((res.payload)?.[0]?.title)
-            }).catch(err =>{
+            }).catch(err => {
                 console.warn(err);
             })
         }
@@ -67,7 +67,7 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
         }
     }, [selectedUserId])
 
-    interface favouriteType{
+    interface favouriteType {
         _id: string,
         title: string,
     }
@@ -121,74 +121,85 @@ export const ListWindow: FC<ListWindowProps> = ({ type, setType }) => {
 
     return (
         <div className="listWindowWrapper">
-            <div className="listWindowWrapper-types">
-                <ItemTypeToggleGroup items={itemTypes} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setType)} alignment={type} />
-            </div>
-            <Divider sx={{ width: '90%', margin: '0 auto' }} />
-            <div className="listWindow">
-                <div className="listWindowCards">
-                    {(filteredItems !== undefined) && filteredItems.map((item: any) => (
-                        <ItemCard key={item._id} id={item.itemId} itemTitle={item.itemTitle} itemType={item.itemType} itemPoster={item.itemBackgroundImage} />
-                    ))}
-                </div>
-                <div className="listWindowTogglesSection">
-                    <ToggleButtonGroup className="listWindowToggleGroup" value={alignment} exclusive onChange={
-                        (event, newAlignment) => {
-                            handleChange(event, newAlignment, setAlignment);
 
-                        }}>
-                        {favourites.map((item: favouriteType) => (
-                            <ToggleButton className="listWindowToggleGroup__button" id={item?._id} key={item?._id} value={item?.title}>
-                                {item?.title}
-                                {isNotSameUser && <IconButton onClick={() => {
-                                    setToggleSetting(true)
+
+            {(filteredItems !== undefined) &&  filteredItems?.length == 0 ? (
+                <Typography variant="h3">списки не найдены</Typography>
+            ) : (
+                <>
+                    <div className="listWindowWrapper-types">
+                        <ItemTypeToggleGroup items={itemTypes} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setType)} alignment={type} />
+                    </div>
+                    <Divider sx={{ width: '90%', margin: '0 auto' }} />
+                    <div className="listWindow">
+                        <div className="listWindowCards">
+                            {(filteredItems !== undefined) && filteredItems.map((item: any) => (
+                                <ItemCard key={item._id} id={item.itemId} itemTitle={item.itemTitle} itemType={item.itemType} itemPoster={item.itemBackgroundImage} />
+                            ))}
+                        </div>
+                        <div className="listWindowTogglesSection">
+                            <ToggleButtonGroup className="listWindowToggleGroup" value={alignment} exclusive onChange={
+                                (event, newAlignment) => {
+                                    handleChange(event, newAlignment, setAlignment);
+
                                 }}>
-                                    <SettingsOutlinedIcon />
-                                </IconButton>}
-                            </ToggleButton>
-                        ))}
-                    </ToggleButtonGroup>
-                    {isNotSameUser && <CreateSection updateFavourites={updateFavourites} />}
-                </div>
+                                {favourites.map((item: favouriteType) => (
+                                    <ToggleButton className="listWindowToggleGroup__button" id={item?._id} key={item?._id} value={item?.title}>
+                                        {item?.title}
+                                        {isNotSameUser && <IconButton onClick={() => {
+                                            setToggleSetting(true)
+                                        }}>
+                                            <SettingsOutlinedIcon />
+                                        </IconButton>}
+                                    </ToggleButton>
+                                ))}
+                            </ToggleButtonGroup>
+                            {isNotSameUser && <CreateSection updateFavourites={updateFavourites} />}
+                        </div>
 
-                {toggleSetting && <ModalWindow open={toggleSetting} handleClose={() => setToggleSetting(false)}>
-                    <div className="sectionToggleSettings">
-                        <Box width={'100%'}>
-                            <Typography textAlign={'center'} variant="h4">{alignment}</Typography>
+                        {toggleSetting && <ModalWindow open={toggleSetting} handleClose={() => setToggleSetting(false)}>
+                            <div className="sectionToggleSettings">
+                                <Box width={'100%'}>
+                                    <Typography textAlign={'center'} variant="h4">{alignment}</Typography>
 
-                            <div className="sectionToggleSettings-inputs">
-                                <TextField onChange={(event) => setEditTitle(event.target.value)} size="medium" placeholder="изменить название раздела" className="sectionToggleSettings-inputs__textfield"></TextField>
+                                    <div className="sectionToggleSettings-inputs">
+                                        <TextField onChange={(event) => setEditTitle(event.target.value)} size="medium" placeholder="изменить название раздела" className="sectionToggleSettings-inputs__textfield"></TextField>
 
-                                <div className="sectionToggleSettings-inputs__buttons">
-                                    <ColorButton onClick={() => {
-                                        axios.delete(`/favourite/remove/${favId}`).then(() => {
-                                            setToggleSetting(false)
-                                            if (favourites.length == 1) {
-                                                dispatch(clearFavourite());
-                                            }
-                                        }).catch(err => {
-                                            console.warn(err);
-                                        }).finally(() => updateFavourites())
-                                    }} >удалить</ColorButton>
-                                    <Button variant="contained" onClick={() => {
-                                        axios.post(`/favourite/edit/${selectedUserId}`, editFields).then(() => {
-                                            updateFavourites()
-                                            setToggleSetting(false)
+                                        <div className="sectionToggleSettings-inputs__buttons">
+                                            <ColorButton onClick={() => {
+                                                axios.delete(`/favourite/remove/${favId}`).then(() => {
+                                                    setToggleSetting(false)
+                                                    if (favourites.length == 1) {
+                                                        dispatch(clearFavourite());
+                                                    }
+                                                }).catch(err => {
+                                                    console.warn(err);
+                                                }).finally(() => updateFavourites())
+                                            }} >удалить</ColorButton>
+                                            <Button variant="contained" onClick={() => {
+                                                axios.post(`/favourite/edit/${selectedUserId}`, editFields).then(() => {
+                                                    updateFavourites()
+                                                    setToggleSetting(false)
 
-                                        }).catch(err => {
-                                            console.warn(err);
-                                            alert('раздел с таким названием уже есть');
-                                        })
-                                    }}>сохранить</Button>
-                                </div>
+                                                }).catch(err => {
+                                                    console.warn(err);
+                                                    alert('раздел с таким названием уже есть');
+                                                })
+                                            }}>сохранить</Button>
+                                        </div>
+                                    </div>
+                                </Box>
+
+
                             </div>
-                        </Box>
-
+                        </ModalWindow>}
 
                     </div>
-                </ModalWindow>}
+                </>
+            )
+            }
 
-            </div>
+
         </div>
     )
 }

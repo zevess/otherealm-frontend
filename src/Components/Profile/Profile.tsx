@@ -13,7 +13,8 @@ import axios from '../../axios'
 import { fetchUser, setSelectedUserData, setSelectedUserPosts } from "../../store/auth"
 import { PostList } from "../Posts/PostList"
 import { ColorButtonBlue } from "../CustomButton"
-import { fetchOneUser } from "../../store/users"
+import { clearUserState, fetchOneUser } from "../../store/users"
+import { FollowsList } from "./FollowsList"
 
 
 export const Profile = () => {
@@ -26,15 +27,17 @@ export const Profile = () => {
   const [section, setSection] = React.useState('list')
   const [error, setError] = React.useState(false);
 
+  
   React.useEffect(() => {
     dispatch(setCurrentFilterItem(type));
   }, [type])
 
 
   React.useEffect(() => {
+    dispatch(clearUserState());
     dispatch(fetchOneUser(`${params.nick}`)).catch(err => setError(true))
   
-  }, []);
+  }, [params.nick]);
 
   if (error) {
     return <Navigate to={'/error'} />
@@ -50,7 +53,10 @@ export const Profile = () => {
           
         </Box>
         
-        {section == 'list' ? <ListWindow type={type} setType={setType} /> : <PostList />}
+        {section == 'list' && <ListWindow type={type} setType={setType}/> }
+        {section == 'posts' && <PostList />}
+        {section == 'follows' && <FollowsList/>}
+        {/* {section == 'list' ? <ListWindow type={type} setType={setType} /> : <PostList />} */}
 
       </div>
     </div>

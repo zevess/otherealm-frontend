@@ -101,15 +101,15 @@ export const authSlice = createSlice({
 
             .addCase(fetchUser.pending, (state) =>{
                 state.status = "loading",
-                state.selectedUserData = null
+                state.data = null
             })
             .addCase(fetchUser.fulfilled, (state, action) =>{
                 state.status = "loaded",
-                state.selectedUserData = action.payload
+                state.data = action.payload
             })
             .addCase(fetchUser.rejected, (state) =>{
                 state.status = "error",
-                state.selectedUserData = null
+                state.data = null
             })
     }
 })

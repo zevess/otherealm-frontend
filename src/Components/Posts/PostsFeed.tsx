@@ -23,8 +23,7 @@ export const PostsFeed = () => {
                 console.log(err);
             })
         }
-
-    }, []);
+    }, [userId]);
 
     if (feedSelector) return (
         <div className="postListWrapper feed">
