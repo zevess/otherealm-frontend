@@ -32,6 +32,9 @@ export const commentsSlice = createSlice({
     reducers:{
         addComments: (state, action) =>{
             state.comments.items = action.payload;
+        },
+        clearComments: (state) =>{
+            state.comments.items = [];
         }
     },
     extraReducers: (builder) =>{
@@ -56,6 +59,6 @@ export const commentsSlice = createSlice({
 })
 
 // export const selectIsAuth = (state: any) => Boolean(state.auth.data);
-export const {addComments} = commentsSlice.actions
+export const {addComments, clearComments} = commentsSlice.actions
 
 export default commentsSlice.reducer

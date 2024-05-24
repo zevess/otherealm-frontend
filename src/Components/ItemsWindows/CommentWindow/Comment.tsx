@@ -1,38 +1,127 @@
-import { Avatar, Box, Typography } from "@mui/material"
+import { Avatar, Box, Button, Divider, IconButton, TextField, Typography } from "@mui/material"
 import { deepOrange } from "@mui/material/colors"
-import { FC } from "react"
+import React, { FC } from "react"
 import { Link } from "react-router-dom"
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { useAppSelector } from "../../../store";
+import { ModalSection } from "../../SectionsPopup/ModalSection";
+import axios from '../../../axios'
+import { ModalWindow } from "../../ModalWindow";
+import { ColorButton } from "../../CustomButton";
+import { useAppDispatch } from "../../../store/hooks";
+import { clearComments, fetchGetComments } from "../../../store/comment";
 
 interface CommentProps {
     name: string,
-    nick: string
-    text: string
-    avatar: string
+    id: string,
+    nick: string,
+    text: string,
+    avatar: string,
+    date: string,
+    commentUserId: string,
+    postId: string,
 }
 
-export const Comment: FC<CommentProps> = ({ name, text, nick, avatar }) => {
+export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, commentUserId, id, postId }) => {
+
+    const dispatch = useAppDispatch()
+    const [toggleSetting, setToggleSetting] = React.useState(Boolean);
+    const [commentText, setCommentText] = React.useState(text)
+
+    const userId = useAppSelector((state) => state.authData.data?._id)
+    const isSameUser = (userId == commentUserId);
+
+    const dateToForm = new Date(date);
+    const options = {
+        weekday: 'short' as const,
+        year: 'numeric' as const,
+        month: 'short' as const,
+        day: 'numeric' as const
+    }
+
+    const formatedDate = dateToForm.toLocaleString('ru-RU', options)
+
+    const time = dateToForm.toTimeString().slice(0, 8);
+
+
+    const handleSubmit = () => {
+
+        const fields = {
+            text: commentText
+        }
+
+        axios.patch(`/comments/${id}`, fields).then(() => {
+
+            setToggleSetting(false)
+            dispatch(clearComments());
+            dispatch(fetchGetComments(postId))
+        }).catch(err => {
+            console.warn(err);
+        })
+    }
+
+    const handleDelete = () => {
+        axios.delete(`/comments/${id}`).then(()=>{
+            setToggleSetting(false)
+            dispatch(clearComments());
+            dispatch(fetchGetComments(postId))
+        }).catch(err => {
+            console.warn(err);
+        })
+    }
+
     return (
+
         <div className="comment">
 
             <div className="commentUser">
                 <Link to={`/profile/${nick}`}>
                     <div className="commentUser__info">
-
                         <Avatar className="commentUser__info-avatar" src={`http://localhost:4444${avatar}`}></Avatar>
                         <p className="commentUser__info-nick">{name}</p>
-                    
                     </div>
-                        
-                    
                 </Link>
 
+                <hr style={{ borderLeft: '2px solid black', height: 'auto' }}></hr>
+            </div>
 
-                <hr style={{ borderLeft: '4px solid black', height: 'auto' }}></hr>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <p className="commentText">{text}</p>
+                <p style={{ margin: 0, marginTop: 'auto', marginRight: 'auto', fontSize: '10px' }}>{formatedDate + '; ' + time}</p>
             </div>
 
 
-            <Typography variant="h5" sx={{ textAlign: 'start', paddingTop: '10px', paddingBottom: '10px' }} className="commentText">{text}</Typography>
+            {isSameUser && (
+                <div style={{ marginLeft: 'auto' }}>
+                    <IconButton onClick={() => setToggleSetting(true)}>
+                        <EditOutlinedIcon />
+                    </IconButton>
+                </div>
+            )}
+
+            {toggleSetting && <ModalWindow open={toggleSetting} handleClose={() => setToggleSetting(false)}>
+                <div className="sectionToggleSettings">
+                    <Box width={'100%'}>
+                        <Typography textAlign={'center'} variant="h4">редактировать комментарий</Typography>
+
+                        <div className="sectionToggleSettings-inputs">
+                            <TextField onChange={(event) => setCommentText(event.target.value)} size="medium" placeholder="редактировать комментарий" className="sectionToggleSettings-inputs__textfield" value={commentText}></TextField>
+
+                            <div className="sectionToggleSettings-inputs__buttons">
+                                <ColorButton onClick={handleDelete} >удалить</ColorButton>
+                                <Button variant="contained" onClick={handleSubmit}>сохранить</Button>
+                            </div>
+                        </div>
+                    </Box>
+
+
+                </div>
+            </ModalWindow>}
         </div>
+
+
+
 
 
     )

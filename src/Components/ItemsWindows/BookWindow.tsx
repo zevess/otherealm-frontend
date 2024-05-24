@@ -45,6 +45,9 @@ export const BookWindow = () => {
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
     const postId = String(parts.slice(-2).join(''))
+
+    window.localStorage.setItem('currentObjectTitle', `${currentBookItem?.volumeInfo?.title}`)
+
     return (
 
         <div className="searchItemWrapper">

@@ -14,10 +14,10 @@ export const ProfileCard: FC<ProfileCardProps> = ({name, avatarUrl, nick}) => {
         <div className="profileCard">
             <Avatar className="commentUser__info-avatar" src={`http://localhost:4444${avatarUrl}`}></Avatar>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
-                <Typography variant="h4" sx={{ marginTop: '10%' }}>{name}</Typography>
+                <p className="profileCard__name">{name}</p>
 
                 <Link to={`/profile/${nick}`}>
-                    <Button>перейти в профиль</Button>
+                    <Button className="profileCard__button">перейти в профиль</Button>
                 </Link>
             </Box>
         </div>

@@ -1,16 +1,19 @@
-import { Box, Button, IconButton, TextField } from "@mui/material"
+import { Box, Button, Divider, IconButton, TextField } from "@mui/material"
 import React from "react";
 import SimpleMDE, { SimpleMdeReact } from 'react-simplemde-editor'
 import "easymde/dist/easymde.min.css";
-import { ColorButton, ColorButtonBlue } from "../CustomButton";
-import axios from '../../axios'
+import axios from '../../../axios'
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { ColorButton, ColorButtonBlue } from "../../CustomButton";
+import { ItemTitle } from "../ItemComponents/ItemTitle";
+import { fetchAddDiscuss } from "../../../store/discuss";
 
 
-export const AddPost = () => {
+export const AddDiscuss = () => {
 
+    const dispatch = useAppDispatch()
     const navigate = useNavigate();
     const [title, setTitle] = React.useState('');
     const [text, setText] = React.useState('');
@@ -21,19 +24,51 @@ export const AddPost = () => {
     const userNick = useAppSelector((state) => state.authData.data?.nick)
     const userId = (useAppSelector((state) => state.authData.data?._id));
     const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
+
+
+    const bookSelector = useAppSelector((state) => state.bookData.currentBookItem);
+    const filmSelector = useAppSelector((state) => state.filmData.currentFilmItem);
+    const gameSelector = useAppSelector((state) => state.gameData.currentGameItem);
+
+
+    let discussObjectTitle
     const isSameUser = (userId == selectedUserId)
 
-    const { postId } = useParams();
-    const isEditing = Boolean(postId)
 
-    if (isSameUser == false){
-        // <Navigate to={`/post/${postId}`} />
-        navigate(`/post/${postId}`);
+    const currentUrl = window.location.href;
+    const parts = currentUrl.split('/');
+    const itemId = `${parts[4]}${parts[5]}`
+    const itemIdSlash = `${parts[4]}/${parts[5]}`
+
+    // console.log(itemIdSlash)
+
+    if (currentUrl.includes('book')) {
+        discussObjectTitle = bookSelector?.volumeInfo?.title
+    } else if (currentUrl.includes('game')) {
+        discussObjectTitle = gameSelector?.name
+    } else if (currentUrl.includes('movie') || currentUrl.includes('cartoon') || currentUrl.includes('tv-series') || currentUrl.includes('anime') || currentUrl.includes('animated-series')) {
+        discussObjectTitle = filmSelector?.name
     }
 
+    if (discussObjectTitle !== undefined) {
+        window.localStorage.setItem('currentObjectTitle', `${discussObjectTitle}`)
+    }
+
+    if ((filmSelector?.name || gameSelector?.name || bookSelector?.volumeInfo?.title) == undefined) {
+        discussObjectTitle = window.localStorage.getItem('currentObjectTitle');
+    }
+
+    const {discussId}  = useParams();
+    console.log(discussId)
+    const isEditing = Boolean(discussId)
+
+    // if (isSameUser == false){
+    //     navigate(`/post/${postId}`);
+    // }
+
     React.useEffect(() => {
-        if (postId !== undefined) {
-            axios.get(`/post/${postId}`).then(res => {
+        if (discussId !== undefined) {
+            axios.get(`/discuss/${itemId}/${discussId}`).then(res => {
                 setTitle(res.data.title);
                 setText(res.data.text);
                 setImageUrl(res.data.imageUrl);
@@ -41,6 +76,9 @@ export const AddPost = () => {
         }
 
     }, [])
+
+
+    
 
     const onChangeText = React.useCallback((value: string) => {
         setText(value);
@@ -87,11 +125,14 @@ export const AddPost = () => {
     const onSubmit = async () => {
         try {
             const fields = {
-                title, text, imageUrl,
+                title, text, imageUrl, itemId
             }
-            const { data } = isEditing ? await axios.patch(`/post/${postId}`, fields) : await axios.post('/posts', fields);
-            const _id = isEditing ? postId : data._id;
-            navigate(`/post/${_id}`);
+            // dispatch(fetchAddDiscuss(fields));
+            // const {data} = await axios.post('/discuss', fields)
+            const { data } = isEditing ? await axios.patch(`/discuss/${itemId}/${discussId}`, fields) : await axios.post('/discuss', fields);
+
+            const _id = isEditing ? discussId : data._id;
+            navigate(`/item/${itemIdSlash}/discuss/${_id}`);
 
         } catch (err) {
             console.warn(err);
@@ -101,9 +142,9 @@ export const AddPost = () => {
 
     const onClickRemove = async() =>{
         try {
-            if (window.confirm('вы уверены что ходите удалить пост?')){
-                await axios.delete(`/post/${postId}`)
-                navigate(`/profile/${userNick}`);
+            if (window.confirm('вы уверены что ходите удалить обсуждение?')){
+                await axios.delete(`/discuss/${itemId}/${discussId}`)
+                navigate(`/item/${itemIdSlash}`);
             }
 
         } catch (err) {
@@ -112,9 +153,14 @@ export const AddPost = () => {
         }
     }
 
+
+
     return (
         <div className="addPostWrapper">
             <div className="addPost">
+                <p className="addPost__title">СОЗДАТЬ ОБСУЖДЕНИЕ</p>
+                <ItemTitle title={`${discussObjectTitle}`} sx={{ margin: '0 auto' }} />
+                <Divider sx={{ marginTop: '16px' }} />
                 <div className="addPostInputs">
                     <input accept="image/*" ref={inputFileRef} type="file" onChange={handleChangePreview} hidden />
                     <Button onClick={() => inputFileRef.current.click()} sx={{ padding: '15px', margin: '8px' }}>загрузить превью</Button>

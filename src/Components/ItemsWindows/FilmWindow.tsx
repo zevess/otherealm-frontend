@@ -28,7 +28,7 @@ export const FilmWindow = () => {
     const token = useAppSelector((state) => state.filmData.kpToken)
     React.useEffect(() => {
         dispatch(filmItemFetch({ paramsId, token }));
-    }, [])
+    }, [paramsId])
     const currentFilmItem = useAppSelector((state) => state.filmData.currentFilmItem)
 
     const title = `${currentFilmItem?.name}`;
@@ -45,6 +45,8 @@ export const FilmWindow = () => {
     const parts = currentUrl.split('/');
     const postId = String(parts.slice(-2).join(''))
     console.log(postId);
+
+    window.localStorage.setItem('currentObjectTitle', `${currentFilmItem.name}`)
 
     return (
         <div className="searchItemWrapper">

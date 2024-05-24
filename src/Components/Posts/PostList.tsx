@@ -7,7 +7,7 @@ import axios from '../../axios'
 import { useAppDispatch } from "../../store/hooks"
 import { setSelectedUserPosts } from "../../store/auth"
 import { userPosts } from "../../store/interfaces"
-import { fetchPosts } from "../../store/posts"
+import { clearPostsState, fetchPosts } from "../../store/posts"
 import { Typography } from "@mui/material"
 
 export const PostList = () => {
@@ -20,19 +20,17 @@ export const PostList = () => {
     const dispatch = useAppDispatch();
 
     React.useEffect(() => {
-        // axios.get(`/posts/${selectedUserId}`).then(res => {
-        //   dispatch(setSelectedUserPosts(res.data));
-        //   console.log("-");
+        dispatch(clearPostsState())
         dispatch(fetchPosts(`${selectedUserId}`)).catch(err => {
             console.log(err);
         })
-    }, []);
+    }, [selectedUserId]);
 
     return (
         <div className="postListWrapper">
             {
                 postsSelector.length == 0 ? (
-                    <Typography variant="h3">списки не найдены</Typography>
+                    <Typography variant="h3">посты не найдены</Typography>
                 ) : (
                     <>
                         <div className="postsList">
@@ -41,14 +39,14 @@ export const PostList = () => {
                             ))}
 
                         </div>
-                        {isNotSameUser && <Link to={'/post/add'}>
-                            <ColorButtonBlue>создать запись</ColorButtonBlue>
-                        </Link>}
+
                     </>
                 )
             }
 
-
+            {isNotSameUser && <Link to={'/post/add'}>
+                <ColorButtonBlue>создать запись</ColorButtonBlue>
+            </Link>}
         </div>
     )
 }

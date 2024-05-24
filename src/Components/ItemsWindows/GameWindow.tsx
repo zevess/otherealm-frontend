@@ -47,6 +47,8 @@ export const GameWindow = () => {
     const parts = currentUrl.split('/');
     const postId = String(parts.slice(-2).join(''))
 
+    window.localStorage.setItem('currentObjectTitle', `${currentGameItem?.name}`)
+
     return (
 
         <div className="searchItemWrapper">

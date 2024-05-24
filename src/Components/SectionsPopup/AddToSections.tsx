@@ -55,7 +55,6 @@ export const AddToSection = () => {
     const [favouriteArr, setFavouriteArr] = React.useState<any>({});
 
     favourites.forEach((item: any) => {
-        console.log(item);
         const foundItem = item.items.find((i: any) => i.itemId === String(itemId));
         favouriteArr[item.title] = { checked: foundItem ? true : false, _id: item._id };
     })

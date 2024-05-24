@@ -11,13 +11,14 @@ interface MediaSearchProps {
     setDownSearchAlignment: React.Dispatch<React.SetStateAction<string>>,
     text: string,
     setText: React.Dispatch<React.SetStateAction<string>>,
-    onClick: Function,
+    onClick: ()=> void,
 }
+
 
 export const MediaSearch: FC<MediaSearchProps> = ({ setDownSearchAlignment, downSearchAlignment, text, setText, onClick }) => {
     return (
         <div className="mediaSearch">
-            <InputText forComments={false} setText={setText} onClick={() => onClick()} placeholder="поиск фильма, игры, литературы" text={text} />
+            <InputText forComments={false} setText={setText} onClick={onClick} placeholder="поиск фильма, игры, литературы" text={text} />
             <SearchToggleGroup items={searchToggleItems} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setDownSearchAlignment)} alignment={downSearchAlignment} ></SearchToggleGroup>
             <div className="searchSource">
                 <p className="searchSourceText">Все результаты взяты из открытых источников:</p>

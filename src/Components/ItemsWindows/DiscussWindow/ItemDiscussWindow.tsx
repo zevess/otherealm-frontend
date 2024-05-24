@@ -5,7 +5,7 @@ import React from "react"
 import { InputText } from "../../InputText"
 import axios from '../../../axios'
 import { useAppDispatch } from "../../../store/hooks"
-import { addDiscuss, clearDiscuss } from "../../../store/discuss"
+// import { addDiscuss, clearDiscuss } from "../../../store/discuss"
 import { useAppSelector } from "../../../store"
 import { CommentSection } from "../CommentWindow/CommentSection"
 import { discussProps } from "../../../store/interfaces"
@@ -29,17 +29,17 @@ export const ItemDiscussWindow = () =>{
 
     console.log(discussId)
 
-    React.useEffect(() => {
-        axios.get(`/discuss/${itemId}/${discussId}`).then(res => {
-            // dispatch(addDiscuss(res.data));
-            // console.log(res.data)
-            setDiscussData(res.data)
-        })
+    // React.useEffect(() => {
+    //     axios.get(`/discuss/${itemId}/${discussId}`).then(res => {
+    //         // dispatch(addDiscuss(res.data));
+    //         // console.log(res.data)
+    //         setDiscussData(res.data)
+    //     })
 
-        return () =>{
-            dispatch(clearDiscuss())
-        }
-    }, [])
+    //     return () =>{
+    //         dispatch(clearDiscuss())
+    //     }
+    // }, [])
 
 
     if (discussData) return(

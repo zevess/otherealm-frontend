@@ -25,7 +25,8 @@ export const DiscussItemTitleCard: FC<DiscussItemTitleCardProps> = ({ author, ti
 
                 <hr style={{ borderLeft: '4px solid black', height: 'auto' }}></hr>
             </div>
-            <Typography variant="h4" className="discussTitle" >{title}</Typography>
+            <p className="discussTitle" >{title}</p>
+
         </div>
 
     )

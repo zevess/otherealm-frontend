@@ -12,6 +12,7 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { useAppSelector } from "../../store";
 import { postProps } from "../../store/interfaces";
 import { fetchOnePost } from "../../store/posts";
+import { clearComments } from "../../store/comment";
 
 export const FullPost = () => {
 
@@ -30,13 +31,15 @@ export const FullPost = () => {
 
     React.useEffect(() => {
         if (postId !== undefined) {
-            dispatch(fetchOnePost(`${postId}`))
+            dispatch(clearComments())
+            dispatch(fetchOnePost(`${postId}`));
+            
             // axios.get(`/post/${postId}`).then(res => {
             //     setPost(res.data);
                 
             // })
         }
-    }, [])
+    }, [postId])
 
     const dateToForm = postSelector.post ? new Date(postSelector.post.createdAt) : null;
     const options = {

@@ -1,26 +1,42 @@
-// import axios from '../axios.ts'
+import axios from '../axios.ts'
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import { postProps, userPosts } from './interfaces.tsx';
 
-// export const fetchDiscuss = createAsyncThunk('/favourite', async(params) => {
-//     const {data} = await axios.post('/favourite', params);
-//     return data
-// })
+export const fetchItemDiscusses = createAsyncThunk('/discuss/:itemId', async (itemId: string) => {
+    const { data } = await axios.get(`/discuss/${itemId}`);
+    return data
+})
 
-// export const fetchUserFavourites = createAsyncThunk('/favourite/:userId', async(userId) => {
-//     const {data} = await axios.get(`/favourite/${userId}`);
-//     return data
-// })
+export const fetchOneDiscuss = createAsyncThunk('/discuss/:itemId/:discussId', async ({itemId, discussId}: {itemId: string, discussId: string}) => {
+    const { data } = await axios.get(`/discuss/${itemId}/${discussId}`);
+    return data
+})
 
+export const fetchAddDiscuss = createAsyncThunk('/discuss', async (fields: object) => {
+    const { data } = await axios.post('/discuss', fields);
+    return data
+}
+)
 
-// export const fetchAddToFavourite = createAsyncThunk('/favourite/:postId', async(favouriteId) => {
-//     const {data} = await axios.patch(`/favourite/${favouriteId}`);
-//     return data
-// })
+export interface discussProps {
+    discusses: {
+        discusses: userPosts[],
+        status: string
+    },
+    currentDiscuss: {
+        currentDiscuss: postProps | null,
+        status: string
+    }
+}
 
-const initialState = {
-    discuss: {
-        items: [],
-        status: "loading"
+const initialState: discussProps = {
+    discusses: {
+        discusses: [],
+        status: ''
+    },
+    currentDiscuss: {
+        currentDiscuss: null,
+        status: ''
     }
 }
 
@@ -28,50 +44,47 @@ export const discussSlice = createSlice({
     name: 'discuss',
     initialState,
     reducers:{
-        addDiscuss: (state, action) =>{
-            state.discuss.items = action.payload
-        },
         clearDiscuss: (state) => {
-            state.discuss.items = [];
+            state.discusses.discusses = [];
         }
     },
-    // extraReducers: (builder) =>{
-    //     builder
-    //         //create favourite
-    //         .addCase(fetchFavourite.fulfilled, (state, action) =>{
-    //             state.favourites.status = "loaded",
-    //             state.favourites.items = action.payload
-    //         })
-    //         .addCase(fetchFavourite.rejected, (state) =>{
-    //             state.favourites.status = "error"
-    //         })
-    //         //get favourites
-    //         .addCase(fetchUserFavourites.pending, (state) =>{
-    //             state.favourites.status = "loading"
-    //         })
-    //         .addCase(fetchUserFavourites.fulfilled, (state, action) =>{
-    //             state.favourites.status = "loaded",
-    //             state.favourites.items = action.payload
-    //         })
-    //         .addCase(fetchUserFavourites.rejected, (state) =>{
-    //             state.favourites.status = "error"
-    //         })
-    //         //add to favourite
-    //         .addCase(fetchAddToFavourite.pending, (state) =>{
-    //             state.favourites.status = "loading"
-    //         })
-    //         .addCase(fetchAddToFavourite.fulfilled, (state, action) =>{
-    //             state.favourites.status = "loaded",
-    //             state.favourites.items = action.payload
-    //         })
-    //         .addCase(fetchAddToFavourite.rejected, (state) =>{
-    //             state.favourites.status = "error"
-    //         })
-    // }
-})
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchItemDiscusses.pending, (state) => {
+                state.discusses.status = 'loading'
+            })
+            .addCase(fetchItemDiscusses.fulfilled, (state, action) => {
+                state.discusses.status = 'loaded'
+                state.discusses.discusses = action.payload
+            })
+            .addCase(fetchItemDiscusses.rejected, (state) => {
+                state.discusses.status = 'rejected'
+            })
+
+            .addCase(fetchOneDiscuss.pending, (state) => {
+                state.currentDiscuss.status = 'loading'
+            })
+            .addCase(fetchOneDiscuss.fulfilled, (state, action) => {
+                state.currentDiscuss.status = 'loaded'
+                state.currentDiscuss.currentDiscuss = action.payload
+            })
+            .addCase(fetchOneDiscuss.rejected, (state) => {
+                state.currentDiscuss.status = 'rejected'
+            })
+
+            .addCase(fetchAddDiscuss.pending, (state) => {
+                state.currentDiscuss.status = 'loading'
+            })
+            .addCase(fetchAddDiscuss.fulfilled, (state) => {
+                state.currentDiscuss.status = 'added'
+            })
+            .addCase(fetchAddDiscuss.rejected, (state) => {
+                state.currentDiscuss.status = 'rejected'
+            })
+}})
 
 // export const selectIsAuth = (state: any) => Boolean(state.auth.data);
 
-export const { addDiscuss, clearDiscuss } = discussSlice.actions;
+export const { clearDiscuss } = discussSlice.actions;
 
 export default discussSlice.reducer
