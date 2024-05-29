@@ -9,14 +9,15 @@ import { setSelectedUserPosts } from "../../store/auth"
 import { userPosts } from "../../store/interfaces"
 import { clearPostsState, fetchPosts } from "../../store/posts"
 import { Typography } from "@mui/material"
+import { AddPost } from "./AddPost"
 
 export const PostList = () => {
-
+    const [addPost, setAddPost] = React.useState(false);
     const userId = (useAppSelector((state) => state.authData.data?._id));
     const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
-    const isNotSameUser = (userId == selectedUserId)
+    const isSameUser = (userId == selectedUserId)
     const postsSelector = useAppSelector((state) => state.postsData.userPosts.userPosts);
-    // console.log(postsSelector);
+ 
     const dispatch = useAppDispatch();
 
     React.useEffect(() => {
@@ -43,10 +44,17 @@ export const PostList = () => {
                     </>
                 )
             }
+            {(!isSameUser && (addPost == false)) &&
+                <ColorButtonBlue onClick={() => setAddPost(true)} sx={{ width: '200px', marginLeft: 'auto', marginRight: 'auto', marginTop: '12px' }}>создать запись</ColorButtonBlue>
+            }
 
-            {isNotSameUser && <Link to={'/post/add'}>
-                <ColorButtonBlue>создать запись</ColorButtonBlue>
-            </Link>}
+            {addPost &&
+                <>
+                
+                    <AddPost />
+                    <ColorButtonBlue onClick={() => setAddPost(false)} sx={{ width: '200px', marginLeft: 'auto', marginRight: 'auto', marginTop: '12px', marginBottom: '12px' }}>отменить создание записи</ColorButtonBlue>
+                </>
+            }
         </div>
     )
 }

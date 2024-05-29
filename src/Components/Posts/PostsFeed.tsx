@@ -9,8 +9,10 @@ import { Link } from "react-router-dom";
 import { ColorButtonBlue } from "../CustomButton";
 import { fetchPostsFeed } from "../../store/posts";
 import { CircularProgress, Typography } from "@mui/material";
+import { AddPost } from "./AddPost";
 
 export const PostsFeed = () => {
+    const [addPost, setAddPost] = React.useState(false);
     const userId = (useAppSelector((state) => state.authData.data?._id));
     const selectedUserId = (useAppSelector((state) => state.authData.selectedUserData?._id));
     const isSameUser = (userId == selectedUserId)
@@ -44,9 +46,17 @@ export const PostsFeed = () => {
             </div>
             )}
             
-            <Link to={'/post/add'}>
-                <ColorButtonBlue>создать запись</ColorButtonBlue>
-            </Link>
+            {(!isSameUser && (addPost == false)) &&
+                <ColorButtonBlue onClick={() => setAddPost(true)} sx={{ width: '200px', marginLeft: 'auto', marginRight: 'auto', marginTop: '12px' }}>создать запись</ColorButtonBlue>
+            }
+
+            {addPost &&
+                <>
+                
+                    <AddPost />
+                    <ColorButtonBlue onClick={() => setAddPost(false)} sx={{ width: '200px', marginLeft: 'auto', marginRight: 'auto', marginTop: '12px', marginBottom: '12px' }}>отменить создание записи</ColorButtonBlue>
+                </>
+            }
 
         </div>
     )

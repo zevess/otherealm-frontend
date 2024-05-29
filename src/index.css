@@ -763,10 +763,9 @@ button:focus-visible {
   background-color: white;
 }
 
-
-
 .postListWrapper {
   width: 80%;
+  max-width: 1300px;
   display: flex;
   flex-direction: column-reverse;
   /* align-items: flex-start; */
@@ -775,6 +774,7 @@ button:focus-visible {
 
 .postListWrapper.feed {
   width: 100%;
+  max-width: none;
 }
 
 .postsList {
@@ -863,6 +863,7 @@ button:focus-visible {
 
 .addPost {
   width: 60%;
+  max-width: 1300px;
   background-color: white;
   padding: 15px;
 }
@@ -1601,9 +1602,9 @@ button:focus-visible {
     width: 85% !important;
   }
 
-  .postItem {
+  /* .postItem {
     width: 80%;
-  }
+  } */
 
   .postUserInfo.nick {
     font-size: 16px;

@@ -12,7 +12,7 @@ interface ProfileCardProps {
 export const ProfileCard: FC<ProfileCardProps> = ({name, avatarUrl, nick}) => {
     return (
         <div className="profileCard">
-            <Avatar className="commentUser__info-avatar" src={`http://localhost:4444${avatarUrl}`}></Avatar>
+            <Avatar className="commentUser__info-avatar" src={`${process.env.REACT_APP_API_URL}${avatarUrl}`}></Avatar>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
                 <p className="profileCard__name">{name}</p>
 

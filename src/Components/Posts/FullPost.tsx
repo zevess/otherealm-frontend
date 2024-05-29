@@ -17,27 +17,18 @@ import { clearComments } from "../../store/comment";
 export const FullPost = () => {
 
     const dispatch = useAppDispatch();
-
-    // const [post, setPost] = React.useState<postProps | null>(null);
-
+    
     const postSelector = useAppSelector(state => state.postsData.currentPost)
+    const userId = (useAppSelector((state) => state.authData.data?._id));
+    const isSameUser = (userId === postSelector.post?.user._id)
 
     const params = useParams();
     const postId = params.postId;
-    
-
-    const userId = (useAppSelector((state) => state.authData.data?._id));
-    const isSameUser = (userId === postSelector.post?.user._id)
 
     React.useEffect(() => {
         if (postId !== undefined) {
             dispatch(clearComments())
             dispatch(fetchOnePost(`${postId}`));
-            
-            // axios.get(`/post/${postId}`).then(res => {
-            //     setPost(res.data);
-                
-            // })
         }
     }, [postId])
 
@@ -48,9 +39,7 @@ export const FullPost = () => {
         month: 'short' as const,
         day: 'numeric' as const
     }
-
     const formatedDate = dateToForm ? dateToForm.toLocaleString('ru-RU', options) : null
-
     const time = dateToForm ? dateToForm.toTimeString().slice(0, 8) : null;
 
     if (postSelector.post) return (
@@ -74,18 +63,14 @@ export const FullPost = () => {
                             <p style={{ margin: 0 }}>{postSelector.post.viewsCount}</p>
                         </Box>
 
-
                         {isSameUser && <Box marginLeft={'auto'}>
                             <Link to={`/post/${postSelector.post._id}/edit`}>
                                 <IconButton >
                                     <EditOutlinedIcon />
                                 </IconButton>
                             </Link>
-
                         </Box>}
-
                     </div>
-
                     <hr className="hrHorizontal"></hr>
                 </div>
 
@@ -94,7 +79,7 @@ export const FullPost = () => {
                 }
 
                 <Typography variant="h4" className="fullPostTitle">{postSelector.post.title}</Typography>
-                <Divider sx={{width: '60%', margin: '0 auto'}}/>
+                <Divider sx={{ width: '60%', margin: '0 auto' }} />
                 <ReactMarkdown children={postSelector.post.text} />
                 {postId !== undefined && <CommentSection postId={postId} />}
             </div>

@@ -3,11 +3,6 @@ import './App.css'
 import { Layout } from './Components/Layout'
 import { Search } from './Components/Search/Search'
 import { Profile } from './Components/Profile/Profile'
-import { ItemDiscussWindow } from './Components/ItemsWindows/DiscussWindow/ItemDiscussWindow'
-import { FranchiseWindow } from './Components/FranchiseWindow/FranchiseWindow'
-import { Provider } from 'react-redux'
-import { store, useAppSelector } from './store'
-
 import { GameWindow } from './Components/ItemsWindows/GameWindow'
 import { FilmWindow } from './Components/ItemsWindows/FilmWindow'
 import { BookWindow } from './Components/ItemsWindows/BookWindow'
@@ -75,8 +70,6 @@ function App() {
           <Route path='/item/tv-series/:id/discuss/:discussId' element={<DiscussItem />} />
           <Route path='/item/game/:id/discuss/:discussId' element={<DiscussItem />} />
           <Route path='/item/book/:id/discuss/:discussId' element={<DiscussItem />} />
-
-          <Route path='/discuss/:itemId/:discussId' element={<ItemDiscussWindow />} />
 
 
           <Route path='/post/:postId' element={<FullPost />} />

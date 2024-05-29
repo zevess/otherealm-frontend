@@ -20,52 +20,42 @@ export const CommentSection: FC<CommentSectionProps> = ({ postId }) => {
 
     const dispatch = useAppDispatch();
     const [text, setCommentText] = React.useState('');
-    // const [data, setData] = React.useState<CommentProps[]>()
     const commentsData = useAppSelector(state => state.commentsData.comments.items)
 
     React.useEffect(() => {
         dispatch(clearComments())
         dispatch(fetchGetComments(postId))
-        // axios.get(`/comments/${postId}`).then(res => {
-        //     dispatch(addComments(res.data));
-        //     setData(res.data);
-        // })
+
     }, [])
 
     const onSubmit = async () => {
-        try {
-            const fields = {
-                text,
-                postId
-            }
-
-            dispatch(fetchPostComment(fields))
-            // await axios.post('/comments', fields);
-            setCommentText('');
-
-            // dispatch(clearComments())
-            // dispatch(fetchGetComments(postId))
-            // axios.get(`/comments/${postId}`).then(res => {
-            //     setData(res.data);
-
-            // })
-        } catch (err) {
-            console.warn(err);
-            alert("ошибка при добавлении комментария")
+        const fields = {
+            text,
+            postId
         }
-    }
     
+        dispatch(fetchPostComment(fields)).then((response: any) => {
+            if (response.error) {
+                alert("Ошибка: комментарий должен содержать не менее 3 символов");
+            } else {
+                dispatch(clearComments());
+                dispatch(fetchGetComments(postId));
+                setCommentText('');
+            }
+        }).catch((err) => {
+            console.warn(err);
+            alert("Ошибка при добавлении комментария");
+        });
+    }
 
     return (
         <Box display={'flex'} flexDirection={'column'}>
-            <InputText forComments={true} text={text} setText={setCommentText} onClick={() => onSubmit()} placeholder={"комментарий (не менее 3 символов)"} />
+            <InputText forComments={true} text={text} setText={setCommentText} onClick={onSubmit} placeholder={"комментарий (не менее 3 символов)"} />
             <Box>
                 {commentsData !== undefined && commentsData.map((item) => (
-
                     <Comment key={item._id} id={item._id} date={item.createdAt} avatar={item?.user.avatarUrl} name={item?.user.name} nick={item?.user.nick} text={item.text} commentUserId={item.user._id} postId={postId} />
                 ))}
             </Box>
-
         </Box>
     )
 }

@@ -11,7 +11,7 @@ interface InputTextProps {
     text: any,
     sx?: object,
     setText: React.Dispatch<React.SetStateAction<string>>,
-    onClick: React.MouseEventHandler<HTMLButtonElement>,
+    onClick: () => void,
     forComments: boolean
 }
 

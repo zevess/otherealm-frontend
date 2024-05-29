@@ -48,21 +48,27 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
     const handleSubmit = () => {
 
         const fields = {
-            text: commentText
+            text: commentText,
+            postId: postId
         }
 
-        axios.patch(`/comments/${id}`, fields).then(() => {
-
-            setToggleSetting(false)
+        axios.patch(`/comments/${id}`, fields).then((response: any) => {
+            if(response.error){
+                alert("Ошибка: комментарий должен содержать не менее 3 символов")
+            } else{
+                setToggleSetting(false)
             dispatch(clearComments());
             dispatch(fetchGetComments(postId))
-        }).catch(err => {
+            }
+        }).catch((err) => {
             console.warn(err);
+            alert("Ошибка при создании комментария")
         })
+
     }
 
     const handleDelete = () => {
-        axios.delete(`/comments/${id}`).then(()=>{
+        axios.delete(`/comments/${id}`).then(() => {
             setToggleSetting(false)
             dispatch(clearComments());
             dispatch(fetchGetComments(postId))
@@ -109,7 +115,7 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
                             <TextField onChange={(event) => setCommentText(event.target.value)} size="medium" placeholder="редактировать комментарий" className="sectionToggleSettings-inputs__textfield" value={commentText}></TextField>
 
                             <div className="sectionToggleSettings-inputs__buttons">
-                                <ColorButton onClick={handleDelete} >удалить</ColorButton>
+                                <ColorButton onClick={handleDelete}>удалить</ColorButton>
                                 <Button variant="contained" onClick={handleSubmit}>сохранить</Button>
                             </div>
                         </div>

@@ -6,11 +6,15 @@ import { ColorButton, ColorButtonBlue } from "../CustomButton";
 import axios from '../../axios'
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useAppSelector } from "../../store/hooks";
+import { useDispatch } from "react-redux";
+import { fetchOnePost, setCurrentPostState } from "../../store/posts";
 
 
 export const AddPost = () => {
 
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const [title, setTitle] = React.useState('');
     const [text, setText] = React.useState('');
@@ -19,29 +23,39 @@ export const AddPost = () => {
     const inputFileRef = React.useRef<any>(null);
 
     const userNick = useAppSelector((state) => state.authData.data?.nick)
-    const userId = (useAppSelector((state) => state.authData.data?._id));
-    const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
-    const isSameUser = (userId == selectedUserId)
+    const selectedUserNick = useAppSelector((state) => state.usersData.currentUser.items?.nick)
+    // const userId = (useAppSelector((state) => state.authData.data?._id));
+    // const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
+
+    const authId = window.localStorage.getItem('authId');
+    const currentUserId = window.localStorage.getItem('currentUser')
+
+    const isSameUser = (authId == currentUserId)
 
     const { postId } = useParams();
     const isEditing = Boolean(postId)
 
-    if (isSameUser == false){
-        // <Navigate to={`/post/${postId}`} />
-        navigate(`/post/${postId}`);
-    }
+    const currentUrl = window.location.href;
+    const parts = currentUrl.split('/');
+    console.log(parts)
 
     React.useEffect(() => {
         if (postId !== undefined) {
-            axios.get(`/post/${postId}`).then(res => {
+            axios.get(`/post/${postId}`).then((res): any => {
+                
+                window.localStorage.setItem('currentUser', res.data.user._id)
                 setTitle(res.data.title);
                 setText(res.data.text);
                 setImageUrl(res.data.imageUrl);
             })
         }
 
-    }, [])
+    }, [postId])
 
+    
+    if (isSameUser == false) {
+        navigate(`/post/${postId}`);
+    }
     const onChangeText = React.useCallback((value: string) => {
         setText(value);
     }, []);
@@ -99,9 +113,9 @@ export const AddPost = () => {
         }
     }
 
-    const onClickRemove = async() =>{
+    const onClickRemove = async () => {
         try {
-            if (window.confirm('вы уверены что ходите удалить пост?')){
+            if (window.confirm('вы уверены что ходите удалить пост?')) {
                 await axios.delete(`/post/${postId}`)
                 navigate(`/profile/${userNick}`);
             }
@@ -113,7 +127,11 @@ export const AddPost = () => {
     }
 
     return (
+
+
+
         <div className="addPostWrapper">
+
             <div className="addPost">
                 <div className="addPostInputs">
                     <input accept="image/*" ref={inputFileRef} type="file" onChange={handleChangePreview} hidden />
@@ -140,7 +158,7 @@ export const AddPost = () => {
 
                     {isEditing && <ColorButton onClick={() => onClickRemove()} size="large">удалить</ColorButton>}
 
-                    <ColorButtonBlue onClick={() => onSubmit()} size="large">
+                    <ColorButtonBlue onClick={() => onSubmit()} disabled={!Boolean(title.length >= 5)} size="large">
                         {isEditing ? 'сохранить' : 'отправить'}
                     </ColorButtonBlue>
 
@@ -148,5 +166,11 @@ export const AddPost = () => {
 
             </div>
         </div>
+
+
     )
 }
+
+{/* <ColorButtonBlue sx={{height: '60px', width: '60px', borderRadius: '16px', marginBottom: '20px'}} onClick={()=>navigate(`/profile/${selectedUserNick}`)}>
+                <ArrowBackIcon />
+            </ColorButtonBlue> */}

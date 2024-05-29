@@ -93,6 +93,7 @@ export const authSlice = createSlice({
             .addCase(fetchAuthMe.fulfilled, (state, action) =>{
                 state.status = "loaded",
                 state.data = action.payload
+                window.localStorage.setItem('authId', action.payload._id)
             })
             .addCase(fetchAuthMe.rejected, (state) =>{
                 state.status = "error",

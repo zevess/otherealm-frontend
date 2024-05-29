@@ -46,7 +46,7 @@ export const discussSlice = createSlice({
     reducers:{
         clearDiscuss: (state) => {
             state.discusses.discusses = [];
-        }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -67,6 +67,7 @@ export const discussSlice = createSlice({
             .addCase(fetchOneDiscuss.fulfilled, (state, action) => {
                 state.currentDiscuss.status = 'loaded'
                 state.currentDiscuss.currentDiscuss = action.payload
+                window.localStorage.setItem('currentUser', action.payload.user._id);
             })
             .addCase(fetchOneDiscuss.rejected, (state) => {
                 state.currentDiscuss.status = 'rejected'

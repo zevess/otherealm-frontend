@@ -50,13 +50,10 @@ export const Profile = () => {
 
         <Box display={'flex'} flexDirection={'column'} marginRight={'20px'} position={'static'}>
           <SectionToggleGroup items={sections} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setSection)} alignment={section}></SectionToggleGroup>
-          
         </Box>
-        
         {section == 'list' && <ListWindow type={type} setType={setType}/> }
         {section == 'posts' && <PostList />}
         {section == 'follows' && <FollowsList/>}
-        {/* {section == 'list' ? <ListWindow type={type} setType={setType} /> : <PostList />} */}
 
       </div>
     </div>

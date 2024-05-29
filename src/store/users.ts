@@ -73,6 +73,7 @@ export const usersSlice = createSlice({
             .addCase(fetchOneUser.fulfilled, (state, action) =>{
                 state.currentUser.status = "loaded",
                 state.currentUser.items = action.payload
+                window.localStorage.setItem('currentUser', action.payload._id);
             })
             .addCase(fetchOneUser.rejected, (state) =>{
                 state.currentUser.status = "error"

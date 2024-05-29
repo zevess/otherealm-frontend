@@ -69,6 +69,9 @@ export const postsSlice = createSlice({
     reducers: {
         clearPostsState: (state) => {
             state.userPosts.userPosts = []
+        },
+        setCurrentPostState: (state, action) =>{
+            state.currentPost.post = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -138,6 +141,6 @@ export const postsSlice = createSlice({
     }
 })
 
-export const { clearPostsState } = postsSlice.actions
+export const { clearPostsState, setCurrentPostState } = postsSlice.actions
 
 export default postsSlice.reducer

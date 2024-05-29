@@ -1,10 +1,5 @@
-import { Box, Button } from "@mui/material"
-import { DiscussInput } from "./DiscussInput"
-import { DiscussButton } from "./DiscussButton"
-import { ModalWindow } from "../../ModalWindow"
+
 import React from "react"
-import { DiscussModal } from "./DiscussModal"
-import { DiscussLinkItem } from "./DiscussLinkItem"
 import axios from '../../../axios'
 import { useAppDispatch } from "../../../store/hooks"
 // import {  clearDiscuss } from "../../../store/discuss"

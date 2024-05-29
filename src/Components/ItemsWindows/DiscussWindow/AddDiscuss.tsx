@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { ColorButton, ColorButtonBlue } from "../../CustomButton";
 import { ItemTitle } from "../ItemComponents/ItemTitle";
 import { fetchAddDiscuss } from "../../../store/discuss";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 export const AddDiscuss = () => {
@@ -21,26 +22,20 @@ export const AddDiscuss = () => {
 
     const inputFileRef = React.useRef<any>(null);
 
-    const userNick = useAppSelector((state) => state.authData.data?.nick)
-    const userId = (useAppSelector((state) => state.authData.data?._id));
-    const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
-
-
     const bookSelector = useAppSelector((state) => state.bookData.currentBookItem);
     const filmSelector = useAppSelector((state) => state.filmData.currentFilmItem);
     const gameSelector = useAppSelector((state) => state.gameData.currentGameItem);
-
-
-    let discussObjectTitle
-    const isSameUser = (userId == selectedUserId)
-
 
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
     const itemId = `${parts[4]}${parts[5]}`
     const itemIdSlash = `${parts[4]}/${parts[5]}`
+    let discussObjectTitle
+    // const isSameUser = (userId == discussAuthorId)
+    const authId = window.localStorage.getItem('authId');
+    const currentUserId = window.localStorage.getItem('currentUser')
 
-    // console.log(itemIdSlash)
+    const isSameUser = (authId == currentUserId)
 
     if (currentUrl.includes('book')) {
         discussObjectTitle = bookSelector?.volumeInfo?.title
@@ -58,9 +53,12 @@ export const AddDiscuss = () => {
         discussObjectTitle = window.localStorage.getItem('currentObjectTitle');
     }
 
-    const {discussId}  = useParams();
+    const { discussId } = useParams();
     console.log(discussId)
     const isEditing = Boolean(discussId)
+    if ((isSameUser == false) && isEditing == true) {
+        navigate(`/item/${itemIdSlash}`)
+    }
 
     // if (isSameUser == false){
     //     navigate(`/post/${postId}`);
@@ -77,9 +75,6 @@ export const AddDiscuss = () => {
 
     }, [])
 
-
-    
-
     const onChangeText = React.useCallback((value: string) => {
         setText(value);
     }, []);
@@ -89,7 +84,7 @@ export const AddDiscuss = () => {
             spellChecker: false,
             maxHeight: '400px',
             autofocus: true,
-            placeholder: 'Введите текст...',
+            placeholder: 'Введите текст... (не менее 10 символов)',
             status: false,
             autosave: {
                 enabled: true,
@@ -107,7 +102,7 @@ export const AddDiscuss = () => {
                     title: "Underline"
                 }, "horizontal-rule", "heading", "|",
                 "quote", "unordered-list", "ordered-list", "|",
-                "link", "image", "|",
+                "link", "|",
                 "preview"
             ]
         } as SimpleMDE.Options;
@@ -136,13 +131,13 @@ export const AddDiscuss = () => {
 
         } catch (err) {
             console.warn(err);
-            alert("ошибка при создании поста")
+            alert("Ошибка при создании поста")
         }
     }
 
-    const onClickRemove = async() =>{
+    const onClickRemove = async () => {
         try {
-            if (window.confirm('вы уверены что ходите удалить обсуждение?')){
+            if (window.confirm('вы уверены что ходите удалить обсуждение?')) {
                 await axios.delete(`/discuss/${itemId}/${discussId}`)
                 navigate(`/item/${itemIdSlash}`);
             }
@@ -156,43 +151,52 @@ export const AddDiscuss = () => {
 
 
     return (
-        <div className="addPostWrapper">
-            <div className="addPost">
-                <p className="addPost__title">СОЗДАТЬ ОБСУЖДЕНИЕ</p>
-                <ItemTitle title={`${discussObjectTitle}`} sx={{ margin: '0 auto' }} />
-                <Divider sx={{ marginTop: '16px' }} />
-                <div className="addPostInputs">
-                    <input accept="image/*" ref={inputFileRef} type="file" onChange={handleChangePreview} hidden />
-                    <Button onClick={() => inputFileRef.current.click()} sx={{ padding: '15px', margin: '8px' }}>загрузить превью</Button>
-                    {imageUrl &&
-                        <>
-                            <Box component={'img'} maxWidth={'100%'} src={`http://localhost:4444${imageUrl}`}>
-                            </Box>
-                            <IconButton onClick={() => setImageUrl('')} >
-                                <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} />
-                            </IconButton>
-                        </>
+
+        <>
+
+            <ColorButtonBlue sx={{ height: '60px', width: '60px', borderRadius: '16px', marginBottom: '20px' }} onClick={() => navigate(`/item/${itemIdSlash}`)}>
+                <ArrowBackIcon />
+            </ColorButtonBlue>
+            <div className="addPostWrapper">
+                <div className="addPost">
+                    <p className="addPost__title">СОЗДАТЬ ОБСУЖДЕНИЕ</p>
+                    <ItemTitle title={`${discussObjectTitle}`} sx={{ margin: '0 auto' }} />
+                    <Divider sx={{ marginTop: '16px' }} />
+                    <div className="addPostInputs">
+                        <input accept="image/*" ref={inputFileRef} type="file" onChange={handleChangePreview} hidden />
+                        <Button onClick={() => inputFileRef.current.click()} sx={{ padding: '15px', margin: '8px' }}>загрузить превью</Button>
+                        {imageUrl &&
+                            <>
+                                <Box component={'img'} maxWidth={'100%'} src={`http://localhost:4444${imageUrl}`}>
+                                </Box>
+                                <IconButton onClick={() => setImageUrl('')} >
+                                    <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} />
+                                </IconButton>
+                            </>
 
 
-                    }
-                    <TextField sx={{ margin: '8px' }} value={title} onChange={(event) => setTitle(event.target.value)} fullWidth placeholder="введите заголовок" />
+                        }
+                        <TextField sx={{ margin: '8px' }} value={title} onChange={(event) => setTitle(event.target.value)} fullWidth placeholder="введите заголовок (не менее 5 символов)" />
+                    </div>
+                    <SimpleMdeReact
+                        options={autofocusNoSpellcheckerOptions}
+                        value={text}
+                        onChange={onChangeText}
+                    />
+                    <div className="addPost__buttons">
+
+                        {isEditing && <ColorButton onClick={() => onClickRemove()} size="large">удалить</ColorButton>}
+
+                        <ColorButtonBlue onClick={() => onSubmit()} disabled={Boolean(!title)} size="large">
+                            {isEditing ? 'сохранить' : 'отправить'}
+                        </ColorButtonBlue>
+
+                    </div>
+
                 </div>
-                <SimpleMdeReact
-                    options={autofocusNoSpellcheckerOptions}
-                    value={text}
-                    onChange={onChangeText}
-                />
-                <div className="addPost__buttons">
-
-                    {isEditing && <ColorButton onClick={() => onClickRemove()} size="large">удалить</ColorButton>}
-
-                    <ColorButtonBlue onClick={() => onSubmit()} size="large">
-                        {isEditing ? 'сохранить' : 'отправить'}
-                    </ColorButtonBlue>
-
-                </div>
-
             </div>
-        </div>
+        </>
+
+
     )
 }

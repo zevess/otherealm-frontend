@@ -1,13 +1,13 @@
-import { Avatar, Box, Button, IconButton, Typography } from "@mui/material"
-import { deepOrange } from "@mui/material/colors"
+import { Avatar, Box,  IconButton, Typography } from "@mui/material"
+
 import React, { FC } from "react"
-import axios from '../../axios'
+import axios, { process } from '../../axios'
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { useParams } from "react-router-dom"
-import { fetchAuthMe, fetchUser, setSelectedUserData } from "../../store/auth"
+
+import { fetchUser } from "../../store/auth"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { ColorButtonBlue } from "../CustomButton"
-import { fetchFollowUser, fetchOneUser, fetchUnfollowUser } from "../../store/users"
+import {  fetchOneUser  } from "../../store/users"
 
 interface ProfileNameProps {
     name: string
@@ -19,14 +19,10 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
 
     const avatar = useAppSelector((state) => state.usersData.currentUser.items?.avatarUrl);
     const background = useAppSelector((state) => state.usersData.currentUser.items?.backgroundUrl);
-    
     const userFollows = (useAppSelector((state) => state.authData.data?.follows));
     const authData = useAppSelector(state => state.authData.data)
     const userId = useAppSelector((state) => state.authData.data?._id);
-
     const currentUser = useAppSelector((state) => state.usersData.currentUser.items);
-
-    
 
     const isSameUser = (userId == currentUser?._id)
     
@@ -34,8 +30,6 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
     console.log(isFollowed)
 
     // const isFollowed = userFollows?.includes(`${currentUser?._id}`)
-
-    
 
     const inputAvatarRef = React.useRef<any>(null)
     const inputBGRef = React.useRef<any>(null)
@@ -83,11 +77,6 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
     const handleFollow = async () => {
         try {
 
-            // const fields = {
-            //     userId,
-            //     userToFollowId
-            // }
-
             const fields = {
                 avatarUrl: currentUser?.avatarUrl,
                 name: currentUser?.name,
@@ -106,11 +95,6 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
 
     const handleUnfollow = async () => {
         try {
-
-            // const fields = {
-            //     userId,
-            //     userToFollowId
-            // }
 
             const fields = {
                 avatarUrl: currentUser?.avatarUrl,
@@ -133,7 +117,7 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
     return (
         <div className="profileHeadWrapper">
 
-            <Box className="profileHead" sx={{ backgroundImage: `url(http://localhost:4444${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <Box className="profileHead" sx={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                 {isSameUser &&
                     <>
                         <input accept="image/*" ref={inputBGRef} type="file" onChange={handleChangeBG} hidden />
@@ -151,9 +135,9 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
                         <>
                             <input accept="image/*" ref={inputAvatarRef} type="file" onChange={handleChangeAvatar} hidden />
                             <IconButton onClick={() => inputAvatarRef.current.click()}>
-                                <Avatar src={`http://localhost:4444${avatar}`} className="profileHead__user-avatar" />
+                                <Avatar src={`${process.env.REACT_APP_API_URL}${avatar}`} className="profileHead__user-avatar" />
                             </IconButton>
-                        </> : <Avatar src={`http://localhost:4444${avatar}`} className="profileHead__user-avatar" />}
+                        </> : <Avatar src={`${process.env.REACT_APP_API_URL}${avatar}`} className="profileHead__user-avatar" />}
 
                     <p className="profileHead__user-name">{name}</p>
                 </Box>

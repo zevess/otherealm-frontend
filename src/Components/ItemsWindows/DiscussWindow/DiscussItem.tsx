@@ -39,7 +39,13 @@ export const DiscussItem = () => {
 
 
     const userId = (useAppSelector((state) => state.authData.data?._id));
-    const isSameUser = (userId === discussSelector?.user._id)
+
+    const authId = window.localStorage.getItem('authId');
+    const currentUserId = window.localStorage.getItem('currentUser')
+
+    const isSameUser = (authId == currentUserId)
+
+    // const isSameUser = (userId === discussSelector?.user._id)
 
 
 

@@ -56,14 +56,14 @@ export const DiscussPreview: FC<DiscussProps> = ({ user, userId, nick, date, tit
                         </div>
                     </Link>
 
-                    {isSameUser && <Box marginLeft={'auto'}>
+                    {/* {isSameUser && <Box marginLeft={'auto'}>
                         <Link to={`/item/${itemId}/discuss/${id}/edit`}>
                             <IconButton >
                                 <EditOutlinedIcon />
                             </IconButton>
                         </Link>
 
-                    </Box>}
+                    </Box>} */}
                 </div>
                 <hr className="hrHorizontal"></hr>
             </div>
