@@ -3,7 +3,7 @@ import React, { FC } from "react"
 import { Link } from "react-router-dom"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { useAppSelector } from "../../../store";
-import axios, { process } from '../../../axios'
+import axios from '../../../axios'
 import { ModalWindow } from "../../ModalWindow";
 import { ColorButton } from "../../CustomButton";
 import { useAppDispatch } from "../../../store/hooks";
@@ -81,7 +81,7 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
             <div className="commentUser">
                 <Link to={`/profile/${nick}`}>
                     <div className="commentUser__info">
-                        <Avatar className="commentUser__info-avatar" src={`${process.env.REACT_APP_API_URL}${avatar}`}></Avatar>
+                        <Avatar className="commentUser__info-avatar" src={`${import.meta.env.VITE_API_URL}${avatar}`}></Avatar>
                         <p className="commentUser__info-nick">{name}</p>
                     </div>
                 </Link>

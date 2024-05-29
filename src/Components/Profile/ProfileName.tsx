@@ -1,9 +1,7 @@
 import { Avatar, Box,  IconButton, Typography } from "@mui/material"
-
 import React, { FC } from "react"
-import axios, { process } from '../../axios'
+import axios from '../../axios'
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-
 import { fetchUser } from "../../store/auth"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { ColorButtonBlue } from "../CustomButton"
@@ -117,7 +115,7 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
     return (
         <div className="profileHeadWrapper">
 
-            <Box className="profileHead" sx={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <Box className="profileHead" sx={{ backgroundImage: `url(${import.meta.env.VITE_API_URL}${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                 {isSameUser &&
                     <>
                         <input accept="image/*" ref={inputBGRef} type="file" onChange={handleChangeBG} hidden />
@@ -135,9 +133,9 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
                         <>
                             <input accept="image/*" ref={inputAvatarRef} type="file" onChange={handleChangeAvatar} hidden />
                             <IconButton onClick={() => inputAvatarRef.current.click()}>
-                                <Avatar src={`${process.env.REACT_APP_API_URL}${avatar}`} className="profileHead__user-avatar" />
+                                <Avatar src={`${import.meta.env.VITE_API_URL}${avatar}`} className="profileHead__user-avatar" />
                             </IconButton>
-                        </> : <Avatar src={`${process.env.REACT_APP_API_URL}${avatar}`} className="profileHead__user-avatar" />}
+                        </> : <Avatar src={`${import.meta.env.VITE_API_URL}${avatar}`} className="profileHead__user-avatar" />}
 
                     <p className="profileHead__user-name">{name}</p>
                 </Box>

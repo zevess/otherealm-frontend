@@ -3,13 +3,10 @@ import ReactMarkdown from 'react-markdown'
 import { CommentSection } from "../ItemsWindows/CommentWindow/CommentSection";
 import { useAppDispatch } from "../../store/hooks";
 import React from "react";
-import  { process } from '../../axios'
 import { Link, useParams } from "react-router-dom";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { useAppSelector } from "../../store";
-
 import { fetchOnePost } from "../../store/posts";
 import { clearComments } from "../../store/comment";
 
@@ -48,7 +45,7 @@ export const FullPost = () => {
 
                     <div className="postItemDetails-user">
                         <Link to={`/profile/${postSelector.post.user.nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <Avatar src={`${process.env.REACT_APP_API_URL}${postSelector.post.user.avatarUrl}`} className="postItemDetails-user__avatar" />
+                            <Avatar src={`${import.meta.env.VITE_API_URL}${postSelector.post.user.avatarUrl}`} className="postItemDetails-user__avatar" />
                             <div className="postItemDetails-user__info">
                                 <p className="postUserInfo nick">{postSelector.post.user.name}</p>
                                 <Divider sx={{ width: '100%' }} />
@@ -74,7 +71,7 @@ export const FullPost = () => {
                 </div>
 
                 {postSelector.post.imageUrl &&
-                    <img src={`${process.env.REACT_APP_API_URL}${postSelector.post.imageUrl}`} className="fullPostImg"></img>
+                    <img src={`${import.meta.env.VITE_API_URL}${postSelector.post.imageUrl}`} className="fullPostImg"></img>
                 }
 
                 <Typography variant="h4" className="fullPostTitle">{postSelector.post.title}</Typography>
