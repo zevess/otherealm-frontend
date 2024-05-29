@@ -1,20 +1,20 @@
 import { Box, Button, IconButton, TextField } from "@mui/material"
 import React from "react";
-import SimpleMDE, { SimpleMdeReact } from 'react-simplemde-editor'
+import  { SimpleMdeReact } from 'react-simplemde-editor'
 import "easymde/dist/easymde.min.css";
 import { ColorButton, ColorButtonBlue } from "../CustomButton";
 import axios, { process } from '../../axios'
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import { useAppSelector } from "../../store/hooks";
 import { useDispatch } from "react-redux";
-import { fetchOnePost, setCurrentPostState } from "../../store/posts";
+
 
 
 export const AddPost = () => {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const navigate = useNavigate();
     const [title, setTitle] = React.useState('');
     const [text, setText] = React.useState('');
@@ -23,7 +23,7 @@ export const AddPost = () => {
     const inputFileRef = React.useRef<any>(null);
 
     const userNick = useAppSelector((state) => state.authData.data?.nick)
-    const selectedUserNick = useAppSelector((state) => state.usersData.currentUser.items?.nick)
+    // const selectedUserNick = useAppSelector((state) => state.usersData.currentUser.items?.nick)
     // const userId = (useAppSelector((state) => state.authData.data?._id));
     // const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
 

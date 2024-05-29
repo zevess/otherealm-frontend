@@ -1,5 +1,5 @@
-import { Box, Button, Modal, Typography } from "@mui/material"
-import React, { FC, ReactNode } from "react"
+import { Box, Modal } from "@mui/material"
+import { FC, ReactNode } from "react"
 
 interface ModalProps {
     open: boolean,

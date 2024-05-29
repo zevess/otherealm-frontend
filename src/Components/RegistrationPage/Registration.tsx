@@ -1,11 +1,11 @@
-import { Box, Button, TextField, Typography } from "@mui/material"
-import { Welcome } from "./Welcome"
+import { Button, TextField, Typography } from "@mui/material"
+
 import { fetchAuth, fetchRegister } from "../../store/auth"
 import { useAppDispatch } from "../../store/hooks"
 import { useForm } from "react-hook-form"
 import { Navigate } from "react-router-dom"
 import { useAppSelector } from "../../store"
-import React, { Dispatch, FC, SetStateAction } from "react"
+import React, { FC } from "react"
 
 
 export const Authorize = () => {

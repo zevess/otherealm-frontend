@@ -1,9 +1,7 @@
-import { Avatar, Box, CircularProgress, Divider, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
+import { Box, CircularProgress, Divider, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
 
-import React, { FC, useEffect } from "react";
-import { deepOrange } from "@mui/material/colors";
-import { InputText } from "../InputText";
-import { Comment } from "./CommentWindow/Comment";
+import React from "react";
+
 import { CommentSection } from "./CommentWindow/CommentSection";
 import { DiscussSection, } from "./DiscussWindow/DiscussSection";
 import { ItemTitle } from "./ItemComponents/ItemTitle";

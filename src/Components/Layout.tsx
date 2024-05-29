@@ -1,4 +1,4 @@
-import { ThemeProvider, Typography } from "@mui/material"
+import { ThemeProvider } from "@mui/material"
 
 import { layoutTheme } from "../assets/theme"
 import { Outlet } from "react-router-dom"

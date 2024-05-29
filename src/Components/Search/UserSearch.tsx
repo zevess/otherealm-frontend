@@ -1,4 +1,4 @@
-import React, { SetStateAction, MouseEvent } from "react"
+import React from "react"
 import { InputText } from "../InputText"
 import { useAppDispatch } from "../../store/hooks"
 import { fetchUsers } from "../../store/users"

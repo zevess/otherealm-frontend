@@ -1,8 +1,8 @@
 
 import React from "react"
-import axios from '../../../axios'
+
 import { useAppDispatch } from "../../../store/hooks"
-// import {  clearDiscuss } from "../../../store/discuss"
+
 import { ColorButtonBlue } from "../../CustomButton"
 import { Link } from "react-router-dom"
 import { clearDiscuss, fetchItemDiscusses } from "../../../store/discuss"
@@ -11,9 +11,7 @@ import { DiscussPreview } from "./DiscussPreview"
 
 export const DiscussSection = () => {
     const dispatch = useAppDispatch()
-    const [modalOpen, setModalOpen] = React.useState(false)
-    const [data, setData] = React.useState<any>();
-
+    
     const discussesSelector = useAppSelector((state) => state.discussData.discusses.discusses)
 
     const currentUrl = window.location.href;
@@ -40,7 +38,7 @@ export const DiscussSection = () => {
 
     }, [])
 
-    console.log(data);
+    
 
     return (
         <div className="discussSection">

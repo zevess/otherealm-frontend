@@ -1,5 +1,3 @@
-import { Dispatch } from "@reduxjs/toolkit";
-import { useAppDispatch } from "../store/hooks";
 
 export const handleChange = (
     event: React.MouseEvent<HTMLElement>,

@@ -1,21 +1,16 @@
-import { Box, Button, Divider, IconButton, TextField, ToggleButton, ToggleButtonGroup, Typography, styled } from "@mui/material"
+import { Box, Button, Divider, IconButton, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
 import { ItemCard } from "../Cards/ItemCard"
 import React, { FC } from "react"
 import { ItemTypeToggleGroup } from "../Toggles/ItemTypeToggleGroup"
-import { divideItems, itemTypes } from "../../utils/itemTypes"
-
+import { itemTypes } from "../../utils/itemTypes"
 import { handleChange } from "../../utils/handleChange"
-import { PopupWithTrigger } from "../Popup"
 import { CreateSection } from "../SectionsPopup/CreateSection.tsx"
 import axios from '../../axios.ts'
 import { useAppSelector } from "../../store"
 import { useAppDispatch } from "../../store/hooks.tsx"
-import { addFavourites, clearFavourite, fetchUserFavourites } from "../../store/favourite.ts"
-import { setCurrentFavouriteItem } from "../../store/reducers/stateReducer.tsx"
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { clearFavourite, fetchUserFavourites } from "../../store/favourite.ts"
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { ModalWindow } from "../ModalWindow.tsx"
-import { purple, red } from "@mui/material/colors"
 import { ColorButton } from "../CustomButton.ts"
 
 

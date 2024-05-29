@@ -6,7 +6,6 @@ import { useAppSelector } from "../../store";
 import { Box, CircularProgress, Divider, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { ItemType } from "./ItemComponents/ItemType";
 import { ItemTitle } from "./ItemComponents/ItemTitle";
-import { ButtonUsage } from "../Button";
 import { ItemDescription } from "./ItemComponents/ItemDescription";
 import { CommentSection } from "./CommentWindow/CommentSection";
 import { DiscussSection } from "./DiscussWindow/DiscussSection";

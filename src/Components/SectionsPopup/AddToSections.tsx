@@ -5,7 +5,7 @@ import axios from '../../axios'
 import { PopupWithTrigger } from "../Popup";
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { addFavourites, clearFavourite } from "../../store/favourite";
-import { favouriteItemProps, favouriteProps } from "../../store/interfaces";
+
 
 export const AddToSection = () => {
 

@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material"
+import { Box } from "@mui/material"
 import { SearchToggleGroup } from "../Toggles/SearchToggleGroup"
 import { SearchResult } from "./SearchResultList"
 import { FC } from "react"

@@ -1,11 +1,10 @@
-import { Box, Drawer, IconButton, List, ListItem, ListItemButton, Typography } from "@mui/material"
+import { Box, Drawer, IconButton, List, ListItem, ListItemButton } from "@mui/material"
 import { HeaderTemplate } from "./HeaderTemplate"
 import { Link } from "react-router-dom"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 import { useAppDispatch } from "../store/hooks";
-import { useSelector } from "react-redux";
 import { logout, } from "../store/auth";
 import { useAppSelector } from "../store";
 import LogoutIcon from '@mui/icons-material/Logout';

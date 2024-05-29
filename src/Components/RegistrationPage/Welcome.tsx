@@ -1,5 +1,5 @@
-import { Box, Button, CardMedia, Divider, Paper, Typography } from "@mui/material"
-import { ColorButton, ColorButtonBlue } from "../CustomButton"
+import { CardMedia, Paper, Typography } from "@mui/material"
+import { ColorButtonBlue } from "../CustomButton"
 import { Link } from "react-router-dom"
 import { useAppSelector } from "../../store";
 

@@ -2,11 +2,10 @@ import { Box } from "@mui/material"
 import { InputText } from "../../InputText"
 import { Comment } from "./Comment"
 import React, { FC } from "react"
-// import { useParams } from "react-router-dom"
-import axios from '../../../axios'
+
 import { useAppDispatch, useAppSelector } from "../../../store/hooks.tsx"
-import { addComments, clearComments, fetchGetComments, fetchPostComment } from "../../../store/comment.ts"
-import { CommentProps } from "../../../store/interfaces.tsx"
+import { clearComments, fetchGetComments, fetchPostComment } from "../../../store/comment.ts"
+
 
 export const commentInputStyles = {
     backgroundColor: 'white', textAlign: 'left', marginBottom: '20px', width: '100%'

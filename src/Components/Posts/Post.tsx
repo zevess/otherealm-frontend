@@ -1,9 +1,9 @@
-import { Avatar, Box, Divider, IconButton, Typography } from "@mui/material"
-import ReactMarkdown from 'react-markdown'
+import { Avatar, Box, Divider, IconButton } from "@mui/material"
+
 import { Link } from "react-router-dom"
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
 import { FC } from "react";
 import { useAppSelector } from "../../store";
 import { process } from "../../axios";

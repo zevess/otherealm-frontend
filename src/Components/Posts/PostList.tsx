@@ -1,11 +1,9 @@
 import { Post } from "./Post"
 import { ColorButtonBlue } from "../CustomButton"
-import { Link } from "react-router-dom"
+
 import { useAppSelector } from "../../store"
 import React from "react"
-import axios from '../../axios'
 import { useAppDispatch } from "../../store/hooks"
-import { setSelectedUserPosts } from "../../store/auth"
 import { userPosts } from "../../store/interfaces"
 import { clearPostsState, fetchPosts } from "../../store/posts"
 import { Typography } from "@mui/material"

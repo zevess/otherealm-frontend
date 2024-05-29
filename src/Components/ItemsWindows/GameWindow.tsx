@@ -1,13 +1,13 @@
-import { Avatar, Box, CircularProgress, Divider, IconButton, InputAdornment, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
+import { Box, CircularProgress, Divider, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
 
-import React, { FC, useEffect } from "react";
+import React from "react";
 
 import { CommentSection } from "./CommentWindow/CommentSection";
 import { DiscussSection, } from "./DiscussWindow/DiscussSection";
 import { ItemTitle } from "./ItemComponents/ItemTitle";
 import { handleChange } from "../../utils/handleChange";
 import { ItemType } from "./ItemComponents/ItemType";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../store";
 import { useAppDispatch } from "../../store/hooks";
 

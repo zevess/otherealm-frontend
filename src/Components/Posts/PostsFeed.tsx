@@ -1,11 +1,7 @@
 import React from "react";
 import { useAppSelector } from "../../store";
 import { useAppDispatch } from "../../store/hooks";
-import axios from '../../axios'
-import { setFeed } from "../../store/auth";
 import { Post } from "./Post";
-import { postProps, userPosts } from "../../store/interfaces";
-import { Link } from "react-router-dom";
 import { ColorButtonBlue } from "../CustomButton";
 import { fetchPostsFeed } from "../../store/posts";
 import { CircularProgress, Typography } from "@mui/material";

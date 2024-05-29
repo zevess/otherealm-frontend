@@ -1,20 +1,20 @@
 import { Box, Button, Divider, IconButton, TextField } from "@mui/material"
 import React from "react";
-import SimpleMDE, { SimpleMdeReact } from 'react-simplemde-editor'
+import { SimpleMdeReact } from 'react-simplemde-editor'
 import "easymde/dist/easymde.min.css";
 import axios, { process } from '../../../axios'
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import {  useAppSelector } from "../../../store/hooks";
 import { ColorButton, ColorButtonBlue } from "../../CustomButton";
 import { ItemTitle } from "../ItemComponents/ItemTitle";
-import { fetchAddDiscuss } from "../../../store/discuss";
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 export const AddDiscuss = () => {
 
-    const dispatch = useAppDispatch()
+    
     const navigate = useNavigate();
     const [title, setTitle] = React.useState('');
     const [text, setText] = React.useState('');

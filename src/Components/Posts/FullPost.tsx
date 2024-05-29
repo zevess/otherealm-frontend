@@ -1,16 +1,15 @@
 import { Avatar, Box, Divider, IconButton, Typography } from "@mui/material"
 import ReactMarkdown from 'react-markdown'
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { CommentSection } from "../ItemsWindows/CommentWindow/CommentSection";
 import { useAppDispatch } from "../../store/hooks";
 import React from "react";
-import axios, { process } from '../../axios'
+import  { process } from '../../axios'
 import { Link, useParams } from "react-router-dom";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { useAppSelector } from "../../store";
-import { postProps } from "../../store/interfaces";
+
 import { fetchOnePost } from "../../store/posts";
 import { clearComments } from "../../store/comment";
 

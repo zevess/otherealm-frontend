@@ -1,11 +1,8 @@
-import { Avatar, Box, Button, Divider, IconButton, TextField, Typography } from "@mui/material"
-import { deepOrange } from "@mui/material/colors"
+import { Avatar, Box, Button, IconButton, TextField, Typography } from "@mui/material"
 import React, { FC } from "react"
 import { Link } from "react-router-dom"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useAppSelector } from "../../../store";
-import { ModalSection } from "../../SectionsPopup/ModalSection";
 import axios, { process } from '../../../axios'
 import { ModalWindow } from "../../ModalWindow";
 import { ColorButton } from "../../CustomButton";
