@@ -10,6 +10,7 @@ import { ColorButton, ColorButtonBlue } from "../../CustomButton";
 import { ItemTitle } from "../ItemComponents/ItemTitle";
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Options } from "easymde";
 
 
 export const AddDiscuss = () => {
@@ -79,16 +80,17 @@ export const AddDiscuss = () => {
         setText(value);
     }, []);
 
-    const autofocusNoSpellcheckerOptions = React.useMemo(() => {
+    const autofocusNoSpellcheckerOptions = React.useMemo<Options>(() => {
         return {
             spellChecker: false,
             maxHeight: '400px',
             autofocus: true,
-            placeholder: 'Введите текст... (не менее 10 символов)',
+            placeholder: 'Введите текст...',
             status: false,
             autosave: {
                 enabled: true,
                 delay: 1000,
+                uniqueId: 'myUniqueID' 
             },
             toolbar: [
                 "bold", "strikethrough", {
@@ -102,10 +104,10 @@ export const AddDiscuss = () => {
                     title: "Underline"
                 }, "horizontal-rule", "heading", "|",
                 "quote", "unordered-list", "ordered-list", "|",
-                "link", "|",
+                "link", "image", "|",
                 "preview"
             ]
-        } as SimpleMDE.Options;
+        };
     }, []);
 
     const handleChangePreview = async (event: any) => {

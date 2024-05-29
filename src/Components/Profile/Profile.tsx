@@ -32,7 +32,7 @@ export const Profile = () => {
 
   React.useEffect(() => {
     dispatch(clearUserState());
-    dispatch(fetchOneUser(`${params.nick}`)).catch(err => setError(true))
+    dispatch(fetchOneUser(`${params.nick}`)).catch(_err => setError(true))
   
   }, [params.nick]);
 

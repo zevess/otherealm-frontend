@@ -39,7 +39,7 @@ export const GamesSearchList = () => {
                     <ItemCard itemPoster={item.background_image ? item.background_image : '../src/assets/img/noImg.png'} id={item.id} key={item.id} itemTitle={item.name} itemType="game" itemAltenativeTitle={item.alternativeName} />
                 ))}
             </div>
-            <Pagination page={currentGamePageSelector} count={totalGamePage} onChange={(event, value) => {
+            <Pagination page={currentGamePageSelector} count={totalGamePage} onChange={(_event, value) => {
                 dispatch(setGamePage(value));
                 dispatch(gameFetch({ searchTitle, rawgToken, currentGamePage: value }))
             }} />

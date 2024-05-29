@@ -40,7 +40,7 @@ export const FilmsSearchList = () => {
                     <ItemCard itemPoster={item.poster?.url ? item.poster.url : '../src/assets/img/noImg.png'} itemTitle={item.name} id={item.id} key={item.id} itemType={item.type} itemAltenativeTitle={item.alternativeName} />
                 ))}
             </div>
-            <Pagination page={currentMediaPageSelector} count={totalMediaPage} onChange={(event, value) => {
+            <Pagination page={currentMediaPageSelector} count={totalMediaPage} onChange={(_event, value) => {
                 dispatch(setMediaPage(value))
                 dispatch(filmFetch({ searchTitle, currentMediaPage: value, kpToken }))
             }} />

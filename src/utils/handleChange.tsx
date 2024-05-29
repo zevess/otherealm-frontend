@@ -1,6 +1,6 @@
 
 export const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
+    _event: React.MouseEvent<HTMLElement>,
     newAlignment: string,
     setAlignment: React.Dispatch<React.SetStateAction<any>>,
 ) => {

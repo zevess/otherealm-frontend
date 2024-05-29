@@ -1,6 +1,7 @@
 import { Box, Button, IconButton, TextField } from "@mui/material"
 import React from "react";
-import  { SimpleMdeReact } from 'react-simplemde-editor'
+import { SimpleMdeReact } from 'react-simplemde-editor'
+import { Options } from 'easymde';
 import "easymde/dist/easymde.min.css";
 import { ColorButton, ColorButtonBlue } from "../CustomButton";
 import axios, { process } from '../../axios'
@@ -8,13 +9,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 import { useAppSelector } from "../../store/hooks";
-import { useDispatch } from "react-redux";
+
 
 
 
 export const AddPost = () => {
 
-    // const dispatch = useDispatch()
+
     const navigate = useNavigate();
     const [title, setTitle] = React.useState('');
     const [text, setText] = React.useState('');
@@ -42,7 +43,7 @@ export const AddPost = () => {
     React.useEffect(() => {
         if (postId !== undefined) {
             axios.get(`/post/${postId}`).then((res): any => {
-                
+
                 window.localStorage.setItem('currentUser', res.data.user._id)
                 setTitle(res.data.title);
                 setText(res.data.text);
@@ -52,7 +53,7 @@ export const AddPost = () => {
 
     }, [postId])
 
-    
+
     if (isSameUser == false) {
         navigate(`/post/${postId}`);
     }
@@ -60,7 +61,8 @@ export const AddPost = () => {
         setText(value);
     }, []);
 
-    const autofocusNoSpellcheckerOptions = React.useMemo(() => {
+        
+    const autofocusNoSpellcheckerOptions = React.useMemo<Options>(() => {
         return {
             spellChecker: false,
             maxHeight: '400px',
@@ -70,6 +72,7 @@ export const AddPost = () => {
             autosave: {
                 enabled: true,
                 delay: 1000,
+                uniqueId: 'myUniqueID' 
             },
             toolbar: [
                 "bold", "strikethrough", {
@@ -86,7 +89,7 @@ export const AddPost = () => {
                 "link", "image", "|",
                 "preview"
             ]
-        } as SimpleMDE.Options;
+        };
     }, []);
 
     const handleChangePreview = async (event: any) => {

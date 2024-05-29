@@ -40,7 +40,7 @@ export const BooksSearchList = () => {
                     <ItemCard itemPoster={item?.volumeInfo?.imageLinks?.thumbnail ? item?.volumeInfo?.imageLinks?.thumbnail : '../src/assets/img/noImg.png'} itemTitle={item?.volumeInfo?.title} id={item?.id} key={item?.id} itemType="book" itemAltenativeTitle={item.alternativeName} />
                 ))}
             </div>
-            <Pagination page={currentBookPage} count={4} onChange={(event, value) => {
+            <Pagination page={currentBookPage} count={4} onChange={(_event, value) => {
                 dispatch(setBookPage(value))
                 dispatch(booksFetch({ searchTitle, gbToken, currentBookPage: value }))
             }} />
