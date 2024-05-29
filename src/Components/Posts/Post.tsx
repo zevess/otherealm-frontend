@@ -6,6 +6,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { FC } from "react";
 import { useAppSelector } from "../../store";
+import { process } from "../../axios";
 
 
 interface PostProps {
@@ -45,7 +46,7 @@ export const Post: FC<PostProps> = ({ user, nick, date, title, imageUrl, id, ava
             <div className="postItemDetails">
                 <div className="postItemDetails-user">
                     <Link to={`/profile/${nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <Avatar src={`http://localhost:4444${avatar}`} className="postItemDetails-user__avatar" />
+                        <Avatar src={`${process.env.REACT_APP_API_URL}${avatar}`} className="postItemDetails-user__avatar" />
                         <div className="postItemDetails-user__info">
                             <p className="postUserInfo nick">{user}</p>
                             <Divider sx={{ width: '100%' }} />
@@ -66,7 +67,7 @@ export const Post: FC<PostProps> = ({ user, nick, date, title, imageUrl, id, ava
             </div>
 
             <Link to={`/post/${id}`}>
-                {imageUrl && <img src={`http://localhost:4444${imageUrl}`} className='postItemImg' ></img>}
+                {imageUrl && <img src={`${process.env.REACT_APP_API_URL}${imageUrl}`} className='postItemImg' ></img>}
                 <p className="postItemText">{title}</p>
                 {isText && <p>...</p>}
 

@@ -6,7 +6,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useAppSelector } from "../../../store";
 import { ModalSection } from "../../SectionsPopup/ModalSection";
-import axios from '../../../axios'
+import axios, { process } from '../../../axios'
 import { ModalWindow } from "../../ModalWindow";
 import { ColorButton } from "../../CustomButton";
 import { useAppDispatch } from "../../../store/hooks";
@@ -84,7 +84,7 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
             <div className="commentUser">
                 <Link to={`/profile/${nick}`}>
                     <div className="commentUser__info">
-                        <Avatar className="commentUser__info-avatar" src={`http://localhost:4444${avatar}`}></Avatar>
+                        <Avatar className="commentUser__info-avatar" src={`${process.env.REACT_APP_API_URL}${avatar}`}></Avatar>
                         <p className="commentUser__info-nick">{name}</p>
                     </div>
                 </Link>

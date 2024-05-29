@@ -4,7 +4,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { CommentSection } from "../../ItemsWindows/CommentWindow/CommentSection";
 import { useAppDispatch } from "../../../store/hooks";
 import React from "react";
-import axios from '../../../axios'
+import axios, { process } from '../../../axios'
 import { Link, useParams } from "react-router-dom";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -89,7 +89,7 @@ export const DiscussItem = () => {
                     <Divider sx={{marginTop: '12px', marginBottom: '12px'}} />
                     <div className="postItemDetails-user">
                         <Link to={`/profile/${discussSelector.user.nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <Avatar src={`http://localhost:4444${discussSelector.user.avatarUrl}`} className="postItemDetails-user__avatar" />
+                            <Avatar src={`${process.env.REACT_APP_API_URL}${discussSelector.user.avatarUrl}`} className="postItemDetails-user__avatar" />
                             <div className="postItemDetails-user__info">
                                 <p className="postUserInfo nick">{discussSelector.user.name}</p>
                                 <Divider sx={{ width: '100%' }} />
@@ -121,7 +121,7 @@ export const DiscussItem = () => {
                 </div>
 
                 {discussSelector.imageUrl &&
-                    <img src={`http://localhost:4444${discussSelector.imageUrl}`} className="fullPostImg"></img>
+                    <img src={`${process.env.REACT_APP_API_URL}${discussSelector.imageUrl}`} className="fullPostImg"></img>
                 }
 
                 <Typography variant="h4" className="fullPostTitle">{discussSelector.title}</Typography>

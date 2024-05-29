@@ -3,7 +3,7 @@ import React from "react";
 import SimpleMDE, { SimpleMdeReact } from 'react-simplemde-editor'
 import "easymde/dist/easymde.min.css";
 import { ColorButton, ColorButtonBlue } from "../CustomButton";
-import axios from '../../axios'
+import axios, { process } from '../../axios'
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -138,7 +138,7 @@ export const AddPost = () => {
                     <Button onClick={() => inputFileRef.current.click()} sx={{ padding: '15px', margin: '8px' }}>загрузить превью</Button>
                     {imageUrl &&
                         <>
-                            <Box component={'img'} maxWidth={'100%'} src={`http://localhost:4444${imageUrl}`}>
+                            <Box component={'img'} maxWidth={'100%'} src={`${process.env.REACT_APP_API_URL}${imageUrl}`}>
                             </Box>
                             <IconButton onClick={() => setImageUrl('')} >
                                 <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} />
