@@ -38,6 +38,7 @@ export const stateSlice = createSlice({
     reducers: {
         addItemTitle: (state, action: PayloadAction<string>) => {
             state.searchTitle = action.payload;
+            window.localStorage.setItem('searchTitle', action.payload)
         },
         setSearchSection: (state, action: PayloadAction<string>) =>{
             state.currentSearchSection = action.payload

@@ -10,19 +10,23 @@ import { addItemTitle, setSearchSection, setTotalBookPage, setTotalGamePage, set
 import { gameFetch } from "../../store/fetches/gameFetch"
 import { MediaSearch } from "./MediaSearch"
 import { UserSearch } from "./UserSearch"
+import { replaceNonAlphanumericToUTF8 } from "../../utils/rename"
+
 
 
 export const Search = () => {
 
     const dispatch = useAppDispatch();
-
-    const [text, setText] = React.useState('');
+    const searchTitleLocalStorage = window.localStorage.getItem('searchTitle');
+    const [text, setText] = React.useState(String(searchTitleLocalStorage));
 
     const [upSearchAlignment, setUpSearchAlignment] = React.useState(Object.keys(searchTypes)[0]);
     const [downSearchAlignment, setDownSearchAlignment] = React.useState(Object.keys(searchToggleItems)[0]);
 
     const searchTitleSelector = useAppSelector((state) => state.state.searchTitle)
-    const searchTitle = searchTitleSelector.replace(' ', '_');
+    const searchTitle = `${searchTitleSelector}`.replace(' ', '_');
+    
+    const gameSearchTitle = replaceNonAlphanumericToUTF8(`${searchTitleSelector}`)
 
     const kpToken = useAppSelector((state) => state.filmData.kpToken)
     const gbToken = useAppSelector((state) => state.bookData.gbToken)
@@ -72,14 +76,16 @@ export const Search = () => {
         }
     }
 
-    const getGame = (searchTitle: string, rawgToken: string, currentGamePage: number) => {
-        if (searchTitle !== (null || '')) {
-            dispatch(gameFetch({ searchTitle, rawgToken, currentGamePage }))
+    const getGame = (gameSearchTitle: string, rawgToken: string, currentGamePage: number) => {
+        if (gameSearchTitle !== (null || '')) {
+            dispatch(gameFetch({ gameSearchTitle, rawgToken, currentGamePage }))
         } else {
             alert("поле ввода не должно быть пустым!")
             return
         }
     }
+
+
 
     return (
         <div className="searchWrapper">
@@ -89,10 +95,10 @@ export const Search = () => {
                 <SearchToggleGroup items={searchTypes} handleChange={(event, newAlignment) => handleChange(event, newAlignment, setUpSearchAlignment)} alignment={upSearchAlignment}></SearchToggleGroup>
                 {upSearchAlignment == 'media' &&
                     (<>
-                        <MediaSearch text={text} setText={setText} onClick={()=>{
-                            getFilms(searchTitle, currentMediaPage, kpToken)
-                            getBooks(searchTitle, gbToken, currentBookPage)
-                            getGame(searchTitle, rawgToken, currentGamePage)
+                        <MediaSearch text={text} setText={setText} onClick={() => {
+                            getFilms(`${searchTitle}`, currentMediaPage, kpToken)
+                            getBooks(`${searchTitle}`, gbToken, currentBookPage)
+                            getGame(gameSearchTitle, rawgToken, currentGamePage)
                         }} setDownSearchAlignment={setDownSearchAlignment} downSearchAlignment={downSearchAlignment}></MediaSearch>
                     </>)
                 }

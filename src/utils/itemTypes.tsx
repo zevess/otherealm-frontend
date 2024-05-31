@@ -29,7 +29,7 @@ export const divideItems: objectProps = {
 
 
 export const searchToggleItems: objectProps = {
-    "cinema": "поиск по фильмам/сериалам/мультфильмам/аниме",
+    "cinema": "поиск по фильмам / сериалам / мультфильмам / аниме",
     "games": "поиск по играм",
     "books": "поиск по книгам"
 }

@@ -30,12 +30,11 @@ export const Welcome = () => {
 
             <p className="welcomeOpportunities__title">Среди возможностей есть:</p>
 
-
             <div className="welcomeOpportunitiesItem">
-                <CardMedia className="welcomeGif" component={'video'} muted autoPlay loop image={'../src/assets/video/preview.mp4'} />
+                <img src="https://i.ibb.co/5cjKRty/1.png" alt="" className="welcomeGif" />
                 <div className="welcomeTextField-about">
                     <Typography sx={{ padding: '15px' }} variant="h6">
-                        поиск по объектам медиа-франшиз
+                        создание персональных разделов
                     </Typography>
                 </div>
             </div>
@@ -44,19 +43,20 @@ export const Welcome = () => {
 
                 <div className="welcomeTextField-about" >
                     <Typography sx={{ padding: '15px' }} variant="h6">
-                        создание коллекций в профиле
+                        поиск объектов медиа-франшиз
                     </Typography>
                 </div>
 
-                <CardMedia className="welcomeGif" component={'video'} muted autoPlay loop image={'../src/assets/video/section.mp4'} />
+                <img src="https://i.ibb.co/7QPSGJb/2.png" alt="" className="welcomeGif" />
 
 
             </div>
 
             <div className="welcomeOpportunitiesItem">
-                <CardMedia className="welcomeGif" component={'video'} muted autoPlay loop image={'../src/assets/video/favourite.mp4'} />
+                <img src="https://i.ibb.co/Bj760QF/3.png" alt="" className="welcomeGif" />
                 <div className="welcomeTextField-about"  >
                     <Typography sx={{ padding: '15px' }} variant="h6">
+                        просмотр информации и
                         добавление объекта медиа-франшизы в коллекции
                     </Typography>
                 </div>
@@ -70,16 +70,16 @@ export const Welcome = () => {
                     </Typography>
                 </div>
 
-                <CardMedia className="welcomeGif" component={'video'} muted autoPlay loop image={'https://youtu.be/3hcpLwuetkQ'} />
+                <img src="https://i.ibb.co/SBm7rbT/4.png" alt="" className="welcomeGif" />
 
 
             </div>
 
             <div className="welcomeOpportunitiesItem">
-                <CardMedia className="welcomeGif" component={'video'} muted autoPlay loop image={'../src/assets/video/discuss.mp4'} />
+                <img src="https://i.ibb.co/0tGQcVt/5.png" alt="" className="welcomeGif" />
                 <div className="welcomeTextField-about"  >
                     <Typography sx={{ padding: '15px' }} variant="h6">
-                        создание обсуждений по объекту медиа-франшиз
+                        обсуждения с другими пользователи объектов медиа-франшиз
                     </Typography>
                 </div>
             </div>
@@ -92,9 +92,31 @@ export const Welcome = () => {
                     </Typography>
                 </div>
 
-                <CardMedia className="welcomeGif" component={'video'} muted autoPlay loop image={'../src/assets/video/favv.mp4'} />
+                <img src="https://i.ibb.co/5jLbS9X/6.png" alt="" className="welcomeGif" />
 
             </div>
+
+            <div className="welcomeOpportunitiesItem">
+                <img src="https://i.ibb.co/Th8mGPP/7.png" alt="" className="welcomeGif" />
+                <div className="welcomeTextField-about"  >
+                    <Typography sx={{ padding: '15px' }} variant="h6">
+                        просмотр постов других пользоватей и подписка на них, для отображения постов в ленте
+                    </Typography>
+                </div>
+            </div>
+
+            <div className="welcomeOpportunitiesItem">
+
+                <div className="welcomeTextField-about"  >
+                    <Typography sx={{ padding: '15px' }} variant="h6">
+                        создание своих постов
+                    </Typography>
+                </div>
+
+                <img src="https://i.ibb.co/9vCBBWc/8.png" alt="" className="welcomeGif" />
+
+            </div>
+
 
             <div className="welcomeTextField-about__end">
                 <Typography variant="h6">

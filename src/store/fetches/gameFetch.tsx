@@ -2,8 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const gameFetch = createAsyncThunk(
     'gameData/gameFetch',
-    async ({ searchTitle, rawgToken, currentGamePage }: { searchTitle: string, rawgToken: string, currentGamePage: number },) => {
-        let fetchURL = `https://api.rawg.io/api/games?key=${rawgToken}&search=${searchTitle}&page=${currentGamePage}`
+    async ({ gameSearchTitle, rawgToken, currentGamePage }: { gameSearchTitle: string, rawgToken: string, currentGamePage: number },) => {
+        let fetchURL = `https://api.rawg.io/api/games?key=${rawgToken}&search=${gameSearchTitle}&page=${currentGamePage}`
         console.log(fetchURL)
         const response = await fetch(fetchURL, {
             method: 'GET',

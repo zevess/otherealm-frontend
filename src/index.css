@@ -739,9 +739,10 @@ button:focus-visible {
 }
 
 .welcomeGif {
-  border: solid 1.5px #646cff;
+  border: solid 2px #646cff;
   border-radius: 16px;
   max-width: 40%;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 .welcomeTextField-about {
@@ -749,6 +750,7 @@ button:focus-visible {
   background-color: white;
   border-radius: 30px;
   border: solid 3px black;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
 .welcomeTextField-about__end {
@@ -761,6 +763,7 @@ button:focus-visible {
   border: solid 2px black;
   border-radius: 40px;
   background-color: white;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
 .postListWrapper {

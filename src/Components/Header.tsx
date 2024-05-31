@@ -127,7 +127,7 @@ export const Header = () => {
             ) : (
                 <div className="headerNav">
                     <Link to={'/'}>
-                        <Box component={'img'} sx={{ width: '150px' }} src="/src/assets/img/ЛОГО.svg"></Box>
+                        <Box component={'img'} sx={{ width: '150px' }} src="https://svgshare.com/i/16ge.svg"></Box>
                     </Link>
                     <Link to={'/auth'}>
                         <p>войти</p>

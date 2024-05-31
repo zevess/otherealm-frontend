@@ -53,7 +53,7 @@ export const FilmWindow = () => {
 
                 <div className="searchItemContent" >
                     <div className="searchItemContent__left">
-                        <img className="searchItemPoster" src={`${currentFilmItem.poster?.url}`} alt="" />
+                        <img className="searchItemPoster" src={`${currentFilmItem.poster?.url}` ? `${currentFilmItem.poster?.url}`: 'https://i.ibb.co/tbwz7KG/noImg.png'} alt="" />
                         <AddToSection />
                     </div>
 

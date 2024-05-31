@@ -11,8 +11,6 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import { useAppSelector } from "../../store/hooks";
 
 
-
-
 export const AddPost = () => {
 
 
@@ -24,9 +22,6 @@ export const AddPost = () => {
     const inputFileRef = React.useRef<any>(null);
 
     const userNick = useAppSelector((state) => state.authData.data?.nick)
-    // const selectedUserNick = useAppSelector((state) => state.usersData.currentUser.items?.nick)
-    // const userId = (useAppSelector((state) => state.authData.data?._id));
-    // const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
 
     const authId = window.localStorage.getItem('authId');
     const currentUserId = window.localStorage.getItem('currentUser')
