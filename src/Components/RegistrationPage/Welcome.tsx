@@ -70,7 +70,7 @@ export const Welcome = () => {
                     </Typography>
                 </div>
 
-                <CardMedia className="welcomeGif" component={'video'} muted autoPlay loop image={'../src/assets/video/comment.mp4'} />
+                <CardMedia className="welcomeGif" component={'video'} muted autoPlay loop image={'https://youtu.be/3hcpLwuetkQ'} />
 
 
             </div>
