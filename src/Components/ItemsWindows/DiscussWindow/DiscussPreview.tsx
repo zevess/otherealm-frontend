@@ -49,7 +49,7 @@ export const DiscussPreview: FC<DiscussProps> = ({ user, userId, nick, date, tit
             <div className="postItemDetails">
                 <div className="postItemDetails-user">
                     <Link to={`/profile/${nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <Avatar src={`${import.meta.env.VITE_API_URL}${avatar}`} className="postItemDetails-user__avatar" />
+                        <Avatar src={`${import.meta.env.VITE_API_URL}/${avatar}`} className="postItemDetails-user__avatar" />
                         <div className="postItemDetails-user__info">
                             <p className="postUserInfo nick">{user}</p>
                             <Divider sx={{ width: '100%' }} />

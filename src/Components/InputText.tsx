@@ -1,6 +1,7 @@
 import { IconButton, InputAdornment, TextField } from "@mui/material"
 import SendIcon from '@mui/icons-material/Send';
 import { FC } from "react";
+import { useAppSelector } from "../store";
 
 export const inputStyles = {
     backgroundColor: 'white', textAlign: 'left', marginBottom: '20px', width: '40%'
@@ -16,6 +17,7 @@ interface InputTextProps {
 }
 
 export const InputText: FC<InputTextProps> = ({placeholder, text, setText, onClick, forComments}) => {
+    const isAuth = useAppSelector((state) => state.authData.data);
     return (
         <TextField value={text} variant="outlined" multiline={true}  placeholder={placeholder} inputProps={{
             style: {
@@ -25,13 +27,13 @@ export const InputText: FC<InputTextProps> = ({placeholder, text, setText, onCli
             
             endAdornment: (
                 <InputAdornment position="end">
-                    <IconButton color="primary" onClick={onClick}>
+                    <IconButton disabled={!isAuth} color="primary" onClick={onClick}>
                         <SendIcon sx={{ width: '50px', height: '50px' }} />
                     </IconButton>
                 </InputAdornment>
             )
         }} className={forComments ? "commentInputField": 'searchInputField'} onChange={(event) =>{
             setText(event.target.value)
-        }}></TextField>
+        }} disabled={!isAuth}></TextField>
     )
 }

@@ -42,7 +42,7 @@ export const PostList = () => {
                     </>
                 )
             }
-            {(!isSameUser && (addPost == false)) &&
+            {(isSameUser == true && (addPost == false)) &&
                 <ColorButtonBlue onClick={() => setAddPost(true)} sx={{ width: '200px', marginLeft: 'auto', marginRight: 'auto', marginTop: '12px' }}>создать запись</ColorButtonBlue>
             }
 

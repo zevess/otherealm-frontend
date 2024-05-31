@@ -6,7 +6,7 @@ import { useAppSelector } from "../../store";
 export const Welcome = () => {
 
     const selectIsAuth = useAppSelector((state) => state.authData.data);
-
+    console.log(import.meta.env)
     return (
         <div className="welcomeWrapper">
 

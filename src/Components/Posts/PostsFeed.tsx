@@ -11,6 +11,7 @@ export const PostsFeed = () => {
     const [addPost, setAddPost] = React.useState(false);
     const userId = (useAppSelector((state) => state.authData.data?._id));
     const selectedUserId = (useAppSelector((state) => state.authData.selectedUserData?._id));
+    const isAuth = useAppSelector((state) => state.authData.data);
     const isSameUser = (userId == selectedUserId)
     const feedSelector = useAppSelector((state) => state.postsData.feed);
     console.log(feedSelector);
@@ -42,7 +43,7 @@ export const PostsFeed = () => {
             </div>
             )}
             
-            {(!isSameUser && (addPost == false)) &&
+            {(isAuth && (addPost == false)) &&
                 <ColorButtonBlue onClick={() => setAddPost(true)} sx={{ width: '200px', marginLeft: 'auto', marginRight: 'auto', marginTop: '12px' }}>создать запись</ColorButtonBlue>
             }
 
