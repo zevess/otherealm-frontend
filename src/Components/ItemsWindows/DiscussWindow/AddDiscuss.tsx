@@ -60,10 +60,6 @@ export const AddDiscuss = () => {
         navigate(`/item/${itemIdSlash}`)
     }
 
-    // if (isSameUser == false){
-    //     navigate(`/post/${postId}`);
-    // }
-
     React.useEffect(() => {
         if (discussId !== undefined) {
             axios.get(`/discuss/${itemId}/${discussId}`).then(res => {
