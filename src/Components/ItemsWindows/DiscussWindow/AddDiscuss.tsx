@@ -55,7 +55,6 @@ export const AddDiscuss = () => {
     }
 
     const { discussId } = useParams();
-    console.log(discussId)
     const isEditing = Boolean(discussId)
     if ((isSameUser == false) && isEditing == true) {
         navigate(`/item/${itemIdSlash}`)

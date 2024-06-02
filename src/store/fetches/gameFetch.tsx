@@ -4,7 +4,6 @@ export const gameFetch = createAsyncThunk(
     'gameData/gameFetch',
     async ({ gameSearchTitle, rawgToken, currentGamePage }: { gameSearchTitle: string, rawgToken: string, currentGamePage: number },) => {
         let fetchURL = `https://api.rawg.io/api/games?key=${rawgToken}&search=${gameSearchTitle}&page=${currentGamePage}`
-        console.log(fetchURL)
         const response = await fetch(fetchURL, {
             method: 'GET',
             headers: {
@@ -20,7 +19,6 @@ export const gameItemFetch = createAsyncThunk(
     'gameData/gameItemFetch',
     async ({gameId, rawgToken} : {gameId: string, rawgToken: string})  => {
         let fetchURL = `https://api.rawg.io/api/games/${gameId}?key=${rawgToken}`
-        console.log(fetchURL)
         const response = await fetch(fetchURL, {
             method: 'GET',
             headers: {

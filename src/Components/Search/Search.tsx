@@ -15,9 +15,14 @@ import { replaceNonAlphanumericToUTF8 } from "../../utils/rename"
 export const Search = () => {
 
     const dispatch = useAppDispatch();
+    // window.localStorage.setItem('searchTitle', '')
+    if (window.localStorage.getItem('searchTitle') == null){
+        window.localStorage.setItem('searchTitle', '');
+    }
+
     const searchTitleLocalStorage = window.localStorage.getItem('searchTitle');
     const [text, setText] = React.useState(String(searchTitleLocalStorage));
-
+    
     const [upSearchAlignment, setUpSearchAlignment] = React.useState(Object.keys(searchTypes)[0]);
     const [downSearchAlignment, setDownSearchAlignment] = React.useState(Object.keys(searchToggleItems)[0]);
 
@@ -52,6 +57,9 @@ export const Search = () => {
 
     React.useEffect(() => {
         dispatch(addItemTitle(text));
+        // return () => {
+        //     dispatch(addItemTitle(''));
+        // }
     }, [text, downSearchAlignment])
     dispatch(setSearchSection(downSearchAlignment));
 
