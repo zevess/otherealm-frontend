@@ -7,12 +7,10 @@ import { ColorButton, ColorButtonBlue } from "../CustomButton";
 import axios from '../../axios'
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-
 import { useAppSelector } from "../../store/hooks";
 
 
 export const AddPost = () => {
-
 
     const navigate = useNavigate();
     const [title, setTitle] = React.useState('');
@@ -159,16 +157,9 @@ export const AddPost = () => {
                     <ColorButtonBlue onClick={() => onSubmit()} disabled={!Boolean(title.length >= 5)} size="large">
                         {isEditing ? 'сохранить' : 'отправить'}
                     </ColorButtonBlue>
-
                 </div>
-
             </div>
         </div>
 
-
     )
 }
-
-{/* <ColorButtonBlue sx={{height: '60px', width: '60px', borderRadius: '16px', marginBottom: '20px'}} onClick={()=>navigate(`/profile/${selectedUserNick}`)}>
-                <ArrowBackIcon />
-            </ColorButtonBlue> */}

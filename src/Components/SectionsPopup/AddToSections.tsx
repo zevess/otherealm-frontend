@@ -50,7 +50,7 @@ export const AddToSection = () => {
     
     const userId = (useAppSelector((state) => state.authData.data?._id));
     const favourites = useAppSelector((state) => state.favouriteData.favourites.items);
-    // console.log(favourites)
+    
     
     const [favouriteArr, setFavouriteArr] = React.useState<any>({});
 
@@ -67,10 +67,7 @@ export const AddToSection = () => {
                 dispatch(addFavourites(res.data));
             })
         }
-        // .catch(err => {
-        //     console.warn(err);
-        //     alert('ошибка при получении разделов')
-        // })
+
         return () => {
             dispatch(clearFavourite());
         }
@@ -102,7 +99,7 @@ export const AddToSection = () => {
             alert('ошибка при добавлении в раздел')
         }
     }
-    // console.log(favouriteArr);
+   
 
     return (
         <PopupWithTrigger id="popup-with-portal" buttonLabel="ДОБАВИТЬ В РАЗДЕЛ">

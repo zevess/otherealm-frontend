@@ -1,7 +1,5 @@
 import { Box, CircularProgress, Divider, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
-
 import React from "react";
-
 import { CommentSection } from "./CommentWindow/CommentSection";
 import { DiscussSection, } from "./DiscussWindow/DiscussSection";
 import { ItemTitle } from "./ItemComponents/ItemTitle";

@@ -12,8 +12,6 @@ import { MediaSearch } from "./MediaSearch"
 import { UserSearch } from "./UserSearch"
 import { replaceNonAlphanumericToUTF8 } from "../../utils/rename"
 
-
-
 export const Search = () => {
 
     const dispatch = useAppDispatch();
@@ -84,8 +82,6 @@ export const Search = () => {
             return
         }
     }
-
-
 
     return (
         <div className="searchWrapper">

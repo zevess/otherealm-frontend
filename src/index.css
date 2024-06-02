@@ -692,9 +692,11 @@ button:focus-visible {
 
 .welcomeWrapper {
   width: 100%;
+  max-width: 1600px;
   display: flex;
   flex-direction: column;
-  justify-content: center
+  /* justify-content: center */
+  margin: 0 auto;
 }
 
 .welcomeInfo {
