@@ -1,5 +1,5 @@
 import React from "react"
-import { InputText } from "../InputText"
+import { InputText } from "../../utils/InputText"
 import { useAppDispatch } from "../../store/hooks"
 import { fetchUsers } from "../../store/users"
 import { useAppSelector } from "../../store"

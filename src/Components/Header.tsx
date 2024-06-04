@@ -1,5 +1,5 @@
 import { Box, Drawer, IconButton, List, ListItem, ListItemButton } from "@mui/material"
-import { HeaderTemplate } from "./HeaderTemplate"
+import { HeaderTemplate } from "../utils/HeaderTemplate"
 import { Link } from "react-router-dom"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';

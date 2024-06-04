@@ -2,7 +2,7 @@ import React from "react";
 import { useAppSelector } from "../../store";
 import { useAppDispatch } from "../../store/hooks";
 import { Post } from "./Post";
-import { ColorButtonBlue } from "../CustomButton";
+import { ColorButtonBlue } from "../../utils/CustomButton";
 import { fetchPostsFeed } from "../../store/posts";
 import { CircularProgress, Typography } from "@mui/material";
 import { AddPost } from "./AddPost";

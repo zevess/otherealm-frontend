@@ -1,12 +1,11 @@
 import { CardMedia, Paper, Typography } from "@mui/material"
-import { ColorButtonBlue } from "../CustomButton"
+import { ColorButtonBlue } from "../../utils/CustomButton"
 import { Link } from "react-router-dom"
 import { useAppSelector } from "../../store";
 
 export const Welcome = () => {
 
     const selectIsAuth = useAppSelector((state) => state.authData.data);
-    console.log(import.meta.env)
     return (
         <div className="welcomeWrapper">
 

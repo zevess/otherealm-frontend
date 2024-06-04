@@ -2,7 +2,7 @@ import React from "react";
 import { useAppSelector } from "../../store";
 import { useAppDispatch } from "../../store/hooks";
 import axios from '../../axios'
-import { PopupWithTrigger } from "../Popup";
+import { PopupWithTrigger } from "../../utils/Popup";
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { addFavourites, clearFavourite } from "../../store/favourite";
 

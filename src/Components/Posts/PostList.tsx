@@ -1,5 +1,5 @@
 import { Post } from "./Post"
-import { ColorButtonBlue } from "../CustomButton"
+import { ColorButtonBlue } from "../../utils/CustomButton"
 
 import { useAppSelector } from "../../store"
 import React from "react"

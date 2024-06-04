@@ -3,7 +3,7 @@ import React from "react";
 import { SimpleMdeReact } from 'react-simplemde-editor'
 import { Options } from 'easymde';
 import "easymde/dist/easymde.min.css";
-import { ColorButton, ColorButtonBlue } from "../CustomButton";
+import { ColorButton, ColorButtonBlue } from "../../utils/CustomButton";
 import axios from '../../axios'
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';

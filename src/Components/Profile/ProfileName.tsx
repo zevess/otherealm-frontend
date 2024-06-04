@@ -4,7 +4,7 @@ import axios from '../../axios'
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { fetchUser } from "../../store/auth"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import { ColorButtonBlue } from "../CustomButton"
+import { ColorButtonBlue } from "../../utils/CustomButton"
 import {  fetchOneUser  } from "../../store/users"
 
 interface ProfileNameProps {

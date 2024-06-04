@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { useAppSelector } from "../../../store";
 import axios from '../../../axios'
-import { ModalWindow } from "../../ModalWindow";
-import { ColorButton } from "../../CustomButton";
+import { ModalWindow } from "../../../utils/ModalWindow";
+import { ColorButton } from "../../../utils/CustomButton";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearComments, fetchGetComments } from "../../../store/comment";
 

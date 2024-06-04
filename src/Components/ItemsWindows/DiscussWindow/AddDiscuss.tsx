@@ -6,7 +6,7 @@ import axios from '../../../axios'
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import {  useAppSelector } from "../../../store/hooks";
-import { ColorButton, ColorButtonBlue } from "../../CustomButton";
+import { ColorButton, ColorButtonBlue } from "../../../utils/CustomButton";
 import { ItemTitle } from "../ItemComponents/ItemTitle";
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';

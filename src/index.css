@@ -689,13 +689,30 @@ button:focus-visible {
 }
 
 
+.processingData{
+  margin: 0 auto;
+  width: 80%;
+  height: 96vh;
+  background-color: white;
+
+  padding: 15px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.processingData__text{
+  height: 90vh;
+  overflow-y: scroll;
+
+}
 
 .welcomeWrapper {
   width: 100%;
   max-width: 1600px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center */
   margin: 0 auto;
 }
 

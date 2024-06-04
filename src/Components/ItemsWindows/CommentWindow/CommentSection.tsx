@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import { InputText } from "../../InputText"
+import { InputText } from "../../../utils/InputText.tsx"
 import { Comment } from "./Comment"
 import React, { FC } from "react"
 

@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { ModalWindow } from "../ModalWindow";
-import { ColorButton } from "../CustomButton";
+import { ModalWindow } from "../../utils/ModalWindow";
+import { ColorButton } from "../../utils/CustomButton";
 import { FC } from "react";
 
 interface ModalSectionProps {

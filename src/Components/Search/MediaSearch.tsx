@@ -4,7 +4,7 @@ import { SearchResult } from "./SearchResultList"
 import { FC } from "react"
 import { searchToggleItems } from "../../utils/itemTypes"
 import { handleChange } from "../../utils/handleChange"
-import { InputText } from "../InputText"
+import { InputText } from "../../utils/InputText"
 
 interface MediaSearchProps {
     downSearchAlignment: string,

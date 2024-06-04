@@ -6,8 +6,6 @@ import { Profile } from './Components/Profile/Profile'
 import { GameWindow } from './Components/ItemsWindows/GameWindow'
 import { FilmWindow } from './Components/ItemsWindows/FilmWindow'
 import { BookWindow } from './Components/ItemsWindows/BookWindow'
-
-import { Authorize } from './Components/RegistrationPage/Registration'
 import { useAppDispatch } from './store/hooks'
 import React from 'react'
 import { fetchAuthMe } from './store/auth'
@@ -18,6 +16,7 @@ import { AddPost } from './Components/Posts/AddPost'
 import { PostsFeed } from './Components/Posts/PostsFeed'
 import { AddDiscuss } from './Components/ItemsWindows/DiscussWindow/AddDiscuss'
 import { DiscussItem } from './Components/ItemsWindows/DiscussWindow/DiscussItem'
+import { Authorize } from './Components/RegistrationPage/Authorize'
 
 function App() {
   const dispatch = useAppDispatch();
