@@ -31,7 +31,7 @@ export const AddPost = () => {
 
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
-    console.log(parts)
+    
 
     React.useEffect(() => {
         if (postId !== undefined) {

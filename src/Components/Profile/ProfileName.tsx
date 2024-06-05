@@ -2,7 +2,7 @@ import { Avatar, Box,  IconButton, Typography } from "@mui/material"
 import React, { FC } from "react"
 import axios from '../../axios'
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { fetchUser } from "../../store/auth"
+import { fetchAuthMe, fetchUser, logout } from "../../store/auth"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { ColorButtonBlue } from "../../utils/CustomButton"
 import {  fetchOneUser  } from "../../store/users"
@@ -14,7 +14,7 @@ interface ProfileNameProps {
 export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
 
     const dispatch = useAppDispatch()
-
+    
     const avatar = useAppSelector((state) => state.usersData.currentUser.items?.avatarUrl);
     const background = useAppSelector((state) => state.usersData.currentUser.items?.backgroundUrl);
     const userFollows = (useAppSelector((state) => state.authData.data?.follows));
@@ -27,7 +27,13 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
     const isFollowed = userFollows?.some((user: any) => user._id === currentUser?._id)
     console.log(isFollowed)
 
-    // const isFollowed = userFollows?.includes(`${currentUser?._id}`)
+    React.useEffect(() =>{
+        setFollow(isFollowed);
+    }, [isFollowed])
+
+    React.useEffect(() => {
+        isSameUser ? dispatch(fetchAuthMe()) : (authData?.nick !== undefined) && dispatch(fetchUser(`${authData?.nick}`))
+      }, [])
 
     const inputAvatarRef = React.useRef<any>(null)
     const inputBGRef = React.useRef<any>(null)
@@ -64,13 +70,7 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
     }
 
 
-    React.useEffect(() =>{
-        setFollow(isFollowed);
-    }, [isFollowed])
-
-    React.useEffect(() => {
-        (authData?.nick !== undefined) && dispatch(fetchUser(`${authData?.nick}`))
-      }, [])
+    
       
     const handleFollow = async () => {
         try {
@@ -83,6 +83,7 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
             }
 
             await axios.patch(`/profile/follow/${userId}`, fields).then(()=>setFollow(true))
+            dispatch(fetchAuthMe());
             // dispatch(fetchFollowUser(fields)).then(() => setFollow(true));
         } catch (err) {
             console.warn(err);
@@ -103,6 +104,7 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
 
             if (window.confirm('вы уверены что хотите отписаться')) {
                 await axios.patch(`/profile/unfollow/${userId}`, fields).then(()=>setFollow(false))
+                dispatch(fetchAuthMe());
                 // dispatch(fetchUnfollowUser(fields)).then(()=> setFollow(false))
             }
 

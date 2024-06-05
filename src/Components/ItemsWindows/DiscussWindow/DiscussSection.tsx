@@ -19,11 +19,7 @@ export const DiscussSection = () => {
     const itemId = String(parts.slice(-2).join(''))
     const itemIdLink = String(parts.slice(-2).join('/'))
 
-    console.log(itemId)
-    // const urlParts = String(parts.slice(-2).join('/'))
-    // console.log(urlParts)
 
-    // console.log(currentUrl)
 
     React.useEffect(() => {
         dispatch(fetchItemDiscusses(`${itemId}`))
