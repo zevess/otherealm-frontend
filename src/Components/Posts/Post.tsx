@@ -20,7 +20,7 @@ interface PostProps {
 export const Post: FC<PostProps> = ({ user, nick, date, title, imageUrl, id, avatar, isText }) => {
 
     const userId = (useAppSelector((state) => state.authData.data?._id));
-    const selectedUserId = (useAppSelector((state) => state.authData.selectedUserData?._id));
+    const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
     const isSameUser = (selectedUserId && (userId == selectedUserId))
 
     const dateToForm = new Date(date);

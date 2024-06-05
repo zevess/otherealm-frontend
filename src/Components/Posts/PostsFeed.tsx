@@ -10,7 +10,7 @@ import { AddPost } from "./AddPost";
 export const PostsFeed = () => {
     const [addPost, setAddPost] = React.useState(false);
     const userId = (useAppSelector((state) => state.authData.data?._id));
-    const selectedUserId = (useAppSelector((state) => state.authData.selectedUserData?._id));
+    const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
     const isAuth = useAppSelector((state) => state.authData.data);
     const isSameUser = (userId == selectedUserId)
     const feedSelector = useAppSelector((state) => state.postsData.feed);
