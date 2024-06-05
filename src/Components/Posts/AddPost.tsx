@@ -29,8 +29,8 @@ export const AddPost = () => {
     const { postId } = useParams();
     const isEditing = Boolean(postId)
 
-    const currentUrl = window.location.href;
-    const parts = currentUrl.split('/');
+    // const currentUrl = window.location.href;
+    // const parts = currentUrl.split('/');
     
 
     React.useEffect(() => {

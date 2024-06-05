@@ -2,7 +2,7 @@ import { Avatar, Box,  IconButton, Typography } from "@mui/material"
 import React, { FC } from "react"
 import axios from '../../axios'
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { fetchAuthMe, fetchUser, logout } from "../../store/auth"
+import { fetchAuthMe, fetchUser } from "../../store/auth"
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { ColorButtonBlue } from "../../utils/CustomButton"
 import {  fetchOneUser  } from "../../store/users"
