@@ -692,7 +692,7 @@ button:focus-visible {
 .processingData{
   margin: 0 auto;
   width: 80%;
-  height: 96vh;
+  height: 80vh;
   background-color: white;
 
   padding: 15px;
@@ -703,7 +703,7 @@ button:focus-visible {
 }
 
 .processingData__text{
-  height: 90vh;
+  
   overflow-y: scroll;
 
 }
