@@ -81,7 +81,7 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
             <div className="commentUser">
                 <Link to={`/profile/${nick}`}>
                     <div className="commentUser__info">
-                        <Avatar className="commentUser__info-avatar" src={`${import.meta.env.VITE_API_URL}${avatar}`}></Avatar>
+                        <Avatar className="commentUser__info-avatar" src={`${avatar}`}></Avatar>
                         <p className="commentUser__info-nick">{name}</p>
                     </div>
                 </Link>

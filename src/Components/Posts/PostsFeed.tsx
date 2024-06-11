@@ -14,7 +14,6 @@ export const PostsFeed = () => {
     const isAuth = useAppSelector((state) => state.authData.data);
     const isSameUser = (userId == selectedUserId)
     const feedSelector = useAppSelector((state) => state.postsData.feed);
-    console.log(feedSelector);
     const dispatch = useAppDispatch();
 
     React.useEffect(() => {

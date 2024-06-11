@@ -23,10 +23,6 @@ export const DiscussSection = () => {
 
     React.useEffect(() => {
         dispatch(fetchItemDiscusses(`${itemId}`))
-        // axios.get(`/discuss/${itemId}`).then(res => {
-        //     setData(res.data);
-        //     dispatch(addDiscuss(res.data));
-        // })
 
         return () => {
             dispatch(clearDiscuss())
@@ -38,11 +34,7 @@ export const DiscussSection = () => {
 
     return (
         <div className="discussSection">
-            {/* <div className="discussSection__inputs">
 
-                
-
-            </div> */}
             <Link to={`discuss/add`} style={{width: 'fit-content', margin: '0 auto'}}>
                 <ColorButtonBlue sx={{height: '80px'}}>
                     создать обсуждение

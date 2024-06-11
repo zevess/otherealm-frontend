@@ -109,9 +109,17 @@ export const AddDiscuss = () => {
         const formData = new FormData();
         const file = event.target.files[0];
         formData.append('image', file);
-        const { data } = await axios.post('/upload', formData)
-        console.log(data.url);
-        setImageUrl(data.url);
+        console.log(formData);
+        try{
+            const { data } = await axios.post(`/upload`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            setImageUrl(data.data.url)
+        } catch(err) {
+            console.log(err)
+        }
     }
 
     const onSubmit = async () => {
@@ -119,8 +127,6 @@ export const AddDiscuss = () => {
             const fields = {
                 title, text, imageUrl, itemId
             }
-            // dispatch(fetchAddDiscuss(fields));
-            // const {data} = await axios.post('/discuss', fields)
             const { data } = isEditing ? await axios.patch(`/discuss/${itemId}/${discussId}`, fields) : await axios.post('/discuss', fields);
 
             const _id = isEditing ? discussId : data._id;
@@ -164,7 +170,7 @@ export const AddDiscuss = () => {
                         <Button onClick={() => inputFileRef.current.click()} sx={{ padding: '15px', margin: '8px' }}>загрузить превью</Button>
                         {imageUrl &&
                             <>
-                                <Box component={'img'} maxWidth={'100%'} src={`${import.meta.env.VITE_API_URL}${imageUrl}`}>
+                                <Box component={'img'} maxWidth={'100%'} src={`${imageUrl}`}>
                                 </Box>
                                 <IconButton onClick={() => setImageUrl('')} >
                                     <DeleteOutlineOutlinedIcon sx={{ color: 'red' }} />

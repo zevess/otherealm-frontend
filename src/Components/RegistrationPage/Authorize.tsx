@@ -11,7 +11,6 @@ export const Authorize = () => {
     const isAuth = useAppSelector((state) => state.authData.data);
    
 
-
     if (isAuth) {
         return <Navigate to={'/'} />
     }
