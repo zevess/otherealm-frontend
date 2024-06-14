@@ -1,8 +1,5 @@
-
 import React from "react"
-
 import { useAppDispatch } from "../../../store/hooks"
-
 import { ColorButtonBlue } from "../../../utils/CustomButton"
 import { Link } from "react-router-dom"
 import { clearDiscuss, fetchItemDiscusses } from "../../../store/discuss"

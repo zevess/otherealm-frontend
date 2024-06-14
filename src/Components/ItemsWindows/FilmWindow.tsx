@@ -31,7 +31,7 @@ export const FilmWindow = () => {
     let fontSize;
     if (title.length > 100) fontSize = '20px';
 
-    console.log(`${currentFilmItem?.type}`)
+    
 
     if (currentFilmItem == undefined) {
         return <CircularProgress />
@@ -40,7 +40,7 @@ export const FilmWindow = () => {
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
     const postId = String(parts.slice(-2).join(''))
-    console.log(postId);
+    
 
     window.localStorage.setItem('currentObjectTitle', `${currentFilmItem.name}`)
 

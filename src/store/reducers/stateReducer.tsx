@@ -1,6 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import {  filmFetch, filmItemFetch } from "../fetches/filmFetch";
-import { bookResultProps, currentFilmItemProps, filmResultProps } from "../interfaces";
 
 
 interface initialStateProps {

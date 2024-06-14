@@ -19,9 +19,6 @@ export const sections: objectProps = {
     "follows": "подписки"
 }
 
-
-
-
 export const divideItems: objectProps = {
     "буду смотреть": "буду смотреть ",
     "любимое": "любимое"
@@ -38,3 +35,5 @@ export const searchTypes: objectProps = {
     "media": "поиск по медиа",
     "users": "поиск пользователей"
 }
+
+export const searchExceptions = ["hentai", "henta", "hent", "hen", "futanari", "futanar", "futana", "futan","futa", "furry", "furr", "dick", "vagina", "boobs", "boob", "booby", "booba", "sex", "sexy", "sexual"] 

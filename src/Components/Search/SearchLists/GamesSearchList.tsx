@@ -5,6 +5,8 @@ import { ItemCard } from "../../Cards/ItemCard";
 import { setGamePage } from "../../../store/reducers/stateReducer";
 import { gameFetch } from "../../../store/fetches/gameFetch";
 import { replaceNonAlphanumericToUTF8 } from "../../../utils/rename";
+import { searchExceptions } from "../../../utils/itemTypes";
+import { clearGamesState } from "../../../store/reducers/gameDataReducer";
 
 
 export const GamesSearchList = () => {
@@ -24,7 +26,9 @@ export const GamesSearchList = () => {
     }
 
 
-    if (gamesResult?.count == 0) {
+    if (gamesResult?.count == 0 || searchExceptions.includes(`${searchTitleSelector}`)) {
+
+        dispatch(clearGamesState());
         return (
             <Box>
                 <Typography variant="h2">

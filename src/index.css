@@ -75,7 +75,7 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    /* color: #213547; */
     background-color: #ffffff;
   }
 
@@ -1287,7 +1287,7 @@ button:focus-visible {
   }
 
   .profileHead__user-name {
-    font-size: 30px;
+    font-size: 25px;
     margin-left: 10px;
   }
 

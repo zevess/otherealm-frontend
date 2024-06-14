@@ -6,7 +6,7 @@ import { gameFetch, gameItemFetch } from "../fetches/gameFetch";
 
 interface initialStateProps {
     rawgToken: string,
-    gameResult?: gameResultProps,
+    gameResult?: gameResultProps | null,
     gamesLoadingStatus?: string,
     currentGameItem?: currentGameItemProps,
     currentGameItemLoadingStatus?: string
@@ -23,6 +23,9 @@ export const gameDataSlice = createSlice({
     name: 'gameData',
     initialState,
     reducers: {
+        clearGamesState: (state) => {
+            state.gameResult = null
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -49,5 +52,7 @@ export const gameDataSlice = createSlice({
             })
     }
 })
+
+export const {clearGamesState} = gameDataSlice.actions
 
 export default gameDataSlice.reducer;

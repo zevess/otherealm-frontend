@@ -31,7 +31,6 @@ export const DiscussItem = () => {
     const parts = currentUrl.split('/');
     const itemId = `${parts[4]}${parts[5]}`;
     const itemIdSlash = `${parts[4]}/${parts[5]}`
-    console.log(discussId, itemId)
 
     React.useEffect(() => {
         if (discussId !== undefined) {

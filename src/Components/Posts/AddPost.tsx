@@ -129,13 +129,9 @@ export const AddPost = () => {
             alert("ошибка при удалении поста")
         }
     }
-    console.log(imageUrl)
+
     return (
-
-
-
         <div className="addPostWrapper">
-
             <div className="addPost">
                 <div className="addPostInputs">
                     <input accept="image/*" ref={inputFileRef} type="file" onChange={handleChangePreview} hidden />
