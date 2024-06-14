@@ -102,6 +102,8 @@ export const AddPost = () => {
         }
     }
 
+    console.log(imageUrl);
+
     const onSubmit = async () => {
         try {
             const fields = {
