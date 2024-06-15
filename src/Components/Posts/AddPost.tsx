@@ -35,25 +35,27 @@ export const AddPost = () => {
 
 
     React.useEffect(() => {
-        if (isEditing) {
-            if (postId !== undefined) {
-                axios.get(`/post/${postId}`).then((res): any => {
 
-                    window.localStorage.setItem('currentUser', res.data.user._id)
-                    setTitle(res.data.title);
-                    setText(res.data.text);
-                    setImageUrl(res.data.imageUrl);
-                })
-            }
+        if (isEditing && (postId !== undefined)) {
+            axios.get(`/post/${postId}`).then((res): any => {
+
+                window.localStorage.setItem('currentUser', res.data.user._id)
+                setTitle(res.data.title);
+                setText(res.data.text);
+                setImageUrl(res.data.imageUrl);
+            })
         }
+
 
 
     }, [postId])
 
 
-    if (isSameUser == false) {
+    if (isEditing && (isSameUser == false)) {
         navigate(`/post/${postId}`);
     }
+
+    
     const onChangeText = React.useCallback((value: string) => {
         setText(value);
     }, []);
@@ -72,7 +74,7 @@ export const AddPost = () => {
                 uniqueId: 'myUniqueID'
             },
             toolbar: [
-                "bold",  {
+                "bold", {
                     name: "underline",
                     action: function (editor: any) {
                         var cm = editor.codemirror;

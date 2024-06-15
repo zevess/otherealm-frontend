@@ -59,6 +59,7 @@ export const authSlice = createSlice({
             .addCase(fetchAuth.fulfilled, (state, action) => {
                 state.status = "loaded",
                     state.data = action.payload
+                    window.localStorage.setItem('authId', action.payload._id)
             })
             .addCase(fetchAuth.rejected, (state) => {
                 state.status = "error",

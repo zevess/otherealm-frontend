@@ -15,6 +15,7 @@ interface ProfileNameProps {
 export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
     const params = useParams();
     const dispatch = useAppDispatch()
+    const isAuth = useAppSelector((state) => state.authData.data);
     const avatar = useAppSelector((state) => state.usersData.currentUser.items?.avatarUrl);
     const background = useAppSelector((state) => state.usersData.currentUser.items?.backgroundUrl);
     const userFollows = (useAppSelector((state) => state.authData.data?.follows));
@@ -157,7 +158,7 @@ export const ProfileName: FC<ProfileNameProps> = ({ name }) => {
                 <hr style={{ borderTop: '6px solid black', width: 'auto' }}></hr>
             </div>
 
-            {!isSameUser && <div className="profileHead__follow">
+            {(isAuth &&!isSameUser) && <div className="profileHead__follow">
                 <ColorButtonBlue sx={{ marginLeft: 'auto' }} onClick={follow ? handleUnfollow : handleFollow}>
                     {follow ? "отписаться" : "подписаться"}
                 </ColorButtonBlue>

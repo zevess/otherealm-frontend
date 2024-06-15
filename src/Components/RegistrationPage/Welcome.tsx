@@ -1,11 +1,12 @@
 import { CardMedia, Paper, Typography } from "@mui/material"
 import { ColorButtonBlue } from "../../utils/CustomButton"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAppSelector } from "../../store";
 
 export const Welcome = () => {
 
     const selectIsAuth = useAppSelector((state) => state.authData.data);
+    const navigate = useNavigate()
     return (
         <div className="welcomeWrapper">
 
@@ -125,9 +126,7 @@ export const Welcome = () => {
 
 
             {!selectIsAuth &&
-                <Link to={'/auth'}>
-                    <ColorButtonBlue sx={{ width: '20%', height: '70px' }}>присоединиться</ColorButtonBlue>
-                </Link>
+                <ColorButtonBlue sx={{ height: '70px', maxWidth: '280px', margin: '0 auto' }} onClick={() => navigate('/auth')}>присоединиться</ColorButtonBlue>
             }
 
 

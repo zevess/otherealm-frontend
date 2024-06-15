@@ -56,12 +56,13 @@ export const AddDiscuss = () => {
 
     const { discussId } = useParams();
     const isEditing = Boolean(discussId)
+    
     if ((isSameUser == false) && isEditing == true) {
         navigate(`/item/${itemIdSlash}`)
     }
 
     React.useEffect(() => {
-        if (discussId !== undefined) {
+        if (isEditing && (discussId !== undefined)) {
             axios.get(`/discuss/${itemId}/${discussId}`).then(res => {
                 setTitle(res.data.title);
                 setText(res.data.text);
