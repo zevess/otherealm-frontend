@@ -28,21 +28,25 @@ export const AddPost = () => {
 
     const { postId } = useParams();
     const isEditing = Boolean(postId)
+    console.log(isEditing)
 
     // const currentUrl = window.location.href;
     // const parts = currentUrl.split('/');
-    
+
 
     React.useEffect(() => {
-        if (postId !== undefined) {
-            axios.get(`/post/${postId}`).then((res): any => {
+        if (isEditing) {
+            if (postId !== undefined) {
+                axios.get(`/post/${postId}`).then((res): any => {
 
-                window.localStorage.setItem('currentUser', res.data.user._id)
-                setTitle(res.data.title);
-                setText(res.data.text);
-                setImageUrl(res.data.imageUrl);
-            })
+                    window.localStorage.setItem('currentUser', res.data.user._id)
+                    setTitle(res.data.title);
+                    setText(res.data.text);
+                    setImageUrl(res.data.imageUrl);
+                })
+            }
         }
+
 
     }, [postId])
 
@@ -54,7 +58,7 @@ export const AddPost = () => {
         setText(value);
     }, []);
 
-        
+
     const autofocusNoSpellcheckerOptions = React.useMemo<Options>(() => {
         return {
             spellChecker: false,
@@ -65,10 +69,10 @@ export const AddPost = () => {
             autosave: {
                 enabled: true,
                 delay: 1000,
-                uniqueId: 'myUniqueID' 
+                uniqueId: 'myUniqueID'
             },
             toolbar: [
-                "bold", "strikethrough", {
+                "bold",  {
                     name: "underline",
                     action: function (editor: any) {
                         var cm = editor.codemirror;
@@ -90,19 +94,19 @@ export const AddPost = () => {
         const file = event.target.files[0];
         formData.append('image', file);
         console.log(formData);
-        try{
-            const { data } = await axios.post(`/upload`, formData, {
+        try {
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            })
+            }).then()
             setImageUrl(data.data.url)
-        } catch(err) {
+        } catch (err) {
             console.log(err)
         }
     }
 
-    console.log(imageUrl);
+
 
     const onSubmit = async () => {
         try {
