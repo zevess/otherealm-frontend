@@ -95,11 +95,11 @@ export const AddPost = () => {
         formData.append('image', file);
         console.log(formData);
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData, {
+            const { data } = await axios.post(`/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).then()
+            })
             setImageUrl(data.data.url)
         } catch (err) {
             console.log(err)
