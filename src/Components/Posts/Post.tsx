@@ -20,6 +20,7 @@ interface PostProps {
 export const Post: FC<PostProps> = ({ user, nick, date, title, imageUrl, id, avatar, isText }) => {
 
     const userId = (useAppSelector((state) => state.authData.data?._id));
+    const adminId = useAppSelector((state) => state.state.adminId)
     const selectedUserId = (useAppSelector((state) => state.usersData.currentUser.items?._id));
     const isSameUser = (selectedUserId && (userId == selectedUserId))
 
@@ -50,7 +51,7 @@ export const Post: FC<PostProps> = ({ user, nick, date, title, imageUrl, id, ava
                         </div>
                     </Link>
 
-                    {isSameUser && <Box marginLeft={'auto'}>
+                    {(isSameUser || (userId == adminId)) && <Box marginLeft={'auto'}>
                         <Link to={`/post/${id}/edit`}>
                             <IconButton >
                                 <EditOutlinedIcon />

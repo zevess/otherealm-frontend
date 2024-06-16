@@ -19,13 +19,15 @@ export const AddPost = () => {
 
     const inputFileRef = React.useRef<any>(null);
 
-    const userNick = useAppSelector((state) => state.authData.data?.nick)
+    const authData = useAppSelector((state) => state.authData.data)
+    const adminId = useAppSelector((state) => state.state.adminId)
 
     const authId = window.localStorage.getItem('authId');
     const currentUserId = window.localStorage.getItem('currentUser')
 
     const isSameUser = (authId == currentUserId)
 
+    
     const { postId } = useParams();
     const isEditing = Boolean(postId)
     console.log(isEditing)
@@ -46,15 +48,16 @@ export const AddPost = () => {
             })
         }
 
-
-
     }, [postId])
 
 
-    if (isEditing && (isSameUser == false)) {
+    if (isEditing && ((isSameUser == false) && (authId !== adminId))) {
         navigate(`/post/${postId}`);
     }
 
+    if (authData == null){
+        navigate(`/post/${postId}`);
+    }
     
     const onChangeText = React.useCallback((value: string) => {
         setText(value);
@@ -129,7 +132,8 @@ export const AddPost = () => {
         try {
             if (window.confirm('вы уверены что ходите удалить пост?')) {
                 await axios.delete(`/post/${postId}`)
-                navigate(`/profile/${userNick}`);
+                // navigate(`/profile/${userNick}`);
+                navigate(-1);
             }
 
         } catch (err) {

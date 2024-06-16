@@ -17,6 +17,7 @@ import { PostsFeed } from './Components/Posts/PostsFeed'
 import { AddDiscuss } from './Components/ItemsWindows/DiscussWindow/AddDiscuss'
 import { DiscussItem } from './Components/ItemsWindows/DiscussWindow/DiscussItem'
 import { Authorize } from './Components/RegistrationPage/Authorize'
+import { AdminPanel } from './Components/AdminWindow/AdminPanel'
 
 function App() {
   const dispatch = useAppDispatch();
@@ -79,6 +80,9 @@ function App() {
 
           <Route path='/auth' element={<Authorize />} />
           <Route path='/error' element={<ErrorBoundary />} />
+
+          <Route path='/admin' element={<AdminPanel/>}/>
+
         </Route>
       </Routes>
     </>

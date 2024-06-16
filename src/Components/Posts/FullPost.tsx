@@ -44,10 +44,10 @@ export const FullPost = () => {
                 <div className="fullPostTop">
 
                     <div className="postItemDetails-user">
-                        <Link to={`/profile/${postSelector.post.user.nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
-                            <Avatar src={`${postSelector.post.user.avatarUrl}`} className="postItemDetails-user__avatar" />
+                        <Link to={postSelector.post.user ? `/profile/${postSelector.post.user.nick}` : ''} style={{ display: 'flex', alignItems: 'flex-end' }}>
+                            <Avatar src={postSelector.post.user ? `${postSelector.post.user.avatarUrl}` : ''} className="postItemDetails-user__avatar" />
                             <div className="postItemDetails-user__info">
-                                <p className="postUserInfo nick">{postSelector.post.user.name}</p>
+                                <p className="postUserInfo nick">{postSelector.post.user ? postSelector.post.user.name : 'пользователь удален'}</p>
                                 <Divider sx={{ width: '100%' }} />
                                 <p className="postUserInfo date">{formatedDate + '; ' + time}</p>
 

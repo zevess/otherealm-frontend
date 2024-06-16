@@ -7,6 +7,11 @@ export const fetchPosts = createAsyncThunk('/posts/:userId', async (userId: stri
     return data
 })
 
+export const fetchAllPosts = createAsyncThunk('/posts', async () => {
+    const { data } = await axios.get('/posts');
+    return data
+})
+
 export const fetchOnePost = createAsyncThunk('/post/:postId', async (postId: string) => {
     const { data } = await axios.get(`/post/${postId}`);
     return data
@@ -84,6 +89,17 @@ export const postsSlice = createSlice({
                 state.userPosts.userPosts = action.payload
             })
             .addCase(fetchPosts.rejected, (state) => {
+                state.userPosts.status = 'rejected'
+            })
+
+            .addCase(fetchAllPosts.pending, (state) => {
+                state.userPosts.status = 'loading'
+            })
+            .addCase(fetchAllPosts.fulfilled, (state, action) => {
+                state.userPosts.status = 'loaded'
+                state.userPosts.userPosts = action.payload
+            })
+            .addCase(fetchAllPosts.rejected, (state) => {
                 state.userPosts.status = 'rejected'
             })
 

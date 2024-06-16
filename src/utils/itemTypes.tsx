@@ -19,6 +19,12 @@ export const sections: objectProps = {
     "follows": "подписки"
 }
 
+export const adminSections: objectProps = {
+    "posts": "посты",
+    "comments": "комментарии",
+    "discusses": "обсуждения"
+}
+
 export const divideItems: objectProps = {
     "буду смотреть": "буду смотреть ",
     "любимое": "любимое"

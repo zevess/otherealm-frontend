@@ -30,7 +30,7 @@ export const AddDiscuss = () => {
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
     const itemId = `${parts[4]}${parts[5]}`
-    const itemIdSlash = `${parts[4]}/${parts[5]}`
+    const itemTag = `${parts[4]}/${parts[5]}`
     let discussObjectTitle
     // const isSameUser = (userId == discussAuthorId)
     const authId = window.localStorage.getItem('authId');
@@ -58,7 +58,7 @@ export const AddDiscuss = () => {
     const isEditing = Boolean(discussId)
     
     if ((isSameUser == false) && isEditing == true) {
-        navigate(`/item/${itemIdSlash}`)
+        navigate(`/item/${itemTag}`)
     }
 
     React.useEffect(() => {
@@ -126,12 +126,12 @@ export const AddDiscuss = () => {
     const onSubmit = async () => {
         try {
             const fields = {
-                title, text, imageUrl, itemId
+                title, text, imageUrl, itemId, itemTag
             }
             const { data } = isEditing ? await axios.patch(`/discuss/${itemId}/${discussId}`, fields) : await axios.post('/discuss', fields);
 
             const _id = isEditing ? discussId : data._id;
-            navigate(`/item/${itemIdSlash}/discuss/${_id}`);
+            navigate(`/item/${itemTag}/discuss/${_id}`);
 
         } catch (err) {
             console.warn(err);
@@ -143,7 +143,7 @@ export const AddDiscuss = () => {
         try {
             if (window.confirm('вы уверены что ходите удалить обсуждение?')) {
                 await axios.delete(`/discuss/${itemId}/${discussId}`)
-                navigate(`/item/${itemIdSlash}`);
+                navigate(`/item/${itemTag}`);
             }
 
         } catch (err) {
@@ -158,7 +158,7 @@ export const AddDiscuss = () => {
 
         <>
 
-            <ColorButtonBlue sx={{ height: '60px', width: '60px', borderRadius: '16px', marginBottom: '20px' }} onClick={() => navigate(`/item/${itemIdSlash}`)}>
+            <ColorButtonBlue sx={{ height: '60px', width: '60px', borderRadius: '16px', marginBottom: '20px' }} onClick={() => navigate(`/item/${itemTag}`)}>
                 <ArrowBackIcon />
             </ColorButtonBlue>
             <div className="addPostWrapper">

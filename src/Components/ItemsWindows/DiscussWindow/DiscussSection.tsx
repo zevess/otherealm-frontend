@@ -20,11 +20,9 @@ export const DiscussSection = () => {
 
     React.useEffect(() => {
         dispatch(fetchItemDiscusses(`${itemId}`))
-
         return () => {
             dispatch(clearDiscuss())
         }
-
     }, [])
 
     

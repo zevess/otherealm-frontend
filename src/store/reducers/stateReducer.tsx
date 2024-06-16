@@ -12,7 +12,8 @@ interface initialStateProps {
     totalBookPage: number,
     isFetching: boolean,
     currentFilterItem: string
-    currentFavouriteItem: string
+    currentFavouriteItem: string,
+    adminId: string
 }
 
 const initialState: initialStateProps = {
@@ -26,7 +27,8 @@ const initialState: initialStateProps = {
     totalBookPage: 1,
     isFetching: false,
     currentFilterItem: "ВСЕ",
-    currentFavouriteItem: ''
+    currentFavouriteItem: '',
+    adminId: '665c42bcc3987e9b7ed0cf66'
 };
 
 

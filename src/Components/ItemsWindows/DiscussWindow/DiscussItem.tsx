@@ -16,15 +16,15 @@ export const DiscussItem = () => {
     const dispatch = useAppDispatch();
 
     const discussSelector = useAppSelector(state => state.discussData.currentDiscuss.currentDiscuss)
+    const adminId = useAppSelector((state) => state.state.adminId)
 
     const discussObjectTitle = window.localStorage.getItem('currentObjectTitle');
- 
     const params = useParams();
     const discussId = String(params.discussId);
 
     const authId = window.localStorage.getItem('authId');
     const currentUserId = window.localStorage.getItem('currentUser')
-
+    
     const isSameUser = (authId == currentUserId)
 
     const currentUrl = window.location.href;
@@ -59,7 +59,7 @@ export const DiscussItem = () => {
                     <ItemTitle title={`${discussObjectTitle}`} sx={{ margin: '0 auto' }} />
                     <Divider sx={{marginTop: '12px', marginBottom: '12px'}} />
                     <div className="postItemDetails-user">
-                        <Link to={`/profile/${discussSelector.user.nick}`} style={{ display: 'flex', alignItems: 'flex-end' }}>
+                        <Link to={discussSelector.user ? `/profile/${discussSelector.user.nick}` : 'пользователь удален'} style={{ display: 'flex', alignItems: 'flex-end' }}>
                             <Avatar src={`${discussSelector.user.avatarUrl}`} className="postItemDetails-user__avatar" />
                             <div className="postItemDetails-user__info">
                                 <p className="postUserInfo nick">{discussSelector.user.name}</p>
@@ -75,7 +75,7 @@ export const DiscussItem = () => {
                         </Box>
 
 
-                        {isSameUser && <Box marginLeft={'auto'}>
+                        {(isSameUser || (authId == adminId)) && <Box marginLeft={'auto'}>
                             <Link to={`/item/${itemIdSlash}/discuss/${discussId}/edit`}>
                                 <IconButton >
                                     <EditOutlinedIcon />

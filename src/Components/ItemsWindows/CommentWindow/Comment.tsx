@@ -29,6 +29,8 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
     const userId = useAppSelector((state) => state.authData.data?._id)
     const isSameUser = (userId == commentUserId);
 
+    const adminId = useAppSelector((state) => state.state.adminId);
+
     const dateToForm = new Date(date);
     const options = {
         weekday: 'short' as const,
@@ -95,7 +97,7 @@ export const Comment: FC<CommentProps> = ({ name, text, nick, avatar, date, comm
             </div>
 
 
-            {isSameUser && (
+            {(isSameUser || (userId == adminId)) && (
                 <div style={{ marginLeft: 'auto' }}>
                     <IconButton onClick={() => setToggleSetting(true)}>
                         <EditOutlinedIcon />
