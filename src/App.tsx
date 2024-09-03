@@ -59,9 +59,7 @@ function App() {
           <Route path='/item/game/:id/discuss/:discussId/edit' element={<AddDiscuss />} />
           <Route path='/item/book/:id/discuss/:discussId/edit' element={<AddDiscuss />} />
 
-
           <Route path='/discuss/:itemId/:discussId/edit' element={<AddDiscuss />} />
-          
           
           <Route path='/item/movie/:id/discuss/:discussId' element={<DiscussItem />} />
           <Route path='/item/anime/:id/discuss/:discussId' element={<DiscussItem />} />

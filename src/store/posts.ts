@@ -2,9 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { postProps, userPosts } from "./interfaces"
 import axios from '../axios'
 
+
 export const fetchPosts = createAsyncThunk('/posts/:userId', async (userId: string) => {
-    const { data } = await axios.get(`/posts/${userId}`);
-    return data
+    const {data} = await axios.get(`/posts/${userId}`);
+    return data;
 })
 
 export const fetchAllPosts = createAsyncThunk('/posts', async () => {

@@ -89,6 +89,16 @@ button:focus-visible {
   }
 }
 
+.footer {
+  padding: 0rem !important;
+  margin-top: auto;
+  height: 100px;
+  background-color: black;
+  width: 100%;
+  z-index: 0;
+  flex: 0 0 auto;
+}
+
 .authWrapper {
   width: 100%;
 }
@@ -1412,116 +1422,6 @@ button:focus-visible {
 
 }
 
-
-
-/* @media (max-width: 480px) {
-
-  .toggleGroup {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .toggleGroupItem {
-    width: 80% !important;
-  }
-
-  .searchItemPoster {
-    height: 451px;
-  }
-
-  .detailsItemText {
-    font-size: 18px !important;
-  }
-
-  .commentUser__info {
-    margin: 6px;
-  }
-
-  .commentUser__info-avatar {
-    width: 60px !important;
-    height: 60px !important;
-  }
-
-  .commentUser__info-nick {
-    font-size: 16px !important;
-  }
-
-  .commentText {
-    font-size: 16px !important;
-  }
-
-  .discussLinkTitle {
-    font-size: 26px !important;
-
-  }
-
-  .discussItemTitle {
-    width: 90%;
-  }
-
-  .discussTitle {
-    font-size: 20px !important;
-
-  }
-
-  .searchSourceLink{
-    font-size: 16px;
-    
-  }
-  .toggleGroup {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .toggleGroupItem {
-    width: 80% !important;
-  }
-
-  .searchItemPoster {
-    height: 451px;
-  }
-
-  .detailsItemText {
-    font-size: 18px !important;
-  }
-
-  .commentUser__info {
-    margin: 6px;
-  }
-
-  .commentUser__info-avatar {
-    width: 60px !important;
-    height: 60px !important;
-  }
-
-  .commentUser__info-nick {
-    font-size: 16px !important;
-  }
-
-  .commentText {
-    font-size: 16px !important;
-  }
-
-  .discussLinkTitle {
-    font-size: 26px !important;
-
-  }
-
-  .discussItemTitle {
-    width: 90%;
-  }
-
-  .discussTitle {
-    font-size: 20px !important;
-
-  }
-
-  .searchSourceLink{
-    font-size: 16px;
-    
-  }
-
-} */
 
 @media (min-width: 320px) and (max-width: 480px) {
 

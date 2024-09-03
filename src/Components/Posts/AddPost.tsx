@@ -27,7 +27,6 @@ export const AddPost = () => {
 
     const isSameUser = (authId == currentUserId)
 
-    
     const { postId } = useParams();
     const isEditing = Boolean(postId)
     console.log(isEditing)
@@ -37,10 +36,8 @@ export const AddPost = () => {
 
 
     React.useEffect(() => {
-
         if (isEditing && (postId !== undefined)) {
             axios.get(`/post/${postId}`).then((res): any => {
-
                 window.localStorage.setItem('currentUser', res.data.user._id)
                 setTitle(res.data.title);
                 setText(res.data.text);
@@ -110,8 +107,6 @@ export const AddPost = () => {
             console.log(err)
         }
     }
-
-
 
     const onSubmit = async () => {
         try {

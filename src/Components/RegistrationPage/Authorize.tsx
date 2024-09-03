@@ -19,11 +19,8 @@ export const Authorize = () => {
         <div className="authWrapper">
             <div className="authWindow">
 
-
                 {authMode == 'register' && <Registration onClick={() => setAuthMode('login')} />}
                 {authMode == 'login' && <Login onClick={() => setAuthMode('register')} />}
-
-
 
             </div>
         </div>
