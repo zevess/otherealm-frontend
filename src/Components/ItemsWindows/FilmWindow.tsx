@@ -70,7 +70,11 @@ export const FilmWindow = () => {
                                 <Typography paddingRight={'10px'} variant="h5" key={index++} className="detailsItemText">{country.name}{index !== currentFilmItem.countries?.length - 1 && ", "}</Typography>
                             ))}
                         </div>
-                        <Typography fontWeight={'bold'} paddingBottom={'15px'} variant="h5" >год: {currentFilmItem.year}</Typography>
+                        <div className="searchItemContent__details-item">
+                            <Typography fontWeight={'bold'} paddingRight={'10px'} paddingBottom={'15px'} variant="h5" >год: </Typography>
+                            <Typography paddingRight={'10px'} variant="h5"  className="detailsItemText">{currentFilmItem.year}</Typography>
+                        </div>
+                        
                         <div className="searchItemContent__details-item">
                             <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">жанры: </Typography>
                             {currentFilmItem.genres?.map((genre, index) => (
@@ -80,13 +84,13 @@ export const FilmWindow = () => {
                         <div className="searchItemContent__details-item">
                             <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText" >режиссер: </Typography>
                             {currentFilmItem.persons?.map((person, index) => (
-                                person.enProfession == 'director' && <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{person.name}</Typography>
+                                person.enProfession == 'director' && <Typography paddingRight={'10px'} variant="h5" key={index} className="detailsItemText">{person.name}, </Typography>
 
                             ))}
                         </div>
                         <div className="searchItemContent__details-item">
                             <Typography fontWeight={'bold'} variant="h5" paddingRight={'10px'} className="detailsItemText">актеры: </Typography>
-                            {currentFilmItem.persons?.map((person, index) => (
+                            {currentFilmItem.persons?.slice(0, 16).map((person, index) => (
                                 (person.enProfession == 'actor') && <Typography paddingRight={'10px'} variant="h5" key={index++} className="detailsItemText">{person.name},</Typography>
                             ))}
                         </div>

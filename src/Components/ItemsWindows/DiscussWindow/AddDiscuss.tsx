@@ -5,7 +5,7 @@ import "easymde/dist/easymde.min.css";
 import axios from '../../../axios'
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import {  useAppSelector } from "../../../store/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import { ColorButton, ColorButtonBlue } from "../../../utils/CustomButton";
 import { ItemTitle } from "../ItemComponents/ItemTitle";
 
@@ -15,7 +15,6 @@ import { Options } from "easymde";
 
 export const AddDiscuss = () => {
 
-    
     const navigate = useNavigate();
     const [title, setTitle] = React.useState('');
     const [text, setText] = React.useState('');
@@ -27,11 +26,14 @@ export const AddDiscuss = () => {
     const filmSelector = useAppSelector((state) => state.filmData.currentFilmItem);
     const gameSelector = useAppSelector((state) => state.gameData.currentGameItem);
 
+    const isAuth = useAppSelector((state) => state.authData.data);
+
+
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
     const itemId = `${parts[4]}${parts[5]}`
     const itemTag = `${parts[4]}/${parts[5]}`
-    let discussObjectTitle
+    let discussObjectTitle;
     // const isSameUser = (userId == discussAuthorId)
     const authId = window.localStorage.getItem('authId');
     const currentUserId = window.localStorage.getItem('currentUser')
@@ -56,10 +58,12 @@ export const AddDiscuss = () => {
 
     const { discussId } = useParams();
     const isEditing = Boolean(discussId)
-    
+
     if ((isSameUser == false) && isEditing == true) {
         navigate(`/item/${itemTag}`)
     }
+
+    
 
     React.useEffect(() => {
         if (isEditing && (discussId !== undefined)) {
@@ -68,6 +72,10 @@ export const AddDiscuss = () => {
                 setText(res.data.text);
                 setImageUrl(res.data.imageUrl);
             })
+        }
+
+        if (!isAuth) {
+            navigate(`/item/${itemTag}`)
         }
 
     }, [])
@@ -86,7 +94,7 @@ export const AddDiscuss = () => {
             autosave: {
                 enabled: true,
                 delay: 1000,
-                uniqueId: 'myUniqueID' 
+                uniqueId: 'myUniqueID'
             },
             toolbar: [
                 "bold", "strikethrough", {
@@ -111,14 +119,14 @@ export const AddDiscuss = () => {
         const file = event.target.files[0];
         formData.append('image', file);
         console.log(formData);
-        try{
+        try {
             const { data } = await axios.post(`/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
             setImageUrl(data.data.url)
-        } catch(err) {
+        } catch (err) {
             console.log(err)
         }
     }

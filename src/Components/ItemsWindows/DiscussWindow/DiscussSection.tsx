@@ -10,6 +10,7 @@ export const DiscussSection = () => {
     const dispatch = useAppDispatch()
     
     const discussesSelector = useAppSelector((state) => state.discussData.discusses.discusses)
+    const isAuth = useAppSelector((state) => state.authData.data);
 
     const currentUrl = window.location.href;
     const parts = currentUrl.split('/');
@@ -25,13 +26,11 @@ export const DiscussSection = () => {
         }
     }, [])
 
-    
-
     return (
         <div className="discussSection">
 
-            <Link to={`discuss/add`} style={{width: 'fit-content', margin: '0 auto'}}>
-                <ColorButtonBlue sx={{height: '80px'}}>
+            <Link to={isAuth ? `discuss/add` : '/auth'} style={{width: 'fit-content', margin: '0 auto'}}>
+                <ColorButtonBlue disabled={!isAuth} sx={{height: '80px'}}>
                     создать обсуждение
                 </ColorButtonBlue>
             </Link>
