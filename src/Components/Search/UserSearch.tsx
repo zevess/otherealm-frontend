@@ -12,8 +12,6 @@ export const UserSearch = () => {
 
     const [searchUsername, setSearchUsername] = React.useState('')
 
-
-
     return (
         <div className="userSearch">
             <InputText forComments={false} placeholder={"введите имя пользователя"} text={searchUsername} setText={setSearchUsername} onClick={()=>dispatch(fetchUsers(`${searchUsername}`))} /> 

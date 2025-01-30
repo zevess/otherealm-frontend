@@ -29,8 +29,6 @@ export const ModalSection: FC<ModalSectionProps> = ({ isOpen, handleClose, alinm
                         </div>
                     </div>
                 </Box>
-
-
             </div>
         </ModalWindow>
     )

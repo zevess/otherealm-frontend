@@ -27,13 +27,13 @@ export const InputText: FC<InputTextProps> = ({placeholder, text, setText, onCli
             
             endAdornment: (
                 <InputAdornment position="end">
-                    <IconButton disabled={!isAuth} color="primary" onClick={onClick}>
+                    <IconButton color="primary" disabled={forComments} onClick={onClick}>
                         <SendIcon sx={{ width: '50px', height: '50px' }} />
                     </IconButton>
                 </InputAdornment>
             )
-        }} className={forComments ? "commentInputField": 'searchInputField'} onChange={(event) =>{
+        }} className={forComments ? "commentInputField": 'searchInputField'} disabled={forComments} onChange={(event) =>{
             setText(event.target.value)
-        }} disabled={!isAuth}></TextField>
+        }}></TextField>
     )
 }

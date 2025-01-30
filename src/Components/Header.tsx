@@ -83,59 +83,47 @@ export const Header = () => {
 
     return (
         <HeaderTemplate>
-            {isAuth ? (
-                <div className="headerNav">
-                    <Link to={'/'}>
-                        {/* <Box component={'img'} sx={{ width: '150px' }} src="/src/assets/img/ЛОГО.svg"></Box> */}
-                        <Box component={'img'} sx={{ width: '150px' }} src="https://svgshare.com/i/16ge.svg"></Box>
+
+            <div className="headerNav">
+                <Link to={'/'}>
+                    {/* <Box component={'img'} sx={{ width: '150px' }} src="/src/assets/img/ЛОГО.svg"></Box> */}
+                    <Box component={'img'} sx={{ width: '150px' }} src="https://svgshare.com/i/16ge.svg"></Box>
+                </Link>
+
+                {windowWidth > 768 && <>
+                    <Link to={"/feed"}>
+                        <Box display={'flex'} alignItems={'center'}>
+                            <FeedOutlinedIcon />
+                            лента
+                        </Box>
                     </Link>
 
-                    {windowWidth > 768 && <>
-                        <Link to={"/feed"}>
-                            <Box display={'flex'} alignItems={'center'}>
-                                <FeedOutlinedIcon />
-                                лента
-                            </Box>
-                        </Link>
-
-                        <Link to={"/search"}>
-                            <Box display={'flex'} alignItems={'center'}>
-                                <SearchOutlinedIcon />
-                                поиск
-                            </Box>
-                        </Link>
-                        <Link to={`/profile/${userNick}`}>
-                            <Box display={'flex'} alignItems={'center'}>
-                                <PersonOutlineOutlinedIcon />
-                                <p>профиль</p>
-                            </Box>
-                        </Link>
-                        <IconButton onClick={onClickLogout}>
-                            <LogoutIcon />
-                        </IconButton>
-                    </>}
-                    {windowWidth <= 768 && (
-                        <IconButton onClick={() => setDrawer(true)}>
-                            <DehazeOutlinedIcon />
-                        </IconButton>
-                    )}
-
-                    <Drawer open={drawer} onClose={() => setDrawer(false)}>
-                        {DrawerList}
-                    </Drawer>
-                </div>
-            ) : (
-                <div className="headerNav">
-                    <Link to={'/'}>
-                        <Box component={'img'} sx={{ width: '150px' }} src="https://svgshare.com/i/16ge.svg"></Box>
+                    <Link to={"/search"}>
+                        <Box display={'flex'} alignItems={'center'}>
+                            <SearchOutlinedIcon />
+                            поиск
+                        </Box>
                     </Link>
-                    <Link to={'/auth'}>
-                        <p>войти</p>
+                    <Link to={`/profile/${userNick}`}>
+                        <Box display={'flex'} alignItems={'center'}>
+                            <PersonOutlineOutlinedIcon />
+                            <p>профиль</p>
+                        </Box>
                     </Link>
-                </div>
+                    <IconButton onClick={onClickLogout}>
+                        <LogoutIcon />
+                    </IconButton>
+                </>}
+                {windowWidth <= 768 && (
+                    <IconButton onClick={() => setDrawer(true)}>
+                        <DehazeOutlinedIcon />
+                    </IconButton>
+                )}
 
-            )}
-
+                <Drawer open={drawer} onClose={() => setDrawer(false)}>
+                    {DrawerList}
+                </Drawer>
+            </div>
 
         </HeaderTemplate>
     )
